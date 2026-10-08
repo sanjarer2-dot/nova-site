@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -22,8 +23,6 @@
             color: inherit;
             text-decoration: none;
         }
-
-        /* HEADER */
 
         header {
             position: sticky;
@@ -72,9 +71,23 @@
             background: #101010;
             color: white;
             font-size: 13px;
+            cursor: pointer;
         }
 
-        /* HERO */
+        .cart-count {
+            display: inline-flex;
+            min-width: 19px;
+            height: 19px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            margin-left: 4px;
+            border-radius: 50%;
+            background: white;
+            color: black;
+            font-size: 11px;
+            font-weight: 700;
+        }
 
         .hero {
             padding: 90px 6% 70px;
@@ -108,8 +121,6 @@
             font-size: 17px;
             line-height: 1.6;
         }
-
-        /* CONTROLS */
 
         .controls {
             max-width: 1400px;
@@ -146,8 +157,6 @@
             outline: none;
         }
 
-        /* CATEGORY */
-
         .category-bar {
             max-width: 1400px;
             margin: auto;
@@ -173,8 +182,6 @@
             color: black;
         }
 
-        /* PRODUCTS */
-
         .products {
             max-width: 1400px;
             margin: auto;
@@ -196,8 +203,6 @@
             transform: translateY(-6px);
             border-color: #3c3c3c;
         }
-
-        /* PRODUCT IMAGE */
 
         .product-image {
             height: 280px;
@@ -247,8 +252,6 @@
             border-radius: 2px 2px 10px 10px;
             box-shadow: 0 15px 25px rgba(0,0,0,0.7);
         }
-
-        /* INFO */
 
         .product-info {
             padding: 23px;
@@ -325,7 +328,9 @@
             transform: scale(1.04);
         }
 
-        /* NO RESULTS */
+        .buy.added {
+            background: #d9d9d9;
+        }
 
         .no-results {
             display: none;
@@ -339,8 +344,6 @@
             color: white;
             margin-bottom: 10px;
         }
-
-        /* FOOTER */
 
         footer {
             border-top: 1px solid #1d1d1d;
@@ -374,7 +377,27 @@
             margin-bottom: 14px;
         }
 
-        /* MOBILE */
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            z-index: 999;
+            padding: 15px 20px;
+            border: 1px solid #333;
+            border-radius: 13px;
+            background: rgba(20,20,20,.96);
+            color: white;
+            box-shadow: 0 15px 40px rgba(0,0,0,.5);
+            transform: translateY(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
         @media (max-width: 1000px) {
             .products {
@@ -417,6 +440,17 @@
             .header-actions {
                 display: none;
             }
+
+            .product h2 {
+                font-size: 21px;
+            }
+
+            .toast {
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -445,6 +479,7 @@
 
         <a href="cart.html" class="header-btn">
             🛒 Корзина
+            <span class="cart-count" id="cartCount">0</span>
         </a>
     </div>
 
@@ -526,34 +561,24 @@
 
 <section class="products" id="products">
 
-
-    <!-- 1 -->
-
     <article
         class="product"
+        data-id="nova-book-pro-16-custom"
         data-name="NOVA Book Pro 16"
         data-price="179990"
         data-category="pro"
     >
-
         <div class="product-image">
-
             <div class="laptop">
                 <div class="screen"></div>
                 <div class="base"></div>
             </div>
-
         </div>
 
         <div class="product-info">
+            <div class="tag">PRO</div>
 
-            <div class="tag">
-                PRO
-            </div>
-
-            <h2>
-                NOVA Book Pro 16
-            </h2>
+            <h2>NOVA Book Pro 16</h2>
 
             <p class="description">
                 Большой профессиональный ноутбук
@@ -561,7 +586,6 @@
             </p>
 
             <div class="specs">
-
                 <div class="spec">
                     <small>ДИСПЛЕЙ</small>
                     <strong>16.2" OLED</strong>
@@ -581,53 +605,37 @@
                     <small>SSD</small>
                     <strong>1 TB</strong>
                 </div>
-
             </div>
 
             <div class="bottom">
+                <div class="price">179 990 ₽</div>
 
-                <div class="price">
-                    179 990 ₽
-                </div>
-
-                <button class="buy">
+                <button class="buy" data-id="nova-book-pro-16-custom">
                     В корзину
                 </button>
-
             </div>
-
         </div>
-
     </article>
 
 
-    <!-- 2 -->
-
     <article
         class="product"
+        data-id="nova-book-pro-14-custom"
         data-name="NOVA Book Pro 14"
         data-price="149990"
         data-category="pro"
     >
-
         <div class="product-image">
-
             <div class="laptop">
                 <div class="screen"></div>
                 <div class="base"></div>
             </div>
-
         </div>
 
         <div class="product-info">
+            <div class="tag">PRO</div>
 
-            <div class="tag">
-                PRO
-            </div>
-
-            <h2>
-                NOVA Book Pro 14
-            </h2>
+            <h2>NOVA Book Pro 14</h2>
 
             <p class="description">
                 Компактный профессиональный ноутбук
@@ -635,7 +643,6 @@
             </p>
 
             <div class="specs">
-
                 <div class="spec">
                     <small>ДИСПЛЕЙ</small>
                     <strong>14.2" OLED</strong>
@@ -655,53 +662,37 @@
                     <small>SSD</small>
                     <strong>1 TB</strong>
                 </div>
-
             </div>
 
             <div class="bottom">
+                <div class="price">149 990 ₽</div>
 
-                <div class="price">
-                    149 990 ₽
-                </div>
-
-                <button class="buy">
+                <button class="buy" data-id="nova-book-pro-14-custom">
                     В корзину
                 </button>
-
             </div>
-
         </div>
-
     </article>
 
 
-    <!-- 3 -->
-
     <article
         class="product"
+        data-id="nova-book-air-15-custom"
         data-name="NOVA Book Air 15"
         data-price="109990"
         data-category="air"
     >
-
         <div class="product-image">
-
             <div class="laptop">
                 <div class="screen"></div>
                 <div class="base"></div>
             </div>
-
         </div>
 
         <div class="product-info">
+            <div class="tag">AIR</div>
 
-            <div class="tag">
-                AIR
-            </div>
-
-            <h2>
-                NOVA Book Air 15
-            </h2>
+            <h2>NOVA Book Air 15</h2>
 
             <p class="description">
                 Тонкий и лёгкий ноутбук
@@ -709,7 +700,6 @@
             </p>
 
             <div class="specs">
-
                 <div class="spec">
                     <small>ДИСПЛЕЙ</small>
                     <strong>15.3" Retina</strong>
@@ -729,53 +719,37 @@
                     <small>SSD</small>
                     <strong>512 GB</strong>
                 </div>
-
             </div>
 
             <div class="bottom">
+                <div class="price">109 990 ₽</div>
 
-                <div class="price">
-                    109 990 ₽
-                </div>
-
-                <button class="buy">
+                <button class="buy" data-id="nova-book-air-15-custom">
                     В корзину
                 </button>
-
             </div>
-
         </div>
-
     </article>
 
 
-    <!-- 4 -->
-
     <article
         class="product"
+        data-id="nova-book-air-13-custom"
         data-name="NOVA Book Air 13"
         data-price="89990"
         data-category="air"
     >
-
         <div class="product-image">
-
             <div class="laptop">
                 <div class="screen"></div>
                 <div class="base"></div>
             </div>
-
         </div>
 
         <div class="product-info">
+            <div class="tag">AIR</div>
 
-            <div class="tag">
-                AIR
-            </div>
-
-            <h2>
-                NOVA Book Air 13
-            </h2>
+            <h2>NOVA Book Air 13</h2>
 
             <p class="description">
                 Максимальная мобильность
@@ -783,7 +757,6 @@
             </p>
 
             <div class="specs">
-
                 <div class="spec">
                     <small>ДИСПЛЕЙ</small>
                     <strong>13.6" Retina</strong>
@@ -803,53 +776,37 @@
                     <small>SSD</small>
                     <strong>512 GB</strong>
                 </div>
-
             </div>
 
             <div class="bottom">
+                <div class="price">89 990 ₽</div>
 
-                <div class="price">
-                    89 990 ₽
-                </div>
-
-                <button class="buy">
+                <button class="buy" data-id="nova-book-air-13-custom">
                     В корзину
                 </button>
-
             </div>
-
         </div>
-
     </article>
 
 
-    <!-- 5 -->
-
     <article
         class="product"
+        data-id="nova-gaming-x-custom"
         data-name="NOVA Gaming X"
         data-price="189990"
         data-category="gaming"
     >
-
         <div class="product-image">
-
             <div class="laptop">
                 <div class="screen"></div>
                 <div class="base"></div>
             </div>
-
         </div>
 
         <div class="product-info">
+            <div class="tag">GAMING</div>
 
-            <div class="tag">
-                GAMING
-            </div>
-
-            <h2>
-                NOVA Gaming X
-            </h2>
+            <h2>NOVA Gaming X</h2>
 
             <p class="description">
                 Игровой ноутбук с мощной графикой
@@ -857,7 +814,6 @@
             </p>
 
             <div class="specs">
-
                 <div class="spec">
                     <small>ДИСПЛЕЙ</small>
                     <strong>16" 240 Hz</strong>
@@ -877,53 +833,37 @@
                     <small>SSD</small>
                     <strong>2 TB</strong>
                 </div>
-
             </div>
 
             <div class="bottom">
+                <div class="price">189 990 ₽</div>
 
-                <div class="price">
-                    189 990 ₽
-                </div>
-
-                <button class="buy">
+                <button class="buy" data-id="nova-gaming-x-custom">
                     В корзину
                 </button>
-
             </div>
-
         </div>
-
     </article>
 
 
-    <!-- 6 -->
-
     <article
         class="product"
+        data-id="nova-business-14-custom"
         data-name="NOVA Business 14"
         data-price="99990"
         data-category="business"
     >
-
         <div class="product-image">
-
             <div class="laptop">
                 <div class="screen"></div>
                 <div class="base"></div>
             </div>
-
         </div>
 
         <div class="product-info">
+            <div class="tag">BUSINESS</div>
 
-            <div class="tag">
-                BUSINESS
-            </div>
-
-            <h2>
-                NOVA Business 14
-            </h2>
+            <h2>NOVA Business 14</h2>
 
             <p class="description">
                 Надёжный рабочий ноутбук
@@ -931,7 +871,6 @@
             </p>
 
             <div class="specs">
-
                 <div class="spec">
                     <small>ДИСПЛЕЙ</small>
                     <strong>14" IPS</strong>
@@ -951,36 +890,22 @@
                     <small>SSD</small>
                     <strong>512 GB</strong>
                 </div>
-
             </div>
 
             <div class="bottom">
+                <div class="price">99 990 ₽</div>
 
-                <div class="price">
-                    99 990 ₽
-                </div>
-
-                <button class="buy">
+                <button class="buy" data-id="nova-business-14-custom">
                     В корзину
                 </button>
-
             </div>
-
         </div>
-
     </article>
 
 
     <div class="no-results" id="noResults">
-
-        <h2>
-            Ничего не найдено
-        </h2>
-
-        <p>
-            Попробуй изменить запрос или категорию.
-        </p>
-
+        <h2>Ничего не найдено</h2>
+        <p>Попробуй изменить запрос или категорию.</p>
     </div>
 
 </section>
@@ -991,23 +916,16 @@
     <div class="footer-grid">
 
         <div>
-
-            <div class="footer-logo">
-                NOVA
-            </div>
+            <div class="footer-logo">NOVA</div>
 
             <p>
                 Технологии нового поколения.
                 Устройства, которые работают на вас.
             </p>
-
         </div>
 
         <div>
-
-            <h3>
-                Категории
-            </h3>
+            <h3>Категории</h3>
 
             <p>
                 <a href="smartphones.html">Смартфоны</a>
@@ -1024,14 +942,10 @@
             <p>
                 <a href="audio.html">Аудио</a>
             </p>
-
         </div>
 
         <div>
-
-            <h3>
-                NOVA
-            </h3>
+            <h3>NOVA</h3>
 
             <p>
                 <a href="about.html">О компании</a>
@@ -1044,12 +958,16 @@
             <p>
                 <a href="contacts.html">Контакты</a>
             </p>
-
         </div>
 
     </div>
 
 </footer>
+
+
+<div class="toast" id="toast">
+    Товар добавлен в корзину ✓
+</div>
 
 
 <script>
@@ -1058,32 +976,172 @@
     const sort = document.getElementById("sort");
     const productsContainer = document.getElementById("products");
     const noResults = document.getElementById("noResults");
+    const toast = document.getElementById("toast");
+    const cartCount = document.getElementById("cartCount");
 
     let products = [...document.querySelectorAll(".product")];
 
     let currentCategory = "all";
 
 
+    /* =========================
+       CART
+    ========================= */
+
+    function readCart() {
+
+        try {
+
+            const saved = JSON.parse(
+                localStorage.getItem("novaCart")
+            );
+
+            if (!Array.isArray(saved)) {
+                return [];
+            }
+
+            return saved
+                .map(item => {
+
+                    if (typeof item === "string") {
+                        return {
+                            id: item,
+                            quantity: 1
+                        };
+                    }
+
+                    return {
+                        id: String(item.id || ""),
+                        quantity: Math.max(
+                            1,
+                            Number(item.quantity) || 1
+                        )
+                    };
+
+                })
+                .filter(item => item.id);
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    }
+
+
+    function saveCart(cart) {
+
+        localStorage.setItem(
+            "novaCart",
+            JSON.stringify(cart)
+        );
+
+    }
+
+
+    function updateCartCount() {
+
+        const cart = readCart();
+
+        const count = cart.reduce(
+            (total, item) =>
+                total + item.quantity,
+            0
+        );
+
+        cartCount.textContent = count;
+
+    }
+
+
+    function addToCart(id) {
+
+        const cart = readCart();
+
+        const existing = cart.find(
+            item => item.id === id
+        );
+
+
+        if (existing) {
+
+            existing.quantity += 1;
+
+        } else {
+
+            cart.push({
+                id: id,
+                quantity: 1
+            });
+
+        }
+
+
+        saveCart(cart);
+
+        updateCartCount();
+
+    }
+
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    let toastTimer;
+
+
+    function showToast() {
+
+        clearTimeout(toastTimer);
+
+        toast.classList.add("show");
+
+        toastTimer = setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        }, 1800);
+
+    }
+
+
+    /* =========================
+       SEARCH / SORT / FILTER
+    ========================= */
+
     function updateProducts() {
 
-        const query = search.value.toLowerCase().trim();
+        const query =
+            search.value
+                .toLowerCase()
+                .trim();
+
 
         let visible = products.filter(product => {
 
             const name =
-                product.dataset.name.toLowerCase();
+                product.dataset.name
+                    .toLowerCase();
 
             const category =
                 product.dataset.category;
 
+
             const matchesSearch =
                 name.includes(query);
+
 
             const matchesCategory =
                 currentCategory === "all" ||
                 category === currentCategory;
 
-            return matchesSearch && matchesCategory;
+
+            return (
+                matchesSearch &&
+                matchesCategory
+            );
 
         });
 
@@ -1092,8 +1150,8 @@
 
             visible.sort(
                 (a, b) =>
-                Number(a.dataset.price) -
-                Number(b.dataset.price)
+                    Number(a.dataset.price) -
+                    Number(b.dataset.price)
             );
 
         }
@@ -1103,8 +1161,8 @@
 
             visible.sort(
                 (a, b) =>
-                Number(b.dataset.price) -
-                Number(a.dataset.price)
+                    Number(b.dataset.price) -
+                    Number(a.dataset.price)
             );
 
         }
@@ -1121,15 +1179,17 @@
 
             product.style.display = "block";
 
-            productsContainer.appendChild(product);
+            productsContainer.appendChild(
+                product
+            );
 
         });
 
 
         noResults.style.display =
             visible.length === 0
-            ? "block"
-            : "none";
+                ? "block"
+                : "none";
 
     }
 
@@ -1157,13 +1217,19 @@
                     document
                         .querySelectorAll(".category")
                         .forEach(btn =>
-                            btn.classList.remove("active")
+                            btn.classList
+                                .remove("active")
                         );
 
-                    button.classList.add("active");
+
+                    button.classList.add(
+                        "active"
+                    );
+
 
                     currentCategory =
                         button.dataset.category;
+
 
                     updateProducts();
 
@@ -1173,6 +1239,10 @@
         });
 
 
+    /* =========================
+       ADD BUTTONS
+    ========================= */
+
     document
         .querySelectorAll(".buy")
         .forEach(button => {
@@ -1181,12 +1251,38 @@
                 "click",
                 () => {
 
-                    button.textContent = "Добавлено ✓";
+                    const id =
+                        button.dataset.id;
+
+
+                    if (!id) {
+                        return;
+                    }
+
+
+                    addToCart(id);
+
+
+                    button.textContent =
+                        "Добавлено ✓";
+
+
+                    button.classList.add(
+                        "added"
+                    );
+
+
+                    showToast();
+
 
                     setTimeout(() => {
 
                         button.textContent =
                             "В корзину";
+
+                        button.classList.remove(
+                            "added"
+                        );
 
                     }, 1200);
 
@@ -1195,7 +1291,17 @@
 
         });
 
+
+    /* =========================
+       INITIAL
+    ========================= */
+
+    updateCartCount();
+
+    updateProducts();
+
 </script>
 
 </body>
 </html>
+```
