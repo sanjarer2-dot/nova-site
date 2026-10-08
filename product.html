@@ -1,102 +1,675 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVA — Товар</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA — Товар</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:#08090c;
+    color:#fff;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.header{
+    height:72px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #1d2027;
+    background:rgba(8,9,12,.92);
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:3px;
+}
+
+.nav{
+    display:flex;
+    gap:28px;
+}
+
+.nav a{
+    color:#aeb4c0;
+    font-size:14px;
+    transition:.2s;
+}
+
+.nav a:hover{
+    color:#fff;
+}
+
+.actions{
+    display:flex;
+    gap:12px;
+}
+
+.action{
+    width:42px;
+    height:42px;
+    border:1px solid #292d35;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    transition:.2s;
+}
+
+.action:hover{
+    background:#171a20;
+}
+
+.container{
+    width:88%;
+    max-width:1250px;
+    margin:auto;
+}
+
+.breadcrumbs{
+    padding:30px 0;
+    color:#777e8c;
+    font-size:14px;
+}
+
+.breadcrumbs span{
+    color:#fff;
+}
+
+.product{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:70px;
+    padding-bottom:90px;
+}
+
+.gallery{
+    position:sticky;
+    top:105px;
+    height:max-content;
+}
+
+.main-image{
+    height:570px;
+    border:1px solid #242832;
+    border-radius:28px;
+    background:linear-gradient(145deg,#12151b,#090a0d);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.product-visual{
+    width:245px;
+    height:465px;
+    border-radius:42px;
+    background:linear-gradient(135deg,#262a32,#0d0f13);
+    border:5px solid #343944;
+    box-shadow:0 30px 80px rgba(0,0,0,.7);
+    position:relative;
+}
+
+.camera{
+    position:absolute;
+    width:92px;
+    height:110px;
+    left:18px;
+    top:20px;
+    border-radius:25px;
+    background:#17191e;
+    border:1px solid #3a3e47;
+}
+
+.lens{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:#050609;
+    border:3px solid #464b55;
+    position:absolute;
+}
+
+.lens:nth-child(1){
+    left:12px;
+    top:12px;
+}
+
+.lens:nth-child(2){
+    right:12px;
+    top:12px;
+}
+
+.lens:nth-child(3){
+    left:31px;
+    bottom:12px;
+}
+
+.phone-logo{
+    position:absolute;
+    left:50%;
+    top:55%;
+    transform:translate(-50%,-50%);
+    font-size:30px;
+    font-weight:700;
+    opacity:.5;
+}
+
+.thumbnails{
+    display:flex;
+    gap:12px;
+    margin-top:15px;
+}
+
+.thumbnail{
+    width:82px;
+    height:82px;
+    border-radius:15px;
+    border:1px solid #2c313b;
+    background:#111318;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    color:#777e8c;
+}
+
+.thumbnail.active{
+    border-color:#fff;
+}
+
+.info{
+    padding-top:10px;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:30px;
+    background:#171a20;
+    color:#9ca3b2;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:48px;
+    line-height:1.05;
+    letter-spacing:-2px;
+    margin-bottom:18px;
+}
+
+.description{
+    color:#9ba1ad;
+    font-size:17px;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+.price{
+    font-size:34px;
+    font-weight:750;
+    margin-bottom:32px;
+}
+
+.option-title{
+    font-size:14px;
+    color:#aeb4c0;
+    margin-bottom:12px;
+}
+
+.options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:28px;
+}
+
+.option{
+    min-width:80px;
+    padding:13px 18px;
+    border:1px solid #30343d;
+    border-radius:12px;
+    background:#101217;
+    color:#fff;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#777e8c;
+}
+
+.option.selected{
+    border-color:#fff;
+    background:#1c2028;
+}
+
+.colors{
+    display:flex;
+    gap:12px;
+    margin-bottom:35px;
+}
+
+.color{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:3px solid transparent;
+    outline:1px solid #454a55;
+    cursor:pointer;
+}
+
+.color.selected{
+    outline:2px solid #fff;
+    outline-offset:3px;
+}
+
+.black{
+    background:#111;
+}
+
+.silver{
+    background:#d5d7da;
+}
+
+.titanium{
+    background:#8c8075;
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns:1fr 60px;
+    gap:12px;
+    margin-bottom:35px;
+}
+
+.buy{
+    height:58px;
+    border:0;
+    border-radius:15px;
+    background:#fff;
+    color:#000;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.buy:hover{
+    transform:translateY(-2px);
+    background:#e8e8e8;
+}
+
+.favorite{
+    height:58px;
+    border:1px solid #30343d;
+    border-radius:15px;
+    background:#111318;
+    color:#fff;
+    font-size:23px;
+    cursor:pointer;
+}
+
+.delivery-box{
+    border-top:1px solid #242832;
+    border-bottom:1px solid #242832;
+    padding:24px 0;
+}
+
+.delivery-item{
+    display:flex;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.delivery-item:last-child{
+    margin-bottom:0;
+}
+
+.delivery-icon{
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background:#171a20;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.delivery-item strong{
+    display:block;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.delivery-item p{
+    color:#777e8c;
+    font-size:13px;
+}
+
+.spec-section{
+    border-top:1px solid #242832;
+    padding:70px 0;
+}
+
+.section-title{
+    font-size:32px;
+    margin-bottom:35px;
+}
+
+.spec-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:#242832;
+    border:1px solid #242832;
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.spec{
+    padding:23px;
+    background:#0d0f13;
+}
+
+.spec span{
+    display:block;
+    color:#777e8c;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.spec strong{
+    font-size:15px;
+}
+
+.footer{
+    border-top:1px solid #20232a;
+    padding:35px 6%;
+    color:#666d7a;
+    text-align:center;
+    font-size:13px;
+}
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    padding:16px 22px;
+    background:#fff;
+    color:#000;
+    border-radius:13px;
+    font-weight:600;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:999;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+@media(max-width:850px){
+
+    .nav{
+        display:none;
+    }
+
+    .product{
+        grid-template-columns:1fr;
+        gap:35px;
+    }
+
+    .gallery{
+        position:static;
+    }
+
+    .main-image{
+        height:450px;
+    }
+
+    h1{
+        font-size:38px;
+    }
+
+    .spec-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:500px){
+
+    .header{
+        padding:0 5%;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .main-image{
+        height:380px;
+    }
+
+    .product-visual{
+        transform:scale(.75);
+    }
+
+    h1{
+        font-size:34px;
+    }
+
+    .price{
+        font-size:29px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header class="header">
-    <div class="container nav">
 
-        <a href="index.html" class="logo">NOVA</a>
+    <a href="index.html" class="logo">NOVA</a>
 
-        <nav>
-            <a href="index.html">Главная</a>
-            <a href="catalog.html">Каталог</a>
-            <a href="about.html">О компании</a>
-            <a href="contacts.html">Контакты</a>
-        </nav>
+    <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О компании</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="delivery.html">Доставка</a>
+    </nav>
 
-        <div class="nav-actions">
-            <a href="#" class="nav-icon">♡</a>
-            <a href="#" class="nav-icon">🛒</a>
-        </div>
-
+    <div class="actions">
+        <a href="favorites.html" class="action">♡</a>
+        <a href="cart.html" class="action">🛒</a>
     </div>
+
 </header>
 
 
-<main>
+<main class="container">
 
-    <section class="product-page">
+    <div class="breadcrumbs">
+        Каталог / Смартфоны / <span>NOVA Phone X Pro</span>
+    </div>
 
-        <div class="container product-layout">
 
-            <div class="product-photo">
-                <div class="product-placeholder">
-                    NOVA
+    <section class="product">
+
+        <!-- GALLERY -->
+
+        <div class="gallery">
+
+            <div class="main-image">
+
+                <div class="product-visual">
+
+                    <div class="camera">
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                    </div>
+
+                    <div class="phone-logo">N</div>
+
                 </div>
+
+            </div>
+
+            <div class="thumbnails">
+
+                <div class="thumbnail active">
+                    01
+                </div>
+
+                <div class="thumbnail">
+                    02
+                </div>
+
+                <div class="thumbnail">
+                    03
+                </div>
+
+                <div class="thumbnail">
+                    04
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT INFO -->
+
+        <div class="info">
+
+            <div class="badge">
+                НОВИНКА
+            </div>
+
+            <h1>NOVA Phone X Pro</h1>
+
+            <p class="description">
+                Флагманский смартфон NOVA с мощным процессором,
+                профессиональной камерой и премиальным корпусом.
+            </p>
+
+            <div class="price">
+                119 990 ₽
             </div>
 
 
-            <div class="product-details">
+            <div class="option-title">
+                Память
+            </div>
 
-                <span class="product-category">SMARTPHONE</span>
+            <div class="options">
 
-                <h1>NOVA Phone X</h1>
-
-                <p class="product-description">
-                    Флагманский смартфон нового поколения.
-                    Минималистичный дизайн, высокая производительность
-                    и технологии NOVA в одном устройстве.
-                </p>
-
-                <div class="product-price">
-                    89 990 ₽
-                </div>
-
-                <div class="product-options">
-
-                    <div>
-                        <h3>Память</h3>
-
-                        <button class="option active">256 GB</button>
-                        <button class="option">512 GB</button>
-                    </div>
-
-                    <div>
-                        <h3>Цвет</h3>
-
-                        <button class="option active">Black</button>
-                        <button class="option">Silver</button>
-                        <button class="option">Titanium</button>
-                    </div>
-
-                </div>
-
-                <button class="buy-button">
-                    Добавить в корзину
+                <button class="option selected">
+                    256 ГБ
                 </button>
 
-                <div class="product-features">
+                <button class="option">
+                    512 ГБ
+                </button>
 
-                    <div>
-                        <strong>🚚 Бесплатная доставка</strong>
-                        <span>По всей России</span>
+                <button class="option">
+                    1 ТБ
+                </button>
+
+            </div>
+
+
+            <div class="option-title">
+                Цвет
+            </div>
+
+            <div class="colors">
+
+                <button class="color black selected"></button>
+
+                <button class="color silver"></button>
+
+                <button class="color titanium"></button>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button class="buy" onclick="addToCart()">
+                    В корзину
+                </button>
+
+                <button class="favorite" onclick="addFavorite()">
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="delivery-box">
+
+                <div class="delivery-item">
+
+                    <div class="delivery-icon">
+                        🚚
                     </div>
 
                     <div>
-                        <strong>🛡 Гарантия</strong>
-                        <span>12 месяцев</span>
+                        <strong>Быстрая доставка</strong>
+                        <p>Доставка от 1 рабочего дня</p>
+                    </div>
+
+                </div>
+
+
+                <div class="delivery-item">
+
+                    <div class="delivery-icon">
+                        ✓
                     </div>
 
                     <div>
-                        <strong>↩ Возврат</strong>
-                        <span>14 дней</span>
+                        <strong>Гарантия</strong>
+                        <p>Официальная гарантия на устройство</p>
+                    </div>
+
+                </div>
+
+
+                <div class="delivery-item">
+
+                    <div class="delivery-icon">
+                        ↩
+                    </div>
+
+                    <div>
+                        <strong>Возврат</strong>
+                        <p>Удобный возврат товара</p>
                     </div>
 
                 </div>
@@ -108,44 +681,64 @@
     </section>
 
 
-    <section class="product-info">
+    <!-- SPECIFICATIONS -->
 
-        <div class="container">
+    <section class="spec-section">
 
-            <h2>Характеристики</h2>
+        <h2 class="section-title">
+            Характеристики
+        </h2>
 
-            <div class="specs">
+        <div class="spec-grid">
 
-                <div>
-                    <span>Дисплей</span>
-                    <strong>6.7" OLED 120 Hz</strong>
-                </div>
+            <div class="spec">
+                <span>Дисплей</span>
+                <strong>6.7″ OLED, 120 Гц</strong>
+            </div>
 
-                <div>
-                    <span>Процессор</span>
-                    <strong>NOVA Core X1</strong>
-                </div>
+            <div class="spec">
+                <span>Процессор</span>
+                <strong>NOVA X1 Pro</strong>
+            </div>
 
-                <div>
-                    <span>Камера</span>
-                    <strong>48 MP Pro Camera</strong>
-                </div>
+            <div class="spec">
+                <span>Оперативная память</span>
+                <strong>12 ГБ</strong>
+            </div>
 
-                <div>
-                    <span>Аккумулятор</span>
-                    <strong>5000 mAh</strong>
-                </div>
+            <div class="spec">
+                <span>Память</span>
+                <strong>256 / 512 ГБ / 1 ТБ</strong>
+            </div>
 
-                <div>
-                    <span>Защита</span>
-                    <strong>IP68</strong>
-                </div>
+            <div class="spec">
+                <span>Основная камера</span>
+                <strong>50 МП + 48 МП + 12 МП</strong>
+            </div>
 
-                <div>
-                    <span>ОС</span>
-                    <strong>NOVA OS</strong>
-                </div>
+            <div class="spec">
+                <span>Фронтальная камера</span>
+                <strong>16 МП</strong>
+            </div>
 
+            <div class="spec">
+                <span>Аккумулятор</span>
+                <strong>5 000 мА·ч</strong>
+            </div>
+
+            <div class="spec">
+                <span>Защита</span>
+                <strong>IP68</strong>
+            </div>
+
+            <div class="spec">
+                <span>Связь</span>
+                <strong>5G / Wi-Fi 7 / Bluetooth 5.4</strong>
+            </div>
+
+            <div class="spec">
+                <span>Операционная система</span>
+                <strong>NOVA OS</strong>
             </div>
 
         </div>
@@ -156,30 +749,93 @@
 
 
 <footer class="footer">
-
-    <div class="container">
-
-        <div class="footer-logo">NOVA</div>
-
-        <p>
-            Технологии нового поколения.
-        </p>
-
-        <div class="footer-links">
-            <a href="index.html">Главная</a>
-            <a href="catalog.html">Каталог</a>
-            <a href="about.html">О компании</a>
-            <a href="contacts.html">Контакты</a>
-        </div>
-
-        <div class="footer-bottom">
-            © 2026 NOVA. Все права защищены.
-        </div>
-
-    </div>
-
+    © 2026 NOVA. Все права защищены.
 </footer>
 
+
+<div class="toast" id="toast">
+    Товар добавлен ✓
+</div>
+
+
+<script>
+
+function showToast(text){
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = text;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+
+
+function addToCart(){
+
+    showToast("NOVA Phone X Pro добавлен в корзину ✓");
+
+}
+
+
+function addFavorite(){
+
+    showToast("Добавлено в избранное ♡");
+
+}
+
+
+/* OPTIONS */
+
+document.querySelectorAll(".option").forEach(option => {
+
+    option.addEventListener("click", () => {
+
+        document.querySelectorAll(".option")
+            .forEach(x => x.classList.remove("selected"));
+
+        option.classList.add("selected");
+
+    });
+
+});
+
+
+/* COLORS */
+
+document.querySelectorAll(".color").forEach(color => {
+
+    color.addEventListener("click", () => {
+
+        document.querySelectorAll(".color")
+            .forEach(x => x.classList.remove("selected"));
+
+        color.classList.add("selected");
+
+    });
+
+});
+
+
+/* THUMBNAILS */
+
+document.querySelectorAll(".thumbnail").forEach(thumb => {
+
+    thumb.addEventListener("click", () => {
+
+        document.querySelectorAll(".thumbnail")
+            .forEach(x => x.classList.remove("active"));
+
+        thumb.classList.add("active");
+
+    });
+
+});
+
+</script>
 
 </body>
 </html>
