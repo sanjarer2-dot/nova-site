@@ -8,11 +8,10 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <style>
+    <!-- Единая база товаров NOVA -->
+    <script src="products.js"></script>
 
-        /* =====================================================
-           NOVA CATALOG — PREMIUM COMPACT VERSION
-        ===================================================== */
+    <style>
 
         * {
             box-sizing: border-box;
@@ -59,7 +58,7 @@
             top: 0;
             z-index: 1000;
             height: 76px;
-            background: rgba(5, 5, 5, .84);
+            background: rgba(5,5,5,.84);
             backdrop-filter: blur(22px);
             -webkit-backdrop-filter: blur(22px);
             border-bottom: 1px solid rgba(255,255,255,.08);
@@ -112,11 +111,16 @@
             cursor: pointer;
             position: relative;
             transition: .25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
         }
 
         .nova-action:hover {
             background: #1b1b1b;
             border-color: #555;
+            transform: translateY(-2px);
         }
 
         .counter {
@@ -130,7 +134,7 @@
             background: #fff;
             color: #000;
             font-size: 9px;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             font-weight: 800;
@@ -203,7 +207,6 @@
 
         .search-box {
             flex: 1;
-            position: relative;
         }
 
         .search-box input {
@@ -279,7 +282,7 @@
 
 
         /* =====================================================
-           CATALOG LAYOUT
+           LAYOUT
         ===================================================== */
 
         .catalog-layout {
@@ -637,7 +640,7 @@
 
 
         /* =====================================================
-           PRODUCT INFO — COMPACT
+           PRODUCT INFO
         ===================================================== */
 
         .product-info {
@@ -670,7 +673,7 @@
 
 
         /* =====================================================
-           PRICE + BUTTON
+           PRICE
         ===================================================== */
 
         .product-bottom {
@@ -711,6 +714,11 @@
             transform: scale(.97);
         }
 
+        .add-cart.added {
+            background: #222;
+            color: #fff;
+        }
+
 
         /* =====================================================
            NO RESULTS
@@ -728,6 +736,7 @@
         .no-results h2 {
             font-size: 22px;
             color: #aaa;
+            margin-bottom: 8px;
         }
 
         .no-results p {
@@ -802,12 +811,22 @@
             margin-top: 5px;
         }
 
+        .cart-item-quantity {
+            color: #aaa;
+            font-size: 10px;
+            margin-top: 4px;
+        }
+
         .remove-item {
             background: transparent;
             border: 0;
             color: #666;
             cursor: pointer;
             font-size: 18px;
+        }
+
+        .remove-item:hover {
+            color: #ff5c5c;
         }
 
         .cart-total {
@@ -828,6 +847,11 @@
             font-weight: 800;
             font-size: 12px;
             cursor: pointer;
+            transition: .2s;
+        }
+
+        .checkout-button:hover {
+            transform: translateY(-2px);
         }
 
 
@@ -1173,12 +1197,18 @@
 
         <div class="nova-actions">
 
-            <button class="nova-action" title="Избранное">
+            <button
+                class="nova-action"
+                id="favoriteButton"
+                title="Избранное">
                 ♡
                 <span class="counter" id="favoriteCounter">0</span>
             </button>
 
-            <button class="nova-action" id="cartButton" title="Корзина">
+            <button
+                class="nova-action"
+                id="cartButton"
+                title="Корзина">
                 🛒
                 <span class="counter" id="cartCounter">0</span>
             </button>
@@ -1259,9 +1289,7 @@
     </div>
 
 
-    <!-- =================================================
-         CATEGORIES
-    ================================================= -->
+    <!-- CATEGORIES -->
 
     <div class="categories">
 
@@ -1299,9 +1327,7 @@
     <div class="catalog-layout">
 
 
-        <!-- =================================================
-             FILTERS
-        ================================================= -->
+        <!-- FILTERS -->
 
         <aside class="filters">
 
@@ -1317,31 +1343,29 @@
 
                 <label class="filter-option">
                     До 50 000 ₽
-                    <input type="checkbox" data-price="50000">
+                    <input
+                        type="checkbox"
+                        class="price-filter"
+                        data-min="0"
+                        data-max="50000">
                 </label>
 
                 <label class="filter-option">
                     50 000 — 100 000 ₽
-                    <input type="checkbox" data-price="100000">
+                    <input
+                        type="checkbox"
+                        class="price-filter"
+                        data-min="50000"
+                        data-max="100000">
                 </label>
 
                 <label class="filter-option">
                     Более 100 000 ₽
-                    <input type="checkbox" data-price="100001">
-                </label>
-
-            </div>
-
-
-            <div class="filter-group">
-
-                <div class="filter-title">
-                    Наличие
-                </div>
-
-                <label class="filter-option">
-                    В наличии
-                    <input type="checkbox" checked>
+                    <input
+                        type="checkbox"
+                        class="price-filter"
+                        data-min="100000"
+                        data-max="999999999">
                 </label>
 
             </div>
@@ -1355,12 +1379,18 @@
 
                 <label class="filter-option">
                     Новинка
-                    <input type="checkbox">
+                    <input
+                        type="checkbox"
+                        class="badge-filter"
+                        value="NEW">
                 </label>
 
                 <label class="filter-option">
-                    Bestseller
-                    <input type="checkbox">
+                    PRO
+                    <input
+                        type="checkbox"
+                        class="badge-filter"
+                        value="PRO">
                 </label>
 
             </div>
@@ -1368,9 +1398,7 @@
         </aside>
 
 
-        <!-- =================================================
-             PRODUCTS
-        ================================================= -->
+        <!-- PRODUCTS -->
 
         <section>
 
@@ -1379,666 +1407,30 @@
                 <div class="products-count">
 
                     Найдено устройств:
-                    <strong id="productCount">12</strong>
+                    <strong id="productCount">0</strong>
 
                 </div>
 
             </div>
 
 
-            <div class="products-grid" id="productsGrid">
-
-
-                <!-- 1 -->
-
-                <article
-                    class="product-card"
-                    data-category="smartphone"
-                    data-name="NOVA Phone X"
-                    data-price="89990"
-                >
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            NEW
-                        </span>
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="device"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            SMARTPHONE
-                        </span>
-
-                        <h2>
-                            NOVA Phone X
-                        </h2>
-
-                        <p>
-                            Флагман нового поколения.
-                            OLED 120 Hz и NOVA Core.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                89 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 2 -->
-
-                <article
-                    class="product-card"
-                    data-category="smartphone"
-                    data-name="NOVA Phone X Pro"
-                    data-price="119990"
-                >
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            PRO
-                        </span>
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="device"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            SMARTPHONE
-                        </span>
-
-                        <h2>
-                            NOVA Phone X Pro
-                        </h2>
-
-                        <p>
-                            Pro-камера, Titanium корпус
-                            и максимальная мощность.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                119 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 3 -->
-
-                <article
-                    class="product-card"
-                    data-category="smartphone"
-                    data-name="NOVA Phone Lite"
-                    data-price="59990"
-                >
-
-                    <div class="product-image">
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="device"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            SMARTPHONE
-                        </span>
-
-                        <h2>
-                            NOVA Phone Lite
-                        </h2>
-
-                        <p>
-                            Лёгкий смартфон для тех,
-                            кто выбирает простоту.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                59 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 4 -->
-
-                <article
-                    class="product-card"
-                    data-category="laptop"
-                    data-name="NOVA Book Pro 16"
-                    data-price="179990"
-                >
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            PRO
-                        </span>
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="laptop"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            LAPTOP
-                        </span>
-
-                        <h2>
-                            NOVA Book Pro 16
-                        </h2>
-
-                        <p>
-                            Мощный ноутбук для работы,
-                            творчества и разработки.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                179 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 5 -->
-
-                <article
-                    class="product-card"
-                    data-category="laptop"
-                    data-name="NOVA Book Air"
-                    data-price="109990"
-                >
-
-                    <div class="product-image">
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="laptop"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            LAPTOP
-                        </span>
-
-                        <h2>
-                            NOVA Book Air
-                        </h2>
-
-                        <p>
-                            Тонкий, лёгкий и быстрый
-                            ноутбук на каждый день.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                109 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 6 -->
-
-                <article
-                    class="product-card"
-                    data-category="tablet"
-                    data-name="NOVA Tab Pro"
-                    data-price="79990"
-                >
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            NEW
-                        </span>
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="tablet"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            TABLET
-                        </span>
-
-                        <h2>
-                            NOVA Tab Pro
-                        </h2>
-
-                        <p>
-                            Большой OLED-дисплей
-                            и производительность Pro.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                79 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 7 -->
-
-                <article
-                    class="product-card"
-                    data-category="audio"
-                    data-name="NOVA Buds Pro"
-                    data-price="24990"
-                >
-
-                    <div class="product-image">
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="buds"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            AUDIO
-                        </span>
-
-                        <h2>
-                            NOVA Buds Pro
-                        </h2>
-
-                        <p>
-                            Пространственный звук
-                            и интеллектуальное шумоподавление.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                24 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 8 -->
-
-                <article
-                    class="product-card"
-                    data-category="audio"
-                    data-name="NOVA Headphones Max"
-                    data-price="39990"
-                >
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            MAX
-                        </span>
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="buds"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            AUDIO
-                        </span>
-
-                        <h2>
-                            NOVA Headphones Max
-                        </h2>
-
-                        <p>
-                            Премиальный звук
-                            и максимальный комфорт.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                39 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 9 -->
-
-                <article
-                    class="product-card"
-                    data-category="watch"
-                    data-name="NOVA Watch Ultra"
-                    data-price="49990"
-                >
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            ULTRA
-                        </span>
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="watch"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            WATCH
-                        </span>
-
-                        <h2>
-                            NOVA Watch Ultra
-                        </h2>
-
-                        <p>
-                            Большой дисплей,
-                            спорт и здоровье.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                49 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 10 -->
-
-                <article
-                    class="product-card"
-                    data-category="watch"
-                    data-name="NOVA Watch Pro"
-                    data-price="32990"
-                >
-
-                    <div class="product-image">
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="watch"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            WATCH
-                        </span>
-
-                        <h2>
-                            NOVA Watch Pro
-                        </h2>
-
-                        <p>
-                            Умные часы для
-                            повседневной жизни.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                32 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 11 -->
-
-                <article
-                    class="product-card"
-                    data-category="accessory"
-                    data-name="NOVA Power Hub"
-                    data-price="9990"
-                >
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            ACCESSORY
-                        </span>
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="buds"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            ACCESSORY
-                        </span>
-
-                        <h2>
-                            NOVA Power Hub
-                        </h2>
-
-                        <p>
-                            Универсальная зарядная
-                            станция для экосистемы NOVA.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                9 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 12 -->
-
-                <article
-                    class="product-card"
-                    data-category="accessory"
-                    data-name="NOVA Mag Dock"
-                    data-price="6990"
-                >
-
-                    <div class="product-image">
-
-                        <button class="favorite">
-                            ♡
-                        </button>
-
-                        <div class="buds"></div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            ACCESSORY
-                        </span>
-
-                        <h2>
-                            NOVA Mag Dock
-                        </h2>
-
-                        <p>
-                            Минималистичная магнитная
-                            зарядка для устройств NOVA.
-                        </p>
-
-                        <div class="product-bottom">
-
-                            <span class="price">
-                                6 990 ₽
-                            </span>
-
-                            <button class="add-cart">
-                                В корзину
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
+            <div
+                class="products-grid"
+                id="productsGrid">
             </div>
 
 
-            <div class="no-results" id="noResults">
+            <div
+                class="no-results"
+                id="noResults">
 
                 <h2>
                     Ничего не найдено
                 </h2>
 
                 <p>
-                    Попробуйте изменить запрос или категорию.
+                    Попробуйте изменить запрос,
+                    категорию или фильтры.
                 </p>
 
             </div>
@@ -2051,10 +1443,12 @@
 
 
 <!-- =====================================================
-     CART
+     CART PANEL
 ===================================================== -->
 
-<div class="cart-panel" id="cartPanel">
+<div
+    class="cart-panel"
+    id="cartPanel">
 
     <div class="cart-head">
 
@@ -2062,19 +1456,25 @@
             Корзина
         </h2>
 
-        <button class="close-cart" id="closeCart">
+        <button
+            class="close-cart"
+            id="closeCart">
             ×
         </button>
 
     </div>
 
-    <div class="cart-items" id="cartItems">
+
+    <div
+        class="cart-items"
+        id="cartItems">
 
         <p style="color:#666">
             Корзина пока пустая.
         </p>
 
     </div>
+
 
     <div class="cart-total">
 
@@ -2088,18 +1488,23 @@
 
     </div>
 
-    <button class="checkout-button">
-        Перейти к оформлению
+
+    <button
+        class="checkout-button"
+        id="checkoutButton">
+
+        Перейти в корзину
+
     </button>
 
 </div>
 
 
-<!-- =====================================================
-     TOAST
-===================================================== -->
+<!-- TOAST -->
 
-<div class="toast" id="toast">
+<div
+    class="toast"
+    id="toast">
     Добавлено в корзину
 </div>
 
@@ -2215,20 +1620,14 @@
 </footer>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script>
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
     const productsGrid =
         document.getElementById("productsGrid");
-
-    const cards =
-        [...document.querySelectorAll(".product-card")];
-
-    const categoryButtons =
-        [...document.querySelectorAll(".category-btn")];
 
     const searchInput =
         document.getElementById("searchInput");
@@ -2263,104 +1662,665 @@
     const favoriteCounter =
         document.getElementById("favoriteCounter");
 
+    const favoriteButton =
+        document.getElementById("favoriteButton");
+
     const toast =
         document.getElementById("toast");
 
+    const checkoutButton =
+        document.getElementById("checkoutButton");
+
+
+    /* =====================================================
+       STATE
+    ===================================================== */
 
     let currentCategory = "all";
 
     let cart = [];
 
-    let favorites = 0;
+    let favorites = [];
 
 
     /* =====================================================
-       CATEGORY
+       LOAD STORAGE
     ===================================================== */
 
-    categoryButtons.forEach(button => {
+    function loadStorage() {
 
-        button.addEventListener("click", () => {
+        try {
 
-            categoryButtons.forEach(btn => {
-                btn.classList.remove("active");
-            });
+            const savedCart =
+                JSON.parse(
+                    localStorage.getItem("novaCart") || "[]"
+                );
 
-            button.classList.add("active");
+            cart = savedCart
+                .map(item => {
 
-            currentCategory =
-                button.dataset.category;
+                    if (typeof item === "string") {
 
-            filterProducts();
+                        return {
+                            id: item,
+                            quantity: 1
+                        };
+
+                    }
+
+                    return {
+                        id: item.id,
+                        quantity:
+                            Math.max(
+                                1,
+                                Number(item.quantity) || 1
+                            )
+                    };
+
+                })
+                .filter(
+                    item =>
+                        item.id &&
+                        products[item.id]
+                );
+
+
+            const savedFavorites =
+                JSON.parse(
+                    localStorage.getItem(
+                        "novaFavorites"
+                    ) || "[]"
+                );
+
+
+            favorites =
+                Array.isArray(savedFavorites)
+                    ? savedFavorites
+                    : [];
+
+        } catch {
+
+            cart = [];
+            favorites = [];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAVE
+    ===================================================== */
+
+    function saveCart() {
+
+        localStorage.setItem(
+            "novaCart",
+            JSON.stringify(cart)
+        );
+
+    }
+
+
+    function saveFavorites() {
+
+        localStorage.setItem(
+            "novaFavorites",
+            JSON.stringify(favorites)
+        );
+
+    }
+
+
+    /* =====================================================
+       PRICE
+    ===================================================== */
+
+    function formatPrice(price) {
+
+        return Number(price)
+            .toLocaleString("ru-RU") + " ₽";
+
+    }
+
+
+    /* =====================================================
+       CATEGORY LABEL
+    ===================================================== */
+
+    function categoryLabel(category) {
+
+        const labels = {
+
+            smartphone: "SMARTPHONE",
+            laptop: "LAPTOP",
+            tablet: "TABLET",
+            audio: "AUDIO",
+            watch: "WATCH",
+            accessory: "ACCESSORY"
+
+        };
+
+        return labels[category] || "NOVA";
+
+    }
+
+
+    /* =====================================================
+       DEVICE VISUAL
+    ===================================================== */
+
+    function deviceVisual(category) {
+
+        if (category === "laptop") {
+
+            return `<div class="laptop"></div>`;
+
+        }
+
+        if (category === "tablet") {
+
+            return `<div class="tablet"></div>`;
+
+        }
+
+        if (category === "audio") {
+
+            return `<div class="buds"></div>`;
+
+        }
+
+        if (category === "watch") {
+
+            return `<div class="watch"></div>`;
+
+        }
+
+        if (category === "accessory") {
+
+            return `<div class="buds"></div>`;
+
+        }
+
+        return `<div class="device"></div>`;
+
+    }
+
+
+    /* =====================================================
+       RENDER PRODUCTS
+    ===================================================== */
+
+    function renderProducts() {
+
+        productsGrid.innerHTML = "";
+
+        const list =
+            Object.entries(products);
+
+
+        list.forEach(([id, product]) => {
+
+            const card =
+                document.createElement("article");
+
+            card.className =
+                "product-card";
+
+            card.dataset.id = id;
+
+            card.dataset.category =
+                product.category || "";
+
+            card.dataset.name =
+                product.name || "";
+
+            card.dataset.price =
+                Number(product.price) || 0;
+
+            card.dataset.badge =
+                product.badge || "";
+
+
+            const isFavorite =
+                favorites.includes(id);
+
+
+            card.innerHTML = `
+
+                <div class="product-image">
+
+                    ${
+                        product.badge
+                            ? `
+                                <span class="badge">
+                                    ${product.badge}
+                                </span>
+                              `
+                            : ""
+                    }
+
+
+                    <button
+                        class="favorite ${
+                            isFavorite ? "active" : ""
+                        }"
+                        data-id="${id}"
+                        aria-label="Добавить в избранное">
+
+                        ${isFavorite ? "♥" : "♡"}
+
+                    </button>
+
+
+                    ${deviceVisual(product.category)}
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+
+                        ${categoryLabel(product.category)}
+
+                    </span>
+
+
+                    <h2>
+                        ${product.name}
+                    </h2>
+
+
+                    <p>
+                        ${
+                            product.description ||
+                            "Премиальное устройство NOVA."
+                        }
+                    </p>
+
+
+                    <div class="product-bottom">
+
+                        <span class="price">
+
+                            ${formatPrice(product.price)}
+
+                        </span>
+
+
+                        <button
+                            class="add-cart"
+                            data-id="${id}">
+
+                            В корзину
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            productsGrid.appendChild(card);
 
         });
 
-    });
+
+        attachProductEvents();
+
+        filterProducts();
+
+    }
 
 
     /* =====================================================
-       SEARCH
+       PRODUCT EVENTS
     ===================================================== */
 
-    searchInput.addEventListener(
-        "input",
-        filterProducts
-    );
+    function attachProductEvents() {
 
+        document
+            .querySelectorAll(".add-cart")
+            .forEach(button => {
 
-    /* =====================================================
-       SORT
-    ===================================================== */
+                button.addEventListener(
+                    "click",
+                    event => {
 
-    sortSelect.addEventListener(
-        "change",
-        () => {
+                        event.preventDefault();
+                        event.stopPropagation();
 
-            const value =
-                sortSelect.value;
+                        addToCart(
+                            button.dataset.id
+                        );
 
-            let sorted =
-                [...cards];
-
-            if (value === "cheap") {
-
-                sorted.sort(
-                    (a, b) =>
-                        Number(a.dataset.price) -
-                        Number(b.dataset.price)
+                    }
                 );
 
-            }
-
-            if (value === "expensive") {
-
-                sorted.sort(
-                    (a, b) =>
-                        Number(b.dataset.price) -
-                        Number(a.dataset.price)
-                );
-
-            }
-
-            if (value === "name") {
-
-                sorted.sort(
-                    (a, b) =>
-                        a.dataset.name.localeCompare(
-                            b.dataset.name
-                        )
-                );
-
-            }
-
-            sorted.forEach(card => {
-                productsGrid.appendChild(card);
             });
 
-            filterProducts();
+
+        document
+            .querySelectorAll(".favorite")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    event => {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        toggleFavorite(
+                            button.dataset.id
+                        );
+
+                    }
+                );
+
+            });
+
+
+        document
+            .querySelectorAll(".product-card")
+            .forEach(card => {
+
+                card.addEventListener(
+                    "dblclick",
+                    () => {
+
+                        window.location.href =
+                            "product.html?id=" +
+                            encodeURIComponent(
+                                card.dataset.id
+                            );
+
+                    }
+                );
+
+            });
+
+    }
+
+
+    /* =====================================================
+       ADD TO CART
+    ===================================================== */
+
+    function addToCart(id) {
+
+        const product =
+            products[id];
+
+        if (!product) return;
+
+
+        const existing =
+            cart.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if (existing) {
+
+            existing.quantity++;
+
+        } else {
+
+            cart.push({
+                id: id,
+                quantity: 1
+            });
 
         }
-    );
+
+
+        saveCart();
+
+        updateCartUI();
+
+        showToast(
+            product.name +
+            " добавлен в корзину"
+        );
+
+
+        /*
+           Короткая анимация кнопки
+        */
+
+        const button =
+            document.querySelector(
+                `.add-cart[data-id="${id}"]`
+            );
+
+
+        if (button) {
+
+            const oldText =
+                button.textContent;
+
+            button.textContent =
+                "Добавлено ✓";
+
+            button.classList.add("added");
+
+            setTimeout(() => {
+
+                button.textContent =
+                    oldText;
+
+                button.classList.remove(
+                    "added"
+                );
+
+            }, 1000);
+
+        }
+
+    }
+
+
+    /* =====================================================
+       REMOVE CART ITEM
+    ===================================================== */
+
+    function removeFromCart(id) {
+
+        cart =
+            cart.filter(
+                item =>
+                    item.id !== id
+            );
+
+        saveCart();
+
+        updateCartUI();
+
+    }
+
+
+    /* =====================================================
+       CART UI
+    ===================================================== */
+
+    function updateCartUI() {
+
+        const count =
+            cart.reduce(
+                (sum, item) =>
+                    sum + item.quantity,
+                0
+            );
+
+
+        cartCounter.textContent =
+            count;
+
+
+        cartCounter.style.display =
+            count > 0 ? "flex" : "none";
+
+
+        if (cart.length === 0) {
+
+            cartItems.innerHTML = `
+
+                <p style="color:#666">
+                    Корзина пока пустая.
+                </p>
+
+            `;
+
+            cartTotal.textContent =
+                "0 ₽";
+
+            return;
+
+        }
+
+
+        cartItems.innerHTML = "";
+
+
+        let total = 0;
+
+
+        cart.forEach(item => {
+
+            const product =
+                products[item.id];
+
+            if (!product) return;
+
+
+            total +=
+                Number(product.price) *
+                item.quantity;
+
+
+            const element =
+                document.createElement("div");
+
+            element.className =
+                "cart-item";
+
+
+            element.innerHTML = `
+
+                <div>
+
+                    <div class="cart-item-name">
+                        ${product.name}
+                    </div>
+
+                    <div class="cart-item-price">
+                        ${formatPrice(product.price)}
+                    </div>
+
+                    <div class="cart-item-quantity">
+                        Количество: ${item.quantity}
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="remove-item"
+                    data-id="${item.id}"
+                    title="Удалить">
+
+                    ×
+
+                </button>
+
+            `;
+
+
+            element
+                .querySelector(".remove-item")
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        removeFromCart(
+                            item.id
+                        );
+
+                    }
+                );
+
+
+            cartItems.appendChild(element);
+
+        });
+
+
+        cartTotal.textContent =
+            formatPrice(total);
+
+    }
+
+
+    /* =====================================================
+       FAVORITES
+    ===================================================== */
+
+    function toggleFavorite(id) {
+
+        const index =
+            favorites.indexOf(id);
+
+
+        if (index === -1) {
+
+            favorites.push(id);
+
+            showToast(
+                "Добавлено в избранное"
+            );
+
+        } else {
+
+            favorites.splice(
+                index,
+                1
+            );
+
+            showToast(
+                "Удалено из избранного"
+            );
+
+        }
+
+
+        saveFavorites();
+
+        updateFavoriteUI();
+
+        renderProducts();
+
+    }
+
+
+    function updateFavoriteUI() {
+
+        const count =
+            favorites.length;
+
+
+        favoriteCounter.textContent =
+            count;
+
+
+        favoriteCounter.style.display =
+            count > 0 ? "flex" : "none";
+
+    }
 
 
     /* =====================================================
@@ -2374,39 +2334,127 @@
                 .trim()
                 .toLowerCase();
 
+
+        const priceFilters =
+            [
+                ...document.querySelectorAll(
+                    ".price-filter:checked"
+                )
+            ];
+
+
+        const badgeFilters =
+            [
+                ...document.querySelectorAll(
+                    ".badge-filter:checked"
+                )
+            ];
+
+
         let visible = 0;
 
-        cards.forEach(card => {
 
-            const category =
-                card.dataset.category;
+        document
+            .querySelectorAll(".product-card")
+            .forEach(card => {
 
-            const name =
-                card.dataset.name.toLowerCase();
+                const category =
+                    card.dataset.category;
 
-            const categoryMatch =
-                currentCategory === "all" ||
-                category === currentCategory;
+                const name =
+                    card.dataset.name
+                        .toLowerCase();
 
-            const searchMatch =
-                name.includes(query);
+                const description =
+                    products[card.dataset.id]
+                        ?.description
+                        ?.toLowerCase() || "";
 
-            if (categoryMatch && searchMatch) {
 
-                card.style.display = "";
+                const price =
+                    Number(
+                        card.dataset.price
+                    );
 
-                visible++;
 
-            } else {
+                const badge =
+                    card.dataset.badge;
 
-                card.style.display = "none";
 
-            }
+                const categoryMatch =
+                    currentCategory === "all" ||
+                    category === currentCategory;
 
-        });
+
+                const searchMatch =
+                    name.includes(query) ||
+                    description.includes(query);
+
+
+                let priceMatch = true;
+
+
+                if (priceFilters.length > 0) {
+
+                    priceMatch =
+                        priceFilters.some(filter => {
+
+                            const min =
+                                Number(
+                                    filter.dataset.min
+                                );
+
+                            const max =
+                                Number(
+                                    filter.dataset.max
+                                );
+
+                            return (
+                                price >= min &&
+                                price <= max
+                            );
+
+                        });
+
+                }
+
+
+                let badgeMatch = true;
+
+
+                if (badgeFilters.length > 0) {
+
+                    badgeMatch =
+                        badgeFilters.some(
+                            filter =>
+                                badge ===
+                                filter.value
+                        );
+
+                }
+
+
+                const show =
+                    categoryMatch &&
+                    searchMatch &&
+                    priceMatch &&
+                    badgeMatch;
+
+
+                card.style.display =
+                    show ? "" : "none";
+
+
+                if (show) {
+                    visible++;
+                }
+
+            });
+
 
         productCount.textContent =
             visible;
+
 
         noResults.style.display =
             visible === 0
@@ -2417,127 +2465,147 @@
 
 
     /* =====================================================
-       CART
+       CATEGORY BUTTONS
     ===================================================== */
 
     document
-        .querySelectorAll(".add-cart")
+        .querySelectorAll(".category-btn")
         .forEach(button => {
 
-            button.addEventListener("click", () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                const card =
-                    button.closest(".product-card");
+                    document
+                        .querySelectorAll(
+                            ".category-btn"
+                        )
+                        .forEach(btn => {
 
-                const name =
-                    card.dataset.name;
+                            btn.classList.remove(
+                                "active"
+                            );
 
-                const price =
-                    Number(card.dataset.price);
+                        });
 
-                cart.push({
-                    name,
-                    price
-                });
 
-                updateCart();
+                    button.classList.add(
+                        "active"
+                    );
 
-                showToast(
-                    name + " добавлен в корзину"
+
+                    currentCategory =
+                        button.dataset.category;
+
+
+                    filterProducts();
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    searchInput.addEventListener(
+        "input",
+        filterProducts
+    );
+
+
+    /* =====================================================
+       FILTERS
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            ".price-filter, .badge-filter"
+        )
+        .forEach(input => {
+
+            input.addEventListener(
+                "change",
+                filterProducts
+            );
+
+        });
+
+
+    /* =====================================================
+       SORT
+    ===================================================== */
+
+    sortSelect.addEventListener(
+        "change",
+        () => {
+
+            const cards =
+                [
+                    ...document.querySelectorAll(
+                        ".product-card"
+                    )
+                ];
+
+
+            const value =
+                sortSelect.value;
+
+
+            cards.sort(
+                (a, b) => {
+
+                    if (value === "cheap") {
+
+                        return (
+                            Number(a.dataset.price) -
+                            Number(b.dataset.price)
+                        );
+
+                    }
+
+
+                    if (value === "expensive") {
+
+                        return (
+                            Number(b.dataset.price) -
+                            Number(a.dataset.price)
+                        );
+
+                    }
+
+
+                    if (value === "name") {
+
+                        return a.dataset.name
+                            .localeCompare(
+                                b.dataset.name
+                            );
+
+                    }
+
+
+                    return 0;
+
+                }
+            );
+
+
+            cards.forEach(card => {
+
+                productsGrid.appendChild(
+                    card
                 );
 
             });
 
-        });
 
-
-    function updateCart() {
-
-        cartCounter.textContent =
-            cart.length;
-
-        if (cart.length === 0) {
-
-            cartItems.innerHTML =
-                `<p style="color:#666">
-                    Корзина пока пустая.
-                </p>`;
-
-            cartTotal.textContent =
-                "0 ₽";
-
-            return;
+            filterProducts();
 
         }
-
-
-        cartItems.innerHTML = "";
-
-
-        cart.forEach((item, index) => {
-
-            const element =
-                document.createElement("div");
-
-            element.className =
-                "cart-item";
-
-            element.innerHTML = `
-
-                <div>
-
-                    <div class="cart-item-name">
-                        ${item.name}
-                    </div>
-
-                    <div class="cart-item-price">
-                        ${formatPrice(item.price)}
-                    </div>
-
-                </div>
-
-                <button
-                    class="remove-item"
-                    onclick="removeFromCart(${index})"
-                >
-                    ×
-                </button>
-
-            `;
-
-            cartItems.appendChild(element);
-
-        });
-
-
-        const total =
-            cart.reduce(
-                (sum, item) =>
-                    sum + item.price,
-                0
-            );
-
-        cartTotal.textContent =
-            formatPrice(total);
-
-    }
-
-
-    function removeFromCart(index) {
-
-        cart.splice(index, 1);
-
-        updateCart();
-
-    }
-
-
-    function formatPrice(number) {
-
-        return number
-            .toLocaleString("ru-RU") + " ₽";
-
-    }
+    );
 
 
     /* =====================================================
@@ -2548,7 +2616,9 @@
         "click",
         () => {
 
-            cartPanel.classList.toggle("open");
+            cartPanel.classList.toggle(
+                "open"
+            );
 
         }
     );
@@ -2558,45 +2628,42 @@
         "click",
         () => {
 
-            cartPanel.classList.remove("open");
+            cartPanel.classList.remove(
+                "open"
+            );
 
         }
     );
 
 
     /* =====================================================
-       FAVORITES
+       CHECKOUT / CART PAGE
     ===================================================== */
 
-    document
-        .querySelectorAll(".favorite")
-        .forEach(button => {
+    checkoutButton.addEventListener(
+        "click",
+        () => {
 
-            button.addEventListener(
-                "click",
-                () => {
+            window.location.href =
+                "cart.html";
 
-                    button.classList.toggle("active");
+        }
+    );
 
-                    if (
-                        button.classList.contains("active")
-                    ) {
 
-                        favorites++;
+    /* =====================================================
+       FAVORITES BUTTON
+    ===================================================== */
 
-                    } else {
+    favoriteButton.addEventListener(
+        "click",
+        () => {
 
-                        favorites--;
+            window.location.href =
+                "favorites.html";
 
-                    }
-
-                    favoriteCounter.textContent =
-                        favorites;
-
-                }
-            );
-
-        });
+        }
+    );
 
 
     /* =====================================================
@@ -2608,22 +2675,42 @@
         toast.textContent =
             message;
 
-        toast.classList.add("show");
+        toast.classList.add(
+            "show"
+        );
 
-        setTimeout(() => {
 
-            toast.classList.remove("show");
+        clearTimeout(
+            window.novaToastTimer
+        );
 
-        }, 2200);
+
+        window.novaToastTimer =
+            setTimeout(
+                () => {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                2200
+            );
 
     }
 
 
     /* =====================================================
-       INITIAL
+       START
     ===================================================== */
 
-    filterProducts();
+    loadStorage();
+
+    renderProducts();
+
+    updateCartUI();
+
+    updateFavoriteUI();
 
 </script>
 
