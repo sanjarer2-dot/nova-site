@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Корзина — NOVA</title>
+
+    <script src="products.js"></script>
 
     <style>
         * {
@@ -12,10 +15,14 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             background:
-                radial-gradient(circle at 50% -10%, rgba(255,255,255,.08), transparent 35%),
+                radial-gradient(circle at 50% -10%, rgba(255,255,255,.09), transparent 35%),
                 #07080a;
             color: #fff;
             min-height: 100vh;
@@ -24,6 +31,10 @@
         a {
             color: inherit;
             text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
         }
 
         /* HEADER */
@@ -39,6 +50,7 @@
             padding: 0 6%;
             background: rgba(7,8,10,.78);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,.07);
         }
 
@@ -70,6 +82,7 @@
         }
 
         .header-btn {
+            position: relative;
             width: 42px;
             height: 42px;
             border: 1px solid rgba(255,255,255,.1);
@@ -79,11 +92,29 @@
             justify-content: center;
             background: rgba(255,255,255,.04);
             transition: .25s;
+            font-size: 18px;
         }
 
         .header-btn:hover {
             background: rgba(255,255,255,.1);
             transform: translateY(-2px);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            border-radius: 20px;
+            background: #fff;
+            color: #000;
+            font-size: 10px;
+            font-weight: 800;
+            display: none;
+            align-items: center;
+            justify-content: center;
         }
 
         /* MAIN */
@@ -109,6 +140,7 @@
             margin-top: 10px;
             font-size: clamp(42px, 7vw, 72px);
             letter-spacing: -3px;
+            line-height: 1;
         }
 
         .cart-layout {
@@ -118,7 +150,7 @@
             align-items: start;
         }
 
-        /* PRODUCTS */
+        /* ITEMS */
 
         .cart-items {
             display: flex;
@@ -133,12 +165,19 @@
             align-items: center;
             padding: 18px;
             border-radius: 24px;
-            background: linear-gradient(
-                145deg,
-                rgba(255,255,255,.07),
-                rgba(255,255,255,.025)
-            );
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.07),
+                    rgba(255,255,255,.025)
+                );
             border: 1px solid rgba(255,255,255,.08);
+            transition: .25s;
+        }
+
+        .cart-item:hover {
+            border-color: rgba(255,255,255,.14);
+            transform: translateY(-1px);
         }
 
         .product-image {
@@ -149,56 +188,72 @@
             align-items: center;
             justify-content: center;
             background:
-                radial-gradient(circle at 50% 30%, rgba(255,255,255,.14), transparent 45%),
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(255,255,255,.14),
+                    transparent 45%
+                ),
                 #111318;
             overflow: hidden;
         }
 
-        .mini-phone {
-            width: 54px;
-            height: 105px;
-            border-radius: 13px;
-            background: linear-gradient(145deg,#555b67,#15171c);
+        /* UNIVERSAL DEVICE VISUAL */
+
+        .device {
+            position: relative;
+            width: 58px;
+            height: 108px;
+            border-radius: 15px;
+            background: linear-gradient(145deg,#626873,#111318);
             border: 3px solid #30343d;
             box-shadow: 0 15px 30px rgba(0,0,0,.5);
-            position: relative;
         }
 
-        .mini-phone::before {
+        .device::before {
             content: "";
             position: absolute;
             top: 6px;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px;
-            height: 5px;
+            width: 22px;
+            height: 6px;
             border-radius: 10px;
             background: #08090b;
+            z-index: 2;
         }
 
-        .mini-phone::after {
+        .device::after {
             content: "";
             position: absolute;
-            inset: 12px 7px;
-            border-radius: 9px;
+            inset: 13px 7px;
+            border-radius: 10px;
             background:
-                radial-gradient(circle at 50% 30%, rgba(255,255,255,.2), transparent 35%),
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(255,255,255,.2),
+                    transparent 35%
+                ),
                 linear-gradient(160deg,#202833,#090b0e);
         }
 
+        .product-info {
+            min-width: 0;
+        }
+
         .product-info h2 {
-            font-size: 21px;
+            font-size: 19px;
             margin-bottom: 7px;
+            line-height: 1.2;
         }
 
         .product-info p {
             color: #888;
-            font-size: 14px;
+            font-size: 13px;
             margin-bottom: 15px;
         }
 
         .product-price {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 700;
         }
 
@@ -207,6 +262,8 @@
             text-align: right;
         }
 
+        /* QUANTITY */
+
         .quantity {
             display: inline-flex;
             align-items: center;
@@ -214,6 +271,7 @@
             border-radius: 12px;
             overflow: hidden;
             margin-bottom: 13px;
+            background: rgba(255,255,255,.025);
         }
 
         .quantity button {
@@ -224,15 +282,18 @@
             color: #fff;
             cursor: pointer;
             font-size: 18px;
+            transition: .2s;
         }
 
         .quantity button:hover {
-            background: rgba(255,255,255,.12);
+            background: rgba(255,255,255,.14);
         }
 
         .quantity span {
             width: 35px;
             text-align: center;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         .remove {
@@ -243,6 +304,7 @@
             color: #777;
             cursor: pointer;
             font-size: 13px;
+            transition: .2s;
         }
 
         .remove:hover {
@@ -256,12 +318,14 @@
             top: 95px;
             padding: 28px;
             border-radius: 25px;
-            background: linear-gradient(
-                145deg,
-                rgba(255,255,255,.08),
-                rgba(255,255,255,.03)
-            );
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.08),
+                    rgba(255,255,255,.03)
+                );
             border: 1px solid rgba(255,255,255,.1);
+            box-shadow: 0 25px 70px rgba(0,0,0,.2);
         }
 
         .summary h2 {
@@ -277,6 +341,10 @@
             font-size: 14px;
         }
 
+        .summary-row span:last-child {
+            color: #ddd;
+        }
+
         .summary-row.total {
             color: #fff;
             font-size: 21px;
@@ -284,6 +352,10 @@
             padding-top: 18px;
             margin-top: 10px;
             border-top: 1px solid rgba(255,255,255,.1);
+        }
+
+        .summary-row.total span:last-child {
+            color: #fff;
         }
 
         .checkout {
@@ -311,6 +383,7 @@
             margin-top: 18px;
             color: #888;
             font-size: 13px;
+            transition: .2s;
         }
 
         .continue:hover {
@@ -351,6 +424,12 @@
             background: #fff;
             color: #000;
             font-weight: 700;
+            transition: .25s;
+        }
+
+        .catalog-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,255,255,.1);
         }
 
         /* FOOTER */
@@ -391,6 +470,7 @@
             .cart-item {
                 grid-template-columns: 85px 1fr;
                 gap: 15px;
+                padding: 14px;
             }
 
             .product-image {
@@ -398,8 +478,37 @@
                 height: 110px;
             }
 
+            .device {
+                width: 46px;
+                height: 84px;
+                border-radius: 12px;
+            }
+
+            .device::before {
+                width: 18px;
+                height: 5px;
+            }
+
+            .device::after {
+                inset: 11px 6px;
+            }
+
+            .product-info h2 {
+                font-size: 16px;
+            }
+
+            .product-info p {
+                font-size: 11px;
+                margin-bottom: 10px;
+            }
+
+            .product-price {
+                font-size: 16px;
+            }
+
             .item-right {
                 grid-column: 2;
+                min-width: 0;
                 text-align: left;
             }
 
@@ -425,8 +534,16 @@
     </nav>
 
     <div class="header-actions">
-        <a href="favorites.html" class="header-btn">♡</a>
-        <a href="cart.html" class="header-btn">🛒</a>
+
+        <a href="favorites.html" class="header-btn">
+            ♡
+        </a>
+
+        <a href="cart.html" class="header-btn">
+            🛒
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+
     </div>
 
 </header>
@@ -454,6 +571,11 @@
                 <div class="summary-row">
                     <span>Товары</span>
                     <span id="subtotal">0 ₽</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Товаров</span>
+                    <span id="itemsCount">0</span>
                 </div>
 
                 <div class="summary-row">
@@ -508,71 +630,47 @@
 
 <script>
 
-    /*
-       Данные товаров.
-       Позже сюда подключим все категории.
-    */
+    /* =========================
+       CART
+    ========================= */
 
-    const products = {
+    let cart = [];
 
-        "iphone-15-pro-max": {
-            name: "iPhone 15 Pro Max",
-            price: 1479
-        },
-
-        "iphone-16-pro-max": {
-            name: "iPhone 16 Pro Max",
-            price: 899
-        },
-
-        "iphone-17-pro-max": {
-            name: "iPhone 17 Pro Max",
-            price: 1285
-        },
-
-        "iphone-18-pro": {
-            name: "iPhone 18 Pro",
-            price: 1449
-        },
-
-        "iphone-18-pro-max": {
-            name: "iPhone 18 Pro Max",
-            price: 1599
-        }
-    };
+    try {
+        cart = JSON.parse(
+            localStorage.getItem("novaCart") || "[]"
+        );
+    } catch {
+        cart = [];
+    }
 
 
     /*
-       Получаем корзину из localStorage.
+       Приводим корзину
+       к единому формату:
+       { id: "...", quantity: 1 }
     */
 
-    let cart = JSON.parse(
-        localStorage.getItem("novaCart") || "[]"
-    );
+    cart = cart
+        .map(item => {
 
-
-    /*
-       Приводим старый формат корзины
-       к нормальному виду.
-    */
-
-    cart = cart.map(item => {
-
-        if (typeof item === "string") {
+            if (typeof item === "string") {
+                return {
+                    id: item,
+                    quantity: 1
+                };
+            }
 
             return {
-                id: item,
-                quantity: 1
+                id: item.id,
+                quantity: Math.max(
+                    1,
+                    Number(item.quantity) || 1
+                )
             };
 
-        }
-
-        return {
-            id: item.id,
-            quantity: item.quantity || 1
-        };
-
-    });
+        })
+        .filter(item => item.id);
 
 
     function saveCart() {
@@ -585,6 +683,46 @@
     }
 
 
+    /* =========================
+       FORMAT PRICE
+    ========================= */
+
+    function formatPrice(price) {
+
+        return Number(price).toLocaleString("ru-RU") + " ₽";
+
+    }
+
+
+    /* =========================
+       CART COUNTER
+    ========================= */
+
+    function updateCartCounter() {
+
+        const counter =
+            document.getElementById("cartCount");
+
+        const count =
+            cart.reduce(
+                (sum, item) =>
+                    sum + item.quantity,
+                0
+            );
+
+
+        counter.textContent = count;
+
+        counter.style.display =
+            count > 0 ? "flex" : "none";
+
+    }
+
+
+    /* =========================
+       RENDER
+    ========================= */
+
     function renderCart() {
 
         const container =
@@ -596,14 +734,41 @@
         const empty =
             document.getElementById("emptyCart");
 
+        const subtotal =
+            document.getElementById("subtotal");
+
+        const totalElement =
+            document.getElementById("total");
+
+        const itemsCountElement =
+            document.getElementById("itemsCount");
+
+
+        /*
+           Удаляем товары,
+           которых больше нет
+           в products.js
+        */
+
+        cart = cart.filter(
+            item => products[item.id]
+        );
+
 
         if (cart.length === 0) {
 
             content.style.display = "none";
             empty.style.display = "block";
 
-            return;
+            subtotal.textContent = "0 ₽";
+            totalElement.textContent = "0 ₽";
+            itemsCountElement.textContent = "0";
 
+            updateCartCounter();
+
+            saveCart();
+
+            return;
         }
 
 
@@ -615,26 +780,28 @@
 
 
         let total = 0;
+        let itemsCount = 0;
 
 
         cart.forEach((item, index) => {
 
-            const product = products[item.id];
-
+            const product =
+                products[item.id];
 
             if (!product) return;
 
 
             const itemTotal =
-                product.price * item.quantity;
+                Number(product.price) *
+                item.quantity;
 
 
             total += itemTotal;
+            itemsCount += item.quantity;
 
 
             const element =
                 document.createElement("div");
-
 
             element.className = "cart-item";
 
@@ -642,20 +809,22 @@
             element.innerHTML = `
 
                 <div class="product-image">
-
-                    <div class="mini-phone"></div>
-
+                    <div class="device"></div>
                 </div>
 
 
                 <div class="product-info">
 
-                    <h2>${product.name}</h2>
+                    <h2>
+                        ${product.name}
+                    </h2>
 
-                    <p>Официальный продукт NOVA</p>
+                    <p>
+                        ${product.brand || "NOVA"}
+                    </p>
 
                     <div class="product-price">
-                        ${product.price.toLocaleString("ru-RU")} ₽
+                        ${formatPrice(product.price)}
                     </div>
 
                 </div>
@@ -665,13 +834,17 @@
 
                     <div class="quantity">
 
-                        <button onclick="changeQuantity(${index}, -1)">
+                        <button
+                            onclick="changeQuantity(${index}, -1)">
                             −
                         </button>
 
-                        <span>${item.quantity}</span>
+                        <span>
+                            ${item.quantity}
+                        </span>
 
-                        <button onclick="changeQuantity(${index}, 1)">
+                        <button
+                            onclick="changeQuantity(${index}, 1)">
                             +
                         </button>
 
@@ -696,19 +869,31 @@
         });
 
 
-        document.getElementById("subtotal")
-            .textContent =
-            total.toLocaleString("ru-RU") + " ₽";
+        subtotal.textContent =
+            formatPrice(total);
+
+        totalElement.textContent =
+            formatPrice(total);
+
+        itemsCountElement.textContent =
+            itemsCount;
 
 
-        document.getElementById("total")
-            .textContent =
-            total.toLocaleString("ru-RU") + " ₽";
+        updateCartCounter();
+
+        saveCart();
 
     }
 
 
+    /* =========================
+       CHANGE QUANTITY
+    ========================= */
+
     function changeQuantity(index, change) {
+
+        if (!cart[index]) return;
+
 
         cart[index].quantity += change;
 
@@ -721,22 +906,31 @@
 
 
         saveCart();
-
         renderCart();
 
     }
 
 
+    /* =========================
+       REMOVE
+    ========================= */
+
     function removeItem(index) {
+
+        if (!cart[index]) return;
+
 
         cart.splice(index, 1);
 
         saveCart();
-
         renderCart();
 
     }
 
+
+    /* =========================
+       CHECKOUT
+    ========================= */
 
     function checkout() {
 
@@ -749,6 +943,10 @@
 
     }
 
+
+    /* =========================
+       START
+    ========================= */
 
     renderCart();
 
