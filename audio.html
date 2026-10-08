@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOVA — Аудио</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #050505;
+    color: #fff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* HEADER */
+
+header {
+    height: 72px;
+    padding: 0 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: rgba(5,5,5,.88);
+    backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid #1c1c1c;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #999;
+    font-size: 13px;
+    transition: .25s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action {
+    padding: 9px 13px;
+
+    border: 1px solid #292929;
+    border-radius: 10px;
+
+    background: #101010;
+
+    font-size: 12px;
+}
+
+
+/* HERO */
+
+.hero {
+    padding: 100px 20px 80px;
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #202020 0%,
+            #0a0a0a 45%,
+            #050505 75%
+        );
+}
+
+.label {
+    color: #777;
+    font-size: 12px;
+    letter-spacing: 4px;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 85px);
+    line-height: .95;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #777;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: auto;
+
+    color: #999;
+
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+
+/* CONTROLS */
+
+.controls {
+    max-width: 1400px;
+    margin: auto;
+
+    padding: 30px 6%;
+
+    display: flex;
+    gap: 15px;
+}
+
+.search {
+    flex: 1;
+
+    padding: 15px 18px;
+
+    background: #101010;
+
+    border: 1px solid #292929;
+    border-radius: 13px;
+
+    color: white;
+
+    outline: none;
+}
+
+.search:focus {
+    border-color: #555;
+}
+
+.sort {
+    padding: 15px;
+
+    background: #101010;
+
+    border: 1px solid #292929;
+    border-radius: 13px;
+
+    color: white;
+}
+
+
+/* CATEGORIES */
+
+.categories {
+    max-width: 1400px;
+    margin: auto;
+
+    padding: 0 6% 35px;
+
+    display: flex;
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.category {
+    padding: 10px 18px;
+
+    border-radius: 30px;
+
+    border: 1px solid #292929;
+
+    background: #0c0c0c;
+
+    color: #999;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.category:hover,
+.category.active {
+    background: white;
+    color: black;
+}
+
+
+/* PRODUCTS */
+
+.products {
+    max-width: 1400px;
+    margin: auto;
+
+    padding: 0 6% 100px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+
+/* CARD */
+
+.product {
+    background: #0d0d0d;
+
+    border: 1px solid #202020;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    transition: .3s;
+}
+
+.product:hover {
+    transform: translateY(-6px);
+    border-color: #3d3d3d;
+}
+
+
+/* IMAGE AREA */
+
+.product-image {
+    height: 280px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #292929,
+            #111 55%,
+            #080808
+        );
+}
+
+
+/* TWS */
+
+.earbuds {
+    width: 180px;
+    height: 180px;
+
+    position: relative;
+}
+
+.earbud {
+    position: absolute;
+
+    width: 62px;
+    height: 105px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f5f5f5,
+            #777
+        );
+
+    border-radius:
+        40px 40px 30px 30px;
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.7);
+}
+
+.earbud::after {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 45px;
+
+    background: #ddd;
+
+    border-radius: 20px;
+
+    bottom: -30px;
+    left: 22px;
+}
+
+.left {
+    left: 18px;
+    top: 25px;
+
+    transform: rotate(-8deg);
+}
+
+.right {
+    right: 18px;
+    top: 25px;
+
+    transform: rotate(8deg);
+}
+
+
+/* HEADPHONES */
+
+.headphones {
+    width: 220px;
+    height: 220px;
+
+    position: relative;
+}
+
+.headphones::before {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 160px;
+
+    border: 25px solid #303030;
+
+    border-bottom: none;
+
+    border-radius: 100px 100px 0 0;
+
+    top: 15px;
+    left: 35px;
+}
+
+.cup {
+    position: absolute;
+
+    width: 60px;
+    height: 85px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #444,
+            #111
+        );
+
+    border-radius: 30px;
+
+    bottom: 25px;
+
+    box-shadow:
+        0 20px 35px rgba(0,0,0,.7);
+}
+
+.cup.left-cup {
+    left: 18px;
+}
+
+.cup.right-cup {
+    right: 18px;
+}
+
+
+/* SPEAKER */
+
+.speaker {
+    width: 150px;
+    height: 190px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #333,
+            #090909
+        );
+
+    box-shadow:
+        0 30px 50px rgba(0,0,0,.7);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.speaker::before {
+    content: "NOVA";
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    border: 7px solid #555;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #777;
+
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+
+/* INFO */
+
+.info {
+    padding: 23px;
+}
+
+.tag {
+    color: #777;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+}
+
+.info h2 {
+    font-size: 23px;
+    margin-bottom: 9px;
+}
+
+.description {
+    color: #888;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+
+/* SPECS */
+
+.specs {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+.spec {
+    padding: 10px;
+
+    background: #151515;
+
+    border-radius: 9px;
+}
+
+.spec small {
+    display: block;
+
+    color: #666;
+
+    font-size: 10px;
+
+    margin-bottom: 4px;
+}
+
+.spec strong {
+    font-size: 12px;
+}
+
+
+/* BOTTOM */
+
+.bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+.price {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.buy {
+    padding: 12px 18px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: white;
+
+    color: black;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.buy:hover {
+    transform: scale(1.04);
+}
+
+
+/* EMPTY */
+
+.empty {
+    display: none;
+
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 80px;
+
+    color: #777;
+}
+
+.empty h2 {
+    color: white;
+
+    margin-bottom: 10px;
+}
+
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid #1d1d1d;
+
+    padding: 60px 6%;
+
+    background: #080808;
+}
+
+.footer-grid {
+    max-width: 1400px;
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr;
+
+    gap: 40px;
+}
+
+.footer-logo {
+    font-size: 26px;
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+}
+
+footer h3 {
+    margin-bottom: 15px;
+}
+
+footer p,
+footer a {
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.9;
+}
+
+
+/* MOBILE */
+
+@media(max-width:1000px) {
+
+    nav {
+        display: none;
+    }
+
+    .products {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:650px) {
+
+    header {
+        padding: 0 20px;
+    }
+
+    .actions {
+        display: none;
+    }
+
+    .hero {
+        padding: 70px 20px;
+    }
+
+    .controls {
+        padding-left: 20px;
+        padding-right: 20px;
+
+        flex-direction: column;
+    }
+
+    .categories,
+    .products {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <a href="index.html" class="logo">
+        NOVA
+    </a>
+
+    <nav>
+
+        <a href="index.html">
+            Главная
+        </a>
+
+        <a href="catalog.html">
+            Каталог
+        </a>
+
+        <a href="smartphones.html">
+            Смартфоны
+        </a>
+
+        <a href="laptops.html">
+            Ноутбуки
+        </a>
+
+        <a href="tablets.html">
+            Планшеты
+        </a>
+
+        <a href="audio.html">
+            Аудио
+        </a>
+
+        <a href="watches.html">
+            Часы
+        </a>
+
+        <a href="accessories.html">
+            Аксессуары
+        </a>
+
+    </nav>
+
+    <div class="actions">
+
+        <a href="favorites.html" class="action">
+            ♡ Избранное
+        </a>
+
+        <a href="cart.html" class="action">
+            🛒 Корзина
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<section class="hero">
+
+    <div class="label">
+        NOVA AUDIO
+    </div>
+
+    <h1>
+        Звук.<br>
+        <span>Который ощущается.</span>
+    </h1>
+
+    <p>
+        Беспроводные наушники, полноразмерные
+        модели и аудиосистемы для музыки,
+        работы и отдыха.
+    </p>
+
+</section>
+
+
+
+<div class="controls">
+
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="Поиск устройства..."
+    >
+
+    <select id="sort" class="sort">
+
+        <option value="default">
+            Сначала рекомендуемые
+        </option>
+
+        <option value="cheap">
+            Сначала дешевле
+        </option>
+
+        <option value="expensive">
+            Сначала дороже
+        </option>
+
+    </select>
+
+</div>
+
+
+
+<div class="categories">
+
+    <button
+        class="category active"
+        data-category="all">
+        Все
+    </button>
+
+    <button
+        class="category"
+        data-category="tws">
+        TWS
+    </button>
+
+    <button
+        class="category"
+        data-category="overear">
+        Over-Ear
+    </button>
+
+    <button
+        class="category"
+        data-category="speaker">
+        Акустика
+    </button>
+
+</div>
+
+
+
+<section class="products" id="products">
+
+
+    <!-- AIRPODS PRO -->
+
+    <article
+        class="product"
+        data-name="AirPods Pro"
+        data-price="24990"
+        data-category="tws"
+    >
+
+        <div class="product-image">
+
+            <div class="earbuds">
+
+                <div class="earbud left"></div>
+                <div class="earbud right"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info">
+
+            <div class="tag">
+                TWS
+            </div>
+
+            <h2>
+                AirPods Pro
+            </h2>
+
+            <p class="description">
+                Компактные беспроводные наушники
+                с активным шумоподавлением.
+            </p>
+
+
+            <div class="specs">
+
+                <div class="spec">
+                    <small>ШУМОПОДАВЛЕНИЕ</small>
+                    <strong>ANC</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЗВУК</small>
+                    <strong>Spatial Audio</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЗАРЯДКА</small>
+                    <strong>USB-C</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЗАЩИТА</small>
+                    <strong>IP54</strong>
+                </div>
+
+            </div>
+
+
+            <div class="bottom">
+
+                <div class="price">
+                    24 990 ₽
+                </div>
+
+                <button class="buy">
+                    В корзину
+                </button>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- AIRPODS -->
+
+    <article
+        class="product"
+        data-name="AirPods"
+        data-price="16990"
+        data-category="tws"
+    >
+
+        <div class="product-image">
+
+            <div class="earbuds">
+
+                <div class="earbud left"></div>
+                <div class="earbud right"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info">
+
+            <div class="tag">
+                TWS
+            </div>
+
+            <h2>
+                AirPods
+            </h2>
+
+            <p class="description">
+                Лёгкие беспроводные наушники
+                для повседневного использования.
+            </p>
+
+
+            <div class="specs">
+
+                <div class="spec">
+                    <small>ЗВУК</small>
+                    <strong>Spatial Audio</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЧИП</small>
+                    <strong>Apple Chip</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЗАРЯДКА</small>
+                    <strong>USB-C</strong>
+                </div>
+
+                <div class="spec">
+                    <small>СВЯЗЬ</small>
+                    <strong>Bluetooth</strong>
+                </div>
+
+            </div>
+
+
+            <div class="bottom">
+
+                <div class="price">
+                    16 990 ₽
+                </div>
+
+                <button class="buy">
+                    В корзину
+                </button>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- AIRPODS MAX -->
+
+    <article
+        class="product"
+        data-name="AirPods Max"
+        data-price="59990"
+        data-category="overear"
+    >
+
+        <div class="product-image">
+
+            <div class="headphones">
+
+                <div class="cup left-cup"></div>
+                <div class="cup right-cup"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info">
+
+            <div class="tag">
+                OVER-EAR
+            </div>
+
+            <h2>
+                AirPods Max
+            </h2>
+
+            <p class="description">
+                Полноразмерные наушники
+                с пространственным звучанием.
+            </p>
+
+
+            <div class="specs">
+
+                <div class="spec">
+                    <small>ШУМОПОДАВЛЕНИЕ</small>
+                    <strong>ANC</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЗВУК</small>
+                    <strong>Spatial Audio</strong>
+                </div>
+
+                <div class="spec">
+                    <small>АВТОНОМНОСТЬ</small>
+                    <strong>До 20 ч</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ПОДКЛЮЧЕНИЕ</small>
+                    <strong>Bluetooth</strong>
+                </div>
+
+            </div>
+
+
+            <div class="bottom">
+
+                <div class="price">
+                    59 990 ₽
+                </div>
+
+                <button class="buy">
+                    В корзину
+                </button>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- SONY -->
+
+    <article
+        class="product"
+        data-name="Sony WH-1000XM6"
+        data-price="44990"
+        data-category="overear"
+    >
+
+        <div class="product-image">
+
+            <div class="headphones">
+
+                <div class="cup left-cup"></div>
+                <div class="cup right-cup"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info">
+
+            <div class="tag">
+                OVER-EAR
+            </div>
+
+            <h2>
+                Sony WH-1000XM6
+            </h2>
+
+            <p class="description">
+                Премиальные наушники
+                с продвинутым шумоподавлением.
+            </p>
+
+
+            <div class="specs">
+
+                <div class="spec">
+                    <small>ШУМОПОДАВЛЕНИЕ</small>
+                    <strong>Adaptive ANC</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЗВУК</small>
+                    <strong>Hi-Res</strong>
+                </div>
+
+                <div class="spec">
+                    <small>АВТОНОМНОСТЬ</small>
+                    <strong>До 30 ч</strong>
+                </div>
+
+                <div class="spec">
+                    <small>СВЯЗЬ</small>
+                    <strong>Bluetooth</strong>
+                </div>
+
+            </div>
+
+
+            <div class="bottom">
+
+                <div class="price">
+                    44 990 ₽
+                </div>
+
+                <button class="buy">
+                    В корзину
+                </button>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- NOVA BUDS -->
+
+    <article
+        class="product"
+        data-name="NOVA Buds Pro"
+        data-price="24990"
+        data-category="tws"
+    >
+
+        <div class="product-image">
+
+            <div class="earbuds">
+
+                <div class="earbud left"></div>
+                <div class="earbud right"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info">
+
+            <div class="tag">
+                NOVA TWS
+            </div>
+
+            <h2>
+                NOVA Buds Pro
+            </h2>
+
+            <p class="description">
+                Фирменные беспроводные наушники
+                с чистым звуком и ANC.
+            </p>
+
+
+            <div class="specs">
+
+                <div class="spec">
+                    <small>ШУМОПОДАВЛЕНИЕ</small>
+                    <strong>ANC</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЗВУК</small>
+                    <strong>Hi-Fi</strong>
+                </div>
+
+                <div class="spec">
+                    <small>АВТОНОМНОСТЬ</small>
+                    <strong>32 ч</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЗАЩИТА</small>
+                    <strong>IPX5</strong>
+                </div>
+
+            </div>
+
+
+            <div class="bottom">
+
+                <div class="price">
+                    24 990 ₽
+                </div>
+
+                <button class="buy">
+                    В корзину
+                </button>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- NOVA SPEAKER -->
+
+    <article
+        class="product"
+        data-name="NOVA Sound One"
+        data-price="29990"
+        data-category="speaker"
+    >
+
+        <div class="product-image">
+
+            <div class="speaker"></div>
+
+        </div>
+
+
+        <div class="info">
+
+            <div class="tag">
+                ACOUSTICS
+            </div>
+
+            <h2>
+                NOVA Sound One
+            </h2>
+
+            <p class="description">
+                Компактная акустическая система
+                с мощным пространственным звуком.
+            </p>
+
+
+            <div class="specs">
+
+                <div class="spec">
+                    <small>МОЩНОСТЬ</small>
+                    <strong>60 W</strong>
+                </div>
+
+                <div class="spec">
+                    <small>ЗВУК</small>
+                    <strong>360° Audio</strong>
+                </div>
+
+                <div class="spec">
+                    <small>БАТАРЕЯ</small>
+                    <strong>18 ч</strong>
+                </div>
+
+                <div class="spec">
+                    <small>СВЯЗЬ</small>
+                    <strong>Bluetooth</strong>
+                </div>
+
+            </div>
+
+
+            <div class="bottom">
+
+                <div class="price">
+                    29 990 ₽
+                </div>
+
+                <button class="buy">
+                    В корзину
+                </button>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+    <div class="empty" id="empty">
+
+        <h2>
+            Ничего не найдено
+        </h2>
+
+        <p>
+            Попробуй изменить запрос или категорию.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<footer>
+
+    <div class="footer-grid">
+
+
+        <div>
+
+            <div class="footer-logo">
+                NOVA
+            </div>
+
+            <p>
+                Технологии нового поколения.
+                Устройства, которые работают на вас.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Категории
+            </h3>
+
+            <p>
+                <a href="smartphones.html">
+                    Смартфоны
+                </a>
+            </p>
+
+            <p>
+                <a href="laptops.html">
+                    Ноутбуки
+                </a>
+            </p>
+
+            <p>
+                <a href="tablets.html">
+                    Планшеты
+                </a>
+            </p>
+
+            <p>
+                <a href="audio.html">
+                    Аудио
+                </a>
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                NOVA
+            </h3>
+
+            <p>
+                <a href="about.html">
+                    О компании
+                </a>
+            </p>
+
+            <p>
+                <a href="delivery.html">
+                    Доставка
+                </a>
+            </p>
+
+            <p>
+                <a href="contacts.html">
+                    Контакты
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+const search =
+    document.getElementById("search");
+
+const sort =
+    document.getElementById("sort");
+
+const productsContainer =
+    document.getElementById("products");
+
+const empty =
+    document.getElementById("empty");
+
+
+let products =
+    [...document.querySelectorAll(".product")];
+
+let currentCategory = "all";
+
+
+function updateProducts() {
+
+    const query =
+        search.value
+            .toLowerCase()
+            .trim();
+
+
+    let visible =
+        products.filter(product => {
+
+            const name =
+                product.dataset.name
+                    .toLowerCase();
+
+            const category =
+                product.dataset.category;
+
+
+            const searchMatch =
+                name.includes(query);
+
+
+            const categoryMatch =
+                currentCategory === "all" ||
+                category === currentCategory;
+
+
+            return searchMatch &&
+                   categoryMatch;
+
+        });
+
+
+    if (sort.value === "cheap") {
+
+        visible.sort((a,b) => {
+
+            return Number(a.dataset.price) -
+                   Number(b.dataset.price);
+
+        });
+
+    }
+
+
+    if (sort.value === "expensive") {
+
+        visible.sort((a,b) => {
+
+            return Number(b.dataset.price) -
+                   Number(a.dataset.price);
+
+        });
+
+    }
+
+
+    products.forEach(product => {
+
+        product.style.display = "none";
+
+    });
+
+
+    visible.forEach(product => {
+
+        product.style.display = "block";
+
+        productsContainer.appendChild(product);
+
+    });
+
+
+    empty.style.display =
+        visible.length === 0
+        ? "block"
+        : "none";
+
+}
+
+
+search.addEventListener(
+    "input",
+    updateProducts
+);
+
+
+sort.addEventListener(
+    "change",
+    updateProducts
+);
+
+
+document
+    .querySelectorAll(".category")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .querySelectorAll(".category")
+                    .forEach(btn => {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                currentCategory =
+                    button.dataset.category;
+
+
+                updateProducts();
+
+            }
+        );
+
+    });
+
+
+document
+    .querySelectorAll(".buy")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                button.textContent =
+                    "Добавлено ✓";
+
+
+                setTimeout(() => {
+
+                    button.textContent =
+                        "В корзину";
+
+                }, 1200);
+
+            }
+        );
+
+    });
+
+</script>
+
+
+</body>
+</html>
