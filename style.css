@@ -737,3 +737,31 @@ footer {
 .product-card:hover .product-image img {
     transform: scale(1.06);
 }
+/* Уменьшаем текст товаров ТОЛЬКО на главной */
+.feature-info h3 {
+    font-size: 24px;
+    line-height: 1.15;
+}
+
+.feature-info p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.feature-info .price {
+    font-size: 22px;
+}
+
+@media (max-width: 600px) {
+    .feature-info h3 {
+        font-size: 20px;
+    }
+
+    .feature-info p {
+        font-size: 13px;
+    }
+
+    .feature-info .price {
+        font-size: 19px;
+    }
+}
