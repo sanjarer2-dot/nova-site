@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Товар — NOVA</title>
+    <title>NOVA — Товар</title>
+    <meta name="description" content="Официальный каталог NOVA — подробная информация о товаре.">
+
+    <script src="products.js"></script>
 
     <style>
         * {
@@ -13,11 +16,13 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background:
-                radial-gradient(circle at 50% -10%, rgba(255,255,255,.08), transparent 35%),
-                #07080a;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #050506;
             color: #fff;
             min-height: 100vh;
         }
@@ -27,326 +32,425 @@
             text-decoration: none;
         }
 
+        button {
+            font: inherit;
+        }
+
+        /* HEADER */
+
         header {
-            height: 72px;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            height: 72px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 6%;
-            background: rgba(7,8,10,.78);
+            background: rgba(5, 5, 6, .78);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,.07);
+            border-bottom: 1px solid rgba(255,255,255,.08);
         }
 
         .logo {
-            font-size: 25px;
+            font-size: 24px;
             font-weight: 800;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
         }
 
         nav {
             display: flex;
             gap: 28px;
-            color: #999;
+        }
+
+        nav a {
+            color: #aaa;
             font-size: 14px;
-        }
-
-        nav a:hover {
-            color: #fff;
-        }
-
-        .actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .action {
-            position: relative;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255,255,255,.04);
-            border: 1px solid rgba(255,255,255,.1);
             transition: .25s;
         }
 
-        .action:hover {
+        nav a:hover,
+        nav a.active {
+            color: #fff;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-btn {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 13px;
+            background: rgba(255,255,255,.05);
+            color: #fff;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .header-btn:hover {
             background: rgba(255,255,255,.1);
             transform: translateY(-2px);
         }
 
         .counter {
             position: absolute;
-            top: -3px;
-            right: -3px;
+            top: -5px;
+            right: -5px;
             min-width: 18px;
             height: 18px;
             padding: 0 5px;
+            display: grid;
+            place-items: center;
             border-radius: 20px;
             background: #fff;
             color: #000;
             font-size: 10px;
             font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        main {
-            width: min(1200px, 90%);
-            margin: auto;
-            padding: 70px 0 100px;
-        }
+        /* BREADCRUMBS */
 
-        .back {
+        .breadcrumbs {
+            width: min(1200px, 88%);
+            margin: 30px auto 0;
             color: #777;
-            font-size: 14px;
-            margin-bottom: 35px;
-            display: inline-block;
+            font-size: 13px;
         }
 
-        .back:hover {
+        .breadcrumbs a:hover {
             color: #fff;
         }
 
-        .product {
+        /* PRODUCT */
+
+        .product-page {
+            width: min(1200px, 88%);
+            margin: 35px auto 100px;
+        }
+
+        .product-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 70px;
             align-items: center;
         }
 
-        /* PRODUCT VISUAL */
+        /* VISUAL */
 
-        .visual {
-            min-height: 620px;
-            border-radius: 35px;
-            background:
-                radial-gradient(circle at 50% 35%, rgba(255,255,255,.12), transparent 38%),
-                linear-gradient(145deg,#111318,#08090b);
-            border: 1px solid rgba(255,255,255,.08);
+        .product-visual {
+            min-height: 580px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            border-radius: 35px;
+            background:
+                radial-gradient(circle at 50% 45%, rgba(255,255,255,.12), transparent 35%),
+                linear-gradient(145deg, #111114, #080809);
+            border: 1px solid rgba(255,255,255,.08);
         }
 
-        .visual::before {
+        .product-visual::before {
             content: "";
             position: absolute;
-            width: 420px;
-            height: 420px;
+            width: 380px;
+            height: 380px;
             border-radius: 50%;
-            background: rgba(255,255,255,.04);
-            filter: blur(40px);
+            background: rgba(255,255,255,.06);
+            filter: blur(70px);
         }
 
-        .phone {
-            width: 245px;
-            height: 500px;
-            border-radius: 43px;
-            padding: 8px;
-            background: linear-gradient(145deg,#59606c,#191c22);
-            border: 4px solid #3d424b;
+        /* PHONE */
+
+        .device-phone {
+            position: relative;
+            z-index: 2;
+            width: 230px;
+            height: 470px;
+            border-radius: 38px;
+            padding: 7px;
+            background: linear-gradient(145deg, #555, #111);
             box-shadow:
                 0 40px 80px rgba(0,0,0,.7),
-                inset 0 0 0 1px rgba(255,255,255,.15);
-            position: relative;
-            transform: rotate(-7deg);
-            z-index: 2;
+                inset 0 0 0 1px rgba(255,255,255,.25);
+            transform: rotate(-5deg);
+            transition: .5s;
         }
 
-        .screen {
+        .product-visual:hover .device-phone {
+            transform: rotate(0deg) translateY(-8px);
+        }
+
+        .device-screen {
             width: 100%;
             height: 100%;
-            border-radius: 34px;
-            background:
-                radial-gradient(circle at 50% 25%, rgba(255,255,255,.15), transparent 30%),
-                linear-gradient(145deg,#1d2530,#07090c);
+            border-radius: 32px;
             position: relative;
             overflow: hidden;
+            background:
+                radial-gradient(circle at 70% 25%, rgba(255,255,255,.4), transparent 15%),
+                linear-gradient(145deg, #202124, #050505 65%);
         }
 
-        .screen::before {
+        .device-screen::before {
             content: "";
             position: absolute;
             top: 12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 82px;
-            height: 25px;
+            width: 75px;
+            height: 22px;
             border-radius: 20px;
-            background: #050608;
+            background: #000;
         }
 
-        .screen-clock {
+        .device-screen::after {
+            content: "NOVA";
             position: absolute;
-            top: 45%;
+            bottom: 35px;
             width: 100%;
             text-align: center;
-            font-size: 52px;
-            font-weight: 700;
-            letter-spacing: -3px;
-        }
-
-        .screen-date {
-            position: absolute;
-            top: 58%;
-            width: 100%;
-            text-align: center;
-            color: #aaa;
             font-size: 13px;
+            letter-spacing: 4px;
+            opacity: .55;
+        }
+
+        /* UNIVERSAL DEVICE */
+
+        .device-generic {
+            position: relative;
+            z-index: 2;
+            width: 330px;
+            min-height: 260px;
+            border-radius: 28px;
+            background: linear-gradient(145deg, #303035, #0b0b0d);
+            border: 1px solid rgba(255,255,255,.15);
+            box-shadow: 0 35px 80px rgba(0,0,0,.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .5s;
+        }
+
+        .product-visual:hover .device-generic {
+            transform: translateY(-8px);
+        }
+
+        .device-generic span {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            opacity: .8;
         }
 
         /* INFO */
 
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
         .badge {
-            display: inline-block;
-            padding: 7px 11px;
-            border-radius: 20px;
+            display: inline-flex;
+            padding: 7px 12px;
+            border-radius: 30px;
             background: rgba(255,255,255,.08);
             border: 1px solid rgba(255,255,255,.1);
             color: #aaa;
             font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
             margin-bottom: 18px;
         }
 
+        .product-brand {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
         h1 {
-            font-size: clamp(42px,5vw,68px);
-            line-height: .98;
+            font-size: clamp(38px, 5vw, 68px);
+            line-height: .95;
             letter-spacing: -3px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .description {
+            max-width: 500px;
             color: #999;
             line-height: 1.7;
-            max-width: 540px;
+            font-size: 15px;
             margin-bottom: 28px;
         }
 
         .price {
             font-size: 34px;
             font-weight: 800;
+            letter-spacing: -1px;
             margin-bottom: 28px;
         }
 
+        /* OPTIONS */
+
+        .option-block {
+            width: 100%;
+            margin-bottom: 22px;
+        }
+
         .option-title {
-            color: #aaa;
-            font-size: 13px;
+            color: #888;
+            font-size: 12px;
             margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .options {
             display: flex;
-            gap: 9px;
             flex-wrap: wrap;
-            margin-bottom: 24px;
+            gap: 9px;
         }
 
         .option {
-            padding: 11px 15px;
-            border-radius: 11px;
-            background: rgba(255,255,255,.04);
+            padding: 11px 16px;
+            border-radius: 12px;
+            background: rgba(255,255,255,.05);
             border: 1px solid rgba(255,255,255,.1);
-            color: #aaa;
+            color: #ddd;
             cursor: pointer;
+            transition: .2s;
         }
 
-        .option.active,
-        .option:hover {
+        .option:hover,
+        .option.selected {
+            border-color: rgba(255,255,255,.55);
+            background: rgba(255,255,255,.12);
             color: #fff;
-            border-color: rgba(255,255,255,.5);
-            background: rgba(255,255,255,.08);
         }
 
-        .buttons {
+        /* BUTTONS */
+
+        .actions {
             display: flex;
             gap: 12px;
-            margin-top: 10px;
+            width: 100%;
+            margin-top: 8px;
         }
 
-        .cart-btn {
+        .btn {
+            min-height: 54px;
+            padding: 0 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,.12);
+            cursor: pointer;
+            transition: .25s;
+            font-weight: 700;
+        }
+
+        .btn-cart {
             flex: 1;
-            border: none;
-            border-radius: 14px;
-            padding: 17px;
             background: #fff;
             color: #000;
-            font-size: 15px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: .25s;
         }
 
-        .cart-btn:hover {
+        .btn-cart:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(255,255,255,.13);
+            box-shadow: 0 12px 30px rgba(255,255,255,.12);
         }
 
-        .favorite-btn {
-            width: 58px;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,.13);
-            background: rgba(255,255,255,.05);
+        .btn-favorite {
+            width: 56px;
+            background: rgba(255,255,255,.06);
             color: #fff;
-            font-size: 23px;
-            cursor: pointer;
-            transition: .25s;
+            font-size: 20px;
         }
 
-        .favorite-btn:hover {
-            background: rgba(255,255,255,.1);
+        .btn-favorite:hover {
+            background: rgba(255,255,255,.12);
         }
 
-        .favorite-btn.active {
-            color: #ff5b70;
+        .btn-favorite.active {
+            background: #fff;
+            color: #000;
         }
 
         /* SPECS */
 
-        .specs {
-            margin-top: 70px;
-            padding-top: 45px;
-            border-top: 1px solid rgba(255,255,255,.08);
+        .specs-section {
+            margin-top: 90px;
         }
 
-        .specs h2 {
-            font-size: 28px;
+        .section-title {
+            font-size: 32px;
+            letter-spacing: -1px;
             margin-bottom: 25px;
         }
 
-        .spec-grid {
+        .specs {
             display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            border-top: 1px solid rgba(255,255,255,.08);
         }
 
         .spec {
-            padding: 20px;
-            border-radius: 18px;
+            padding: 20px 5px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .spec-name {
+            color: #777;
+        }
+
+        .spec-value {
+            text-align: right;
+            color: #eee;
+            font-weight: 600;
+        }
+
+        /* DELIVERY */
+
+        .benefits {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .benefit {
+            padding: 25px;
+            border-radius: 20px;
             background: rgba(255,255,255,.04);
             border: 1px solid rgba(255,255,255,.07);
         }
 
-        .spec span {
-            display: block;
-            color: #777;
-            font-size: 12px;
-            margin-bottom: 8px;
+        .benefit-icon {
+            font-size: 25px;
+            margin-bottom: 14px;
         }
 
-        .spec strong {
+        .benefit h3 {
             font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .benefit p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.5;
         }
 
         /* TOAST */
@@ -355,74 +459,120 @@
             position: fixed;
             left: 50%;
             bottom: 30px;
-            transform: translate(-50%,20px);
+            transform: translate(-50%, 120px);
+            z-index: 2000;
+            padding: 14px 22px;
+            border-radius: 15px;
             background: #fff;
             color: #000;
-            padding: 14px 20px;
-            border-radius: 14px;
             font-size: 14px;
             font-weight: 700;
-            opacity: 0;
-            pointer-events: none;
-            transition: .3s;
-            z-index: 999;
+            box-shadow: 0 20px 50px rgba(0,0,0,.4);
+            transition: .35s;
         }
 
         .toast.show {
-            opacity: 1;
-            transform: translate(-50%,0);
+            transform: translate(-50%, 0);
         }
+
+        /* FOOTER */
 
         footer {
-            padding: 35px;
-            text-align: center;
-            color: #666;
+            padding: 45px 6%;
             border-top: 1px solid rgba(255,255,255,.07);
+            color: #666;
             font-size: 13px;
+            text-align: center;
         }
 
-        @media(max-width:850px) {
+        /* MOBILE */
 
+        @media (max-width: 900px) {
             nav {
                 display: none;
             }
 
-            .product {
+            .product-layout {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
 
-            .visual {
+            .product-visual {
                 min-height: 500px;
             }
 
-            .phone {
-                width: 200px;
-                height: 410px;
+            .product-info {
+                align-items: stretch;
             }
 
-            .spec-grid {
-                grid-template-columns: repeat(2,1fr);
+            .benefits {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media(max-width:500px) {
-
-            main {
-                width: 92%;
-                padding-top: 40px;
+        @media (max-width: 600px) {
+            header {
+                height: 64px;
+                padding: 0 5%;
             }
 
-            .visual {
+            .logo {
+                font-size: 20px;
+            }
+
+            .header-btn {
+                width: 38px;
+                height: 38px;
+            }
+
+            .breadcrumbs {
+                margin-top: 20px;
+            }
+
+            .product-page {
+                margin-top: 25px;
+            }
+
+            .product-visual {
                 min-height: 430px;
+                border-radius: 25px;
+            }
+
+            .device-phone {
+                width: 185px;
+                height: 380px;
+            }
+
+            .device-generic {
+                width: 85%;
+                min-height: 220px;
             }
 
             h1 {
-                font-size: 43px;
+                font-size: 42px;
             }
 
-            .buttons {
-                flex-direction: row;
+            .price {
+                font-size: 29px;
+            }
+
+            .specs {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                position: sticky;
+                bottom: 12px;
+                z-index: 50;
+            }
+
+            .btn {
+                background: rgba(255,255,255,.1);
+                backdrop-filter: blur(15px);
+            }
+
+            .btn-cart {
+                background: #fff;
             }
         }
     </style>
@@ -431,598 +581,433 @@
 <body>
 
 <header>
-
     <a href="index.html" class="logo">NOVA</a>
 
     <nav>
         <a href="index.html">Главная</a>
         <a href="catalog.html">Каталог</a>
-        <a href="smartphones.html">Смартфоны</a>
-        <a href="laptops.html">Ноутбуки</a>
-        <a href="audio.html">Аудио</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html">Контакты</a>
     </nav>
 
-    <div class="actions">
-
-        <a href="favorites.html" class="action">
+    <div class="header-actions">
+        <a href="favorites.html" class="header-btn" aria-label="Избранное">
             ♡
             <span class="counter" id="favoriteCounter">0</span>
         </a>
 
-        <a href="cart.html" class="action">
+        <a href="cart.html" class="header-btn" aria-label="Корзина">
             🛒
             <span class="counter" id="cartCounter">0</span>
         </a>
-
     </div>
-
 </header>
 
+<div class="breadcrumbs">
+    <a href="index.html">Главная</a>
+    <span> / </span>
+    <a href="catalog.html">Каталог</a>
+    <span> / </span>
+    <span id="breadcrumbName">Товар</span>
+</div>
 
-<main>
+<main class="product-page">
 
-    <a href="catalog.html" class="back">
-        ← Вернуться в каталог
-    </a>
+    <section class="product-layout">
 
-
-    <section class="product">
-
-        <div class="visual">
-
-            <div class="phone">
-
-                <div class="screen">
-
-                    <div class="screen-clock" id="clock">
-                        09:41
-                    </div>
-
-                    <div class="screen-date">
-                        NOVA EXPERIENCE
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div class="product-visual" id="productVisual">
+            <!-- Визуал создаётся JS -->
         </div>
 
+        <div class="product-info">
 
-        <div class="info">
+            <div class="badge" id="productBadge">NOVA</div>
 
-            <div class="badge" id="badge">
-                NOVA
+            <div class="product-brand" id="productBrand"></div>
+
+            <h1 id="productName">Загрузка...</h1>
+
+            <p class="description" id="productDescription"></p>
+
+            <div class="price" id="productPrice"></div>
+
+            <div class="option-block" id="memoryBlock">
+                <div class="option-title">Память</div>
+                <div class="options" id="memoryOptions"></div>
             </div>
 
-            <h1 id="productName">
-                Загрузка...
-            </h1>
-
-            <p class="description" id="description">
-                Загрузка...
-            </p>
-
-            <div class="price" id="price">
-                0 ₽
+            <div class="option-block" id="colorBlock">
+                <div class="option-title">Цвет</div>
+                <div class="options" id="colorOptions"></div>
             </div>
 
-
-            <div class="option-title">
-                Память
-            </div>
-
-            <div class="options" id="memoryOptions"></div>
-
-
-            <div class="option-title">
-                Цвет
-            </div>
-
-            <div class="options" id="colorOptions"></div>
-
-
-            <div class="buttons">
-
-                <button
-                    class="cart-btn"
-                    onclick="addToCart()"
-                    id="cartButton">
-
+            <div class="actions">
+                <button class="btn btn-cart" id="addToCart">
                     Добавить в корзину
-
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    onclick="toggleFavorite()"
-                    id="favoriteButton">
-
+                <button class="btn btn-favorite" id="favoriteBtn" aria-label="Добавить в избранное">
                     ♡
-
                 </button>
-
             </div>
 
         </div>
 
     </section>
 
+    <section class="specs-section">
+        <h2 class="section-title">Характеристики</h2>
 
-    <section class="specs">
+        <div class="specs" id="specs"></div>
+    </section>
 
-        <h2>Характеристики</h2>
+    <section class="benefits">
 
-        <div class="spec-grid" id="specGrid"></div>
+        <div class="benefit">
+            <div class="benefit-icon">🚚</div>
+            <h3>Быстрая доставка</h3>
+            <p>Отправим заказ максимально быстро после оформления.</p>
+        </div>
+
+        <div class="benefit">
+            <div class="benefit-icon">🛡️</div>
+            <h3>Гарантия</h3>
+            <p>Поддержка и гарантийное обслуживание для покупателей NOVA.</p>
+        </div>
+
+        <div class="benefit">
+            <div class="benefit-icon">💬</div>
+            <h3>Поддержка</h3>
+            <p>Поможем выбрать устройство и ответим на вопросы по заказу.</p>
+        </div>
 
     </section>
 
 </main>
 
-
 <footer>
-    © 2026 NOVA. Premium technology store.
+    © 2026 NOVA. Техника. Без компромиссов.
 </footer>
 
-
-<div class="toast" id="toast">
-    Товар добавлен в корзину ✓
-</div>
-
+<div class="toast" id="toast"></div>
 
 <script>
-
     /* =========================
-       ТОВАРЫ
+       NOVA PRODUCT PAGE
     ========================= */
 
-    const products = {
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
 
-        "iphone-15-pro-max": {
-            name: "iPhone 15 Pro Max",
-            badge: "Apple",
-            description: "Флагманский смартфон с титановым корпусом и профессиональной камерой.",
-            price: 1479,
-            memory: ["256 GB", "512 GB", "1 TB"],
-            colors: ["Titanium Black", "Titanium Blue", "Titanium Natural"],
-            specs: {
-                "Экран": "6.7″ OLED",
-                "Частота": "120 Hz",
-                "Камера": "48 MP",
-                "Чип": "A17 Pro"
-            }
-        },
+    const product = products[productId];
 
-        "iphone-16-pro-max": {
-            name: "iPhone 16 Pro Max",
-            badge: "Apple",
-            description: "Большой Pro-дисплей, мощный процессор и продвинутая система камер.",
-            price: 899,
-            memory: ["256 GB", "512 GB", "1 TB"],
-            colors: ["Black Titanium", "Desert Titanium", "Natural Titanium"],
-            specs: {
-                "Экран": "6.9″ OLED",
-                "Частота": "120 Hz",
-                "Камера": "48 MP",
-                "Чип": "A18 Pro"
-            }
-        },
+    const cartKey = "novaCart";
+    const favoritesKey = "novaFavorites";
 
-        "iphone-17-pro-max": {
-            name: "iPhone 17 Pro Max",
-            badge: "NOVA NEW",
-            description: "Новый уровень производительности, камеры и премиального мобильного опыта.",
-            price: 1285,
-            memory: ["256 GB", "512 GB", "1 TB"],
-            colors: ["Black", "Silver", "Titanium"],
-            specs: {
-                "Экран": "6.9″ OLED",
-                "Частота": "120 Hz",
-                "Камера": "48 MP",
-                "Чип": "A19 Pro"
-            }
-        },
+    const $ = (id) => document.getElementById(id);
 
-        "iphone-18-pro": {
-            name: "iPhone 18 Pro",
-            badge: "NEW",
-            description: "Следующее поколение Pro с максимальной производительностью и современной камерой.",
-            price: 1449,
-            memory: ["256 GB", "512 GB", "1 TB"],
-            colors: ["Black", "Silver", "Deep Blue"],
-            specs: {
-                "Экран": "6.3″ OLED",
-                "Частота": "120 Hz",
-                "Камера": "48 MP",
-                "Чип": "A20 Pro"
-            }
-        },
-
-        "iphone-18-pro-max": {
-            name: "iPhone 18 Pro Max",
-            badge: "NEW",
-            description: "Максимальный Pro-опыт NOVA: большой дисплей, мощный чип и профессиональная камера.",
-            price: 1599,
-            memory: ["256 GB", "512 GB", "1 TB"],
-            colors: ["Black", "Silver", "Deep Blue"],
-            specs: {
-                "Экран": "6.9″ OLED",
-                "Частота": "120 Hz",
-                "Камера": "48 MP",
-                "Чип": "A20 Pro"
-            }
+    function getCart() {
+        try {
+            return JSON.parse(localStorage.getItem(cartKey)) || [];
+        } catch {
+            return [];
         }
-
-    };
-
-
-    /* =========================
-       ID ТОВАРА
-    ========================= */
-
-    const params =
-        new URLSearchParams(window.location.search);
-
-    const productId =
-        params.get("id") || "iphone-17-pro-max";
-
-    const product =
-        products[productId] || products["iphone-17-pro-max"];
-
-
-    /* =========================
-       ЗАПОЛНЯЕМ СТРАНИЦУ
-    ========================= */
-
-    document.title =
-        product.name + " — NOVA";
-
-    document.getElementById("productName")
-        .textContent = product.name;
-
-    document.getElementById("badge")
-        .textContent = product.badge;
-
-    document.getElementById("description")
-        .textContent = product.description;
-
-    document.getElementById("price")
-        .textContent =
-        product.price.toLocaleString("ru-RU") + " ₽";
-
-
-    /* =========================
-       ПАМЯТЬ
-    ========================= */
-
-    const memoryContainer =
-        document.getElementById("memoryOptions");
-
-    product.memory.forEach((memory,index) => {
-
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "option" + (index === 0 ? " active" : "");
-
-        button.textContent = memory;
-
-        button.onclick = () => {
-
-            memoryContainer
-                .querySelectorAll(".option")
-                .forEach(x => x.classList.remove("active"));
-
-            button.classList.add("active");
-
-        };
-
-        memoryContainer.appendChild(button);
-
-    });
-
-
-    /* =========================
-       ЦВЕТ
-    ========================= */
-
-    const colorContainer =
-        document.getElementById("colorOptions");
-
-    product.colors.forEach((color,index) => {
-
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "option" + (index === 0 ? " active" : "");
-
-        button.textContent = color;
-
-        button.onclick = () => {
-
-            colorContainer
-                .querySelectorAll(".option")
-                .forEach(x => x.classList.remove("active"));
-
-            button.classList.add("active");
-
-        };
-
-        colorContainer.appendChild(button);
-
-    });
-
-
-    /* =========================
-       ХАРАКТЕРИСТИКИ
-    ========================= */
-
-    const specGrid =
-        document.getElementById("specGrid");
-
-    Object.entries(product.specs).forEach(
-        ([name,value]) => {
-
-            const spec =
-                document.createElement("div");
-
-            spec.className = "spec";
-
-            spec.innerHTML = `
-                <span>${name}</span>
-                <strong>${value}</strong>
-            `;
-
-            specGrid.appendChild(spec);
-
-        }
-    );
-
-
-    /* =========================
-       КОРЗИНА
-    ========================= */
-
-    let cart =
-        JSON.parse(
-            localStorage.getItem("novaCart") || "[]"
-        );
-
-
-    function normalizeCart() {
-
-        cart = cart.map(item => {
-
-            if (typeof item === "string") {
-
-                return {
-                    id: item,
-                    quantity: 1
-                };
-
-            }
-
-            return {
-                id: item.id,
-                quantity: item.quantity || 1
-            };
-
-        });
-
     }
 
+    function saveCart(cart) {
+        localStorage.setItem(cartKey, JSON.stringify(cart));
+    }
 
-    normalizeCart();
+    function getFavorites() {
+        try {
+            return JSON.parse(localStorage.getItem(favoritesKey)) || [];
+        } catch {
+            return [];
+        }
+    }
 
-
-    function saveCart() {
-
+    function saveFavorites(favorites) {
         localStorage.setItem(
-            "novaCart",
-            JSON.stringify(cart)
+            favoritesKey,
+            JSON.stringify(favorites)
         );
-
     }
-
 
     function updateCounters() {
+        const cart = getCart();
+        const favorites = getFavorites();
 
-        const cartCount =
-            cart.reduce(
-                (sum,item) =>
-                sum + (item.quantity || 1),
-                0
-            );
+        $("cartCounter").textContent = cart.reduce(
+            (sum, item) => sum + (item.quantity || 1),
+            0
+        );
 
-        document.getElementById("cartCounter")
-            .textContent = cartCount;
-
-
-        const favorites =
-            JSON.parse(
-                localStorage.getItem("novaFavorites") || "[]"
-            );
-
-        document.getElementById("favoriteCounter")
-            .textContent = favorites.length;
-
+        $("favoriteCounter").textContent = favorites.length;
     }
 
+    function showToast(message) {
+        const toast = $("toast");
 
-    function addToCart() {
+        toast.textContent = message;
+        toast.classList.add("show");
 
-        const existing =
-            cart.find(item =>
-                item.id === productId
-            );
+        clearTimeout(window.toastTimer);
 
+        window.toastTimer = setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2200);
+    }
 
-        if (existing) {
+    function formatPrice(price) {
+        return new Intl.NumberFormat("ru-RU").format(price) + " ₽";
+    }
 
-            existing.quantity += 1;
+    function renderVisual() {
+        const visual = $("productVisual");
+
+        if (product.category === "smartphone") {
+            visual.innerHTML = `
+                <div class="device-phone">
+                    <div class="device-screen"></div>
+                </div>
+            `;
+        } else {
+            visual.innerHTML = `
+                <div class="device-generic">
+                    <span>NOVA</span>
+                </div>
+            `;
+        }
+    }
+
+    function renderProduct() {
+
+        document.title = `${product.name} — NOVA`;
+
+        $("productBadge").textContent =
+            product.badge || product.category || "NOVA";
+
+        $("productBrand").textContent =
+            product.brand || "NOVA";
+
+        $("productName").textContent =
+            product.name;
+
+        $("breadcrumbName").textContent =
+            product.name;
+
+        $("productDescription").textContent =
+            product.description || "Премиальное устройство NOVA.";
+
+        $("productPrice").textContent =
+            formatPrice(product.price);
+
+        renderVisual();
+
+        /* MEMORY */
+
+        if (product.memory && product.memory.length) {
+
+            $("memoryOptions").innerHTML =
+                product.memory.map((memory, index) => `
+                    <button
+                        class="option ${index === 0 ? "selected" : ""}"
+                        data-memory="${memory}">
+                        ${memory}
+                    </button>
+                `).join("");
 
         } else {
 
+            $("memoryBlock").style.display = "none";
+
+        }
+
+        /* COLORS */
+
+        if (product.colors && product.colors.length) {
+
+            $("colorOptions").innerHTML =
+                product.colors.map((color, index) => `
+                    <button
+                        class="option ${index === 0 ? "selected" : ""}"
+                        data-color="${color}">
+                        ${color}
+                    </button>
+                `).join("");
+
+        } else {
+
+            $("colorBlock").style.display = "none";
+
+        }
+
+        /* SPECS */
+
+        const specs = product.specs || {};
+
+        $("specs").innerHTML =
+            Object.entries(specs).map(([key, value]) => `
+                <div class="spec">
+                    <span class="spec-name">${key}</span>
+                    <span class="spec-value">${value}</span>
+                </div>
+            `).join("");
+    }
+
+    function updateFavoriteButton() {
+
+        const favorites = getFavorites();
+
+        const isFavorite =
+            favorites.includes(productId);
+
+        $("favoriteBtn").classList.toggle(
+            "active",
+            isFavorite
+        );
+
+        $("favoriteBtn").textContent =
+            isFavorite ? "♥" : "♡";
+    }
+
+    function addToCart() {
+
+        const cart = getCart();
+
+        const existing = cart.find(
+            item => item.id === productId
+        );
+
+        if (existing) {
+            existing.quantity =
+                (existing.quantity || 1) + 1;
+        } else {
             cart.push({
                 id: productId,
                 quantity: 1
             });
-
         }
 
-
-        saveCart();
-
+        saveCart(cart);
         updateCounters();
 
-        showToast();
-
-        const button =
-            document.getElementById("cartButton");
-
-        button.textContent =
+        $("addToCart").textContent =
             "Добавлено ✓";
 
+        showToast("Товар добавлен в корзину");
 
         setTimeout(() => {
-
-            button.textContent =
+            $("addToCart").textContent =
                 "Добавить в корзину";
-
-        }, 1500);
-
+        }, 1800);
     }
-
-
-    /* =========================
-       ИЗБРАННОЕ
-    ========================= */
-
-    let favorites =
-        JSON.parse(
-            localStorage.getItem("novaFavorites") || "[]"
-        );
-
 
     function toggleFavorite() {
 
-        const button =
-            document.getElementById("favoriteButton");
-
-
-        const index =
-            favorites.indexOf(productId);
-
-
-        if (index === -1) {
-
-            favorites.push(productId);
-
-            button.classList.add("active");
-
-            button.textContent = "♥";
-
-            showToast("Добавлено в избранное ♥");
-
-        } else {
-
-            favorites.splice(index,1);
-
-            button.classList.remove("active");
-
-            button.textContent = "♡";
-
-            showToast("Удалено из избранного");
-
-        }
-
-
-        localStorage.setItem(
-            "novaFavorites",
-            JSON.stringify(favorites)
-        );
-
-
-        updateCounters();
-
-    }
-
-
-    function updateFavoriteButton() {
-
-        const button =
-            document.getElementById("favoriteButton");
-
+        let favorites = getFavorites();
 
         if (favorites.includes(productId)) {
 
-            button.classList.add("active");
+            favorites =
+                favorites.filter(id => id !== productId);
 
-            button.textContent = "♥";
+            showToast("Удалено из избранного");
 
+        } else {
+
+            favorites.push(productId);
+
+            showToast("Добавлено в избранное");
         }
 
+        saveFavorites(favorites);
+
+        updateFavoriteButton();
+        updateCounters();
     }
 
+    function setupOptions() {
 
-    /* =========================
-       TOAST
-    ========================= */
+        document.querySelectorAll(".options").forEach(container => {
 
-    function showToast(message) {
+            container.addEventListener("click", event => {
 
-        const toast =
-            document.getElementById("toast");
+                const button =
+                    event.target.closest(".option");
 
+                if (!button) return;
 
-        toast.textContent =
-            message || "Товар добавлен в корзину ✓";
+                container
+                    .querySelectorAll(".option")
+                    .forEach(option =>
+                        option.classList.remove("selected")
+                    );
 
+                button.classList.add("selected");
+            });
 
-        toast.classList.add("show");
-
-
-        setTimeout(() => {
-
-            toast.classList.remove("show");
-
-        }, 1800);
-
+        });
     }
 
+    /* UNKNOWN PRODUCT */
 
-    /* =========================
-       ЧАСЫ
-    ========================= */
+    if (!product) {
 
-    function updateClock() {
+        document.title = "Товар не найден — NOVA";
 
-        const now = new Date();
+        $("productName").textContent =
+            "Товар не найден";
 
-        const hours =
-            String(now.getHours()).padStart(2,"0");
+        $("productBrand").textContent =
+            "NOVA";
 
-        const minutes =
-            String(now.getMinutes()).padStart(2,"0");
+        $("productDescription").textContent =
+            "К сожалению, такого товара пока нет в каталоге.";
 
-        document.getElementById("clock")
-            .textContent =
-            hours + ":" + minutes;
+        $("productPrice").textContent = "";
 
+        $("memoryBlock").style.display = "none";
+        $("colorBlock").style.display = "none";
+
+        $("addToCart").style.display = "none";
+        $("favoriteBtn").style.display = "none";
+
+        $("specs").innerHTML = `
+            <div class="spec">
+                <span class="spec-name">Каталог</span>
+                <a
+                    href="catalog.html"
+                    class="spec-value">
+                    Вернуться в каталог →
+                </a>
+            </div>
+        `;
+
+        $("productVisual").innerHTML = `
+            <div class="device-generic">
+                <span>404</span>
+            </div>
+        `;
+
+    } else {
+
+        renderProduct();
+        updateFavoriteButton();
+        setupOptions();
+
+        $("addToCart").addEventListener(
+            "click",
+            addToCart
+        );
+
+        $("favoriteBtn").addEventListener(
+            "click",
+            toggleFavorite
+        );
     }
-
-
-    updateClock();
-
-    setInterval(updateClock,1000);
-
 
     updateCounters();
-
-    updateFavoriteButton();
-
 </script>
 
 </body>
