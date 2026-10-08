@@ -6,450 +6,419 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVA — Ноутбуки</title>
 
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* =========================
+           LAPTOPS PAGE
+        ========================= */
+
+        .laptops-page {
+            min-height: 100vh;
+            padding-top: 110px;
+            padding-bottom: 80px;
         }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #050505;
+        .laptops-container {
+            width: min(1200px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .laptops-hero {
+            text-align: center;
+            padding: 45px 0 35px;
+        }
+
+        .laptops-hero .eyebrow {
+            color: #888;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .laptops-hero h1 {
+            margin: 0;
+            font-size: clamp(38px, 6vw, 68px);
+            line-height: 1;
+            letter-spacing: -3px;
             color: #fff;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 6%;
-            background: rgba(5, 5, 5, 0.88);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid #1c1c1c;
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 800;
-            letter-spacing: 4px;
-        }
-
-        nav {
-            display: flex;
-            gap: 25px;
-        }
-
-        nav a {
-            color: #aaa;
-            font-size: 14px;
-            transition: 0.25s;
-        }
-
-        nav a:hover {
-            color: white;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .header-btn {
-            padding: 9px 13px;
-            border: 1px solid #292929;
-            border-radius: 10px;
-            background: #101010;
-            color: white;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .cart-count {
-            display: inline-flex;
-            min-width: 19px;
-            height: 19px;
-            align-items: center;
-            justify-content: center;
-            padding: 0 5px;
-            margin-left: 4px;
-            border-radius: 50%;
-            background: white;
-            color: black;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .hero {
-            padding: 90px 6% 70px;
-            text-align: center;
-            background:
-                radial-gradient(circle at center, #1b1b1b 0%, #080808 40%, #050505 75%);
-        }
-
-        .hero-label {
-            color: #888;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: clamp(42px, 7vw, 82px);
-            line-height: 0.95;
-            margin-bottom: 25px;
-        }
-
-        .hero h1 span {
-            color: #777;
-        }
-
-        .hero p {
+        .laptops-hero p {
             max-width: 650px;
-            margin: auto;
+            margin: 18px auto 0;
             color: #999;
-            font-size: 17px;
+            font-size: 16px;
             line-height: 1.6;
         }
 
-        .controls {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 6%;
+        /* SEARCH / SORT */
+
+        .laptop-toolbar {
             display: flex;
-            gap: 15px;
+            align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        .search {
+        .laptop-search {
             flex: 1;
-            min-width: 240px;
-            padding: 15px 18px;
-            background: #101010;
-            border: 1px solid #272727;
-            border-radius: 13px;
-            color: white;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .laptop-search input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 18px;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 14px;
             outline: none;
+            background: rgba(255,255,255,.04);
+            color: #fff;
             font-size: 14px;
         }
 
-        .search:focus {
-            border-color: #555;
+        .laptop-search input::placeholder {
+            color: #777;
         }
 
-        .sort {
-            padding: 15px;
-            background: #101010;
-            border: 1px solid #272727;
-            border-radius: 13px;
-            color: white;
+        .laptop-sort {
+            padding: 14px 18px;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 14px;
+            background: #111;
+            color: #fff;
             outline: none;
+            cursor: pointer;
         }
 
-        .category-bar {
-            max-width: 1400px;
-            margin: auto;
-            padding: 0 6% 35px;
+        /* FILTERS */
+
+        .laptop-filters {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            margin-bottom: 35px;
         }
 
-        .category {
-            padding: 10px 17px;
-            border: 1px solid #292929;
-            border-radius: 30px;
-            color: #999;
-            background: #0c0c0c;
+        .laptop-filter {
+            padding: 10px 18px;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 999px;
+            background: rgba(255,255,255,.035);
+            color: #aaa;
             cursor: pointer;
-            transition: 0.25s;
+            transition: .2s ease;
         }
 
-        .category:hover,
-        .category.active {
-            background: white;
-            color: black;
+        .laptop-filter:hover,
+        .laptop-filter.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
         }
 
-        .products {
-            max-width: 1400px;
-            margin: auto;
-            padding: 0 6% 100px;
+        /* GRID */
+
+        .laptops-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
         }
 
-        .product {
-            background: #0d0d0d;
-            border: 1px solid #202020;
-            border-radius: 22px;
+        .laptop-card {
+            position: relative;
+            min-width: 0;
             overflow: hidden;
-            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 24px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.07),
+                    rgba(255,255,255,.025)
+                );
+            transition: transform .25s ease, border-color .25s ease;
         }
 
-        .product:hover {
-            transform: translateY(-6px);
-            border-color: #3c3c3c;
+        .laptop-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,.2);
         }
 
-        .product-image {
-            height: 280px;
+        .laptop-card-image {
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
             background:
-                radial-gradient(circle at center, #262626, #101010 55%, #080808);
-            overflow: hidden;
+                radial-gradient(
+                    circle at center,
+                    rgba(255,255,255,.1),
+                    transparent 65%
+                );
         }
 
-        .laptop {
-            width: 270px;
-            height: 170px;
+        /* CSS LAPTOP */
+
+        .css-laptop {
+            width: 205px;
+        }
+
+        .css-laptop-screen {
+            height: 126px;
+            border: 5px solid #292929;
+            border-bottom-width: 8px;
+            border-radius: 9px 9px 4px 4px;
+            background:
+                radial-gradient(circle at 50% 45%, #333, #090909 70%);
+            box-shadow:
+                0 0 30px rgba(255,255,255,.08),
+                inset 0 0 20px rgba(255,255,255,.05);
             position: relative;
-            transform: perspective(600px) rotateX(5deg);
         }
 
-        .screen {
-            width: 235px;
-            height: 145px;
-            margin: auto;
-            background: linear-gradient(145deg, #2d2d2d, #080808);
-            border: 6px solid #333;
-            border-radius: 10px 10px 4px 4px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-        }
-
-        .screen::after {
-            content: "NOVA";
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: #777;
-            font-weight: bold;
-            letter-spacing: 4px;
-        }
-
-        .base {
+        .css-laptop-camera {
             position: absolute;
-            bottom: 0;
-            left: 10px;
-            width: 250px;
-            height: 18px;
-            background: linear-gradient(#555, #202020);
-            border-radius: 2px 2px 10px 10px;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.7);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #777;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .product-info {
-            padding: 23px;
+        .css-laptop-base {
+            height: 12px;
+            margin: 0 -14px;
+            border-radius: 2px 2px 8px 8px;
+            background: linear-gradient(#888, #333);
+            position: relative;
         }
 
-        .tag {
-            color: #777;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
+        .css-laptop-base::after {
+            content: "";
+            position: absolute;
+            width: 65px;
+            height: 3px;
+            left: 50%;
+            top: 2px;
+            transform: translateX(-50%);
+            border-radius: 0 0 4px 4px;
+            background: #111;
         }
 
-        .product h2 {
-            font-size: 23px;
-            margin-bottom: 9px;
+        .laptop-card-content {
+            padding: 22px;
         }
 
-        .description {
+        .laptop-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 9px;
+            border-radius: 7px;
+            background: rgba(255,255,255,.08);
+            color: #aaa;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .laptop-card h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 20px;
+            letter-spacing: -.5px;
+        }
+
+        .laptop-description {
+            min-height: 48px;
+            margin: 10px 0 18px;
             color: #888;
+            font-size: 13px;
             line-height: 1.5;
-            font-size: 14px;
-            margin-bottom: 17px;
         }
 
-        .specs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
+        .laptop-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
             margin-bottom: 20px;
         }
 
-        .spec {
-            background: #151515;
-            border-radius: 9px;
-            padding: 10px;
+        .laptop-spec {
+            padding: 6px 9px;
+            border-radius: 7px;
+            background: rgba(255,255,255,.04);
+            color: #aaa;
+            font-size: 11px;
         }
 
-        .spec small {
-            display: block;
-            color: #666;
-            font-size: 10px;
-            margin-bottom: 4px;
-        }
-
-        .spec strong {
-            font-size: 12px;
-        }
-
-        .bottom {
+        .laptop-bottom {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .price {
-            font-size: 21px;
-            font-weight: 700;
+        .laptop-price {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 800;
+            white-space: nowrap;
         }
 
-        .buy {
-            border: none;
-            padding: 12px 18px;
+        .laptop-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .laptop-btn {
+            border: 0;
             border-radius: 11px;
-            background: white;
-            color: black;
-            font-weight: 700;
+            padding: 11px 13px;
             cursor: pointer;
-            transition: 0.2s;
+            font-size: 12px;
+            font-weight: 700;
+            transition: .2s ease;
         }
 
-        .buy:hover {
-            transform: scale(1.04);
+        .laptop-btn-details {
+            background: rgba(255,255,255,.07);
+            color: #fff;
         }
 
-        .buy.added {
-            background: #d9d9d9;
+        .laptop-btn-details:hover {
+            background: rgba(255,255,255,.13);
         }
 
-        .no-results {
+        .laptop-btn-cart {
+            background: #fff;
+            color: #000;
+        }
+
+        .laptop-btn-cart:hover {
+            transform: scale(1.03);
+        }
+
+        .laptop-btn-cart.added {
+            background: #1f1f1f;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,.15);
+        }
+
+        /* EMPTY */
+
+        .laptops-empty {
             display: none;
             text-align: center;
-            padding: 80px 20px;
+            padding: 70px 20px;
             color: #777;
-            grid-column: 1 / -1;
         }
 
-        .no-results h2 {
-            color: white;
-            margin-bottom: 10px;
+        .laptops-empty h3 {
+            margin: 0 0 8px;
+            color: #fff;
+            font-size: 22px;
         }
 
-        footer {
-            border-top: 1px solid #1d1d1d;
-            padding: 60px 6%;
-            background: #080808;
-        }
+        /* TOAST */
 
-        .footer-grid {
-            max-width: 1400px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-        }
-
-        .footer-logo {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-        }
-
-        footer p,
-        footer a {
-            color: #777;
-            line-height: 1.8;
-            font-size: 14px;
-        }
-
-        footer h3 {
-            margin-bottom: 14px;
-        }
-
-        .toast {
+        .nova-toast {
             position: fixed;
             right: 25px;
             bottom: 25px;
-            z-index: 999;
-            padding: 15px 20px;
-            border: 1px solid #333;
-            border-radius: 13px;
-            background: rgba(20,20,20,.96);
-            color: white;
-            box-shadow: 0 15px 40px rgba(0,0,0,.5);
-            transform: translateY(30px);
+            z-index: 9999;
+            padding: 14px 18px;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 14px;
+            background: rgba(20,20,20,.94);
+            color: #fff;
+            font-size: 13px;
+            box-shadow: 0 15px 50px rgba(0,0,0,.35);
             opacity: 0;
+            transform: translateY(15px);
             pointer-events: none;
-            transition: .3s;
+            transition: .25s ease;
         }
 
-        .toast.show {
-            transform: translateY(0);
+        .nova-toast.show {
             opacity: 1;
+            transform: translateY(0);
         }
 
-        @media (max-width: 1000px) {
-            .products {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* MOBILE */
 
-            nav {
-                display: none;
+        @media (max-width: 950px) {
+            .laptops-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
-        @media (max-width: 650px) {
-            .products {
+        @media (max-width: 700px) {
+            .laptops-page {
+                padding-top: 90px;
+            }
+
+            .laptops-container {
+                width: min(100% - 24px, 600px);
+            }
+
+            .laptop-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .laptop-search {
+                max-width: none;
+            }
+
+            .laptop-sort {
+                width: 100%;
+            }
+
+            .laptops-grid {
                 grid-template-columns: 1fr;
             }
 
-            header {
-                padding: 0 20px;
+            .laptop-card-image {
+                height: 230px;
             }
 
-            .hero {
-                padding: 70px 20px;
+            .laptops-hero h1 {
+                letter-spacing: -2px;
             }
 
-            .controls {
-                padding-left: 20px;
-                padding-right: 20px;
+            .laptop-bottom {
+                align-items: flex-end;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .laptop-card-content {
+                padding: 18px;
             }
 
-            .category-bar,
-            .products {
-                padding-left: 20px;
-                padding-right: 20px;
+            .laptop-card h2 {
+                font-size: 18px;
             }
 
-            .footer-grid {
-                grid-template-columns: 1fr;
+            .laptop-price {
+                font-size: 18px;
             }
 
-            .header-actions {
-                display: none;
+            .laptop-actions {
+                flex-direction: column;
             }
 
-            .product h2 {
-                font-size: 21px;
-            }
-
-            .toast {
-                left: 20px;
-                right: 20px;
-                bottom: 20px;
-                text-align: center;
+            .laptop-btn {
+                width: 100%;
             }
         }
     </style>
@@ -457,586 +426,183 @@
 
 <body>
 
-<header>
+<!-- =========================
+     HEADER
+========================= -->
 
-    <a href="index.html" class="logo">NOVA</a>
+<header class="header">
+    <div class="header-inner">
 
-    <nav>
-        <a href="index.html">Главная</a>
-        <a href="catalog.html">Каталог</a>
-        <a href="smartphones.html">Смартфоны</a>
-        <a href="laptops.html">Ноутбуки</a>
-        <a href="tablets.html">Планшеты</a>
-        <a href="audio.html">Аудио</a>
-        <a href="watches.html">Часы</a>
-        <a href="accessories.html">Аксессуары</a>
-    </nav>
+        <a href="index.html" class="logo">NOVA</a>
 
-    <div class="header-actions">
-        <a href="favorites.html" class="header-btn">
-            ♡ Избранное
-        </a>
+        <nav class="nav">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="smartphones.html">Смартфоны</a>
+            <a href="laptops.html" class="active">Ноутбуки</a>
+            <a href="tablets.html">Планшеты</a>
+            <a href="audio.html">Аудио</a>
+            <a href="watches.html">Часы</a>
+        </nav>
 
-        <a href="cart.html" class="header-btn">
-            🛒 Корзина
-            <span class="cart-count" id="cartCount">0</span>
-        </a>
+        <div class="header-actions">
+
+            <a href="cart.html" class="header-cart">
+                🛒
+                <span id="cartCount">0</span>
+            </a>
+
+        </div>
+
     </div>
-
 </header>
 
 
-<section class="hero">
+<!-- =========================
+     PAGE
+========================= -->
 
-    <div class="hero-label">
-        NOVA COMPUTERS
-    </div>
+<main class="laptops-page">
 
-    <h1>
-        Ноутбуки.<br>
-        <span>Максимум возможностей.</span>
-    </h1>
+    <div class="laptops-container">
 
-    <p>
-        Производительность для работы, творчества,
-        программирования и игр. Выбирайте устройство,
-        которое подходит именно вам.
-    </p>
+        <section class="laptops-hero">
 
-</section>
+            <div class="eyebrow">NOVA COLLECTION</div>
 
-
-<div class="controls">
-
-    <input
-        type="text"
-        id="search"
-        class="search"
-        placeholder="Поиск ноутбука..."
-    >
-
-    <select id="sort" class="sort">
-
-        <option value="default">
-            Сначала рекомендуемые
-        </option>
-
-        <option value="cheap">
-            Сначала дешевле
-        </option>
-
-        <option value="expensive">
-            Сначала дороже
-        </option>
-
-    </select>
-
-</div>
-
-
-<div class="category-bar">
-
-    <button class="category active" data-category="all">
-        Все
-    </button>
-
-    <button class="category" data-category="pro">
-        Pro
-    </button>
-
-    <button class="category" data-category="air">
-        Air
-    </button>
-
-    <button class="category" data-category="gaming">
-        Gaming
-    </button>
-
-    <button class="category" data-category="business">
-        Business
-    </button>
-
-</div>
-
-
-<section class="products" id="products">
-
-    <article
-        class="product"
-        data-id="nova-book-pro-16-custom"
-        data-name="NOVA Book Pro 16"
-        data-price="179990"
-        data-category="pro"
-    >
-        <div class="product-image">
-            <div class="laptop">
-                <div class="screen"></div>
-                <div class="base"></div>
-            </div>
-        </div>
-
-        <div class="product-info">
-            <div class="tag">PRO</div>
-
-            <h2>NOVA Book Pro 16</h2>
-
-            <p class="description">
-                Большой профессиональный ноутбук
-                для тяжёлых задач и творчества.
-            </p>
-
-            <div class="specs">
-                <div class="spec">
-                    <small>ДИСПЛЕЙ</small>
-                    <strong>16.2" OLED</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПРОЦЕССОР</small>
-                    <strong>NOVA X Pro</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПАМЯТЬ</small>
-                    <strong>32 GB RAM</strong>
-                </div>
-
-                <div class="spec">
-                    <small>SSD</small>
-                    <strong>1 TB</strong>
-                </div>
-            </div>
-
-            <div class="bottom">
-                <div class="price">179 990 ₽</div>
-
-                <button class="buy" data-id="nova-book-pro-16-custom">
-                    В корзину
-                </button>
-            </div>
-        </div>
-    </article>
-
-
-    <article
-        class="product"
-        data-id="nova-book-pro-14-custom"
-        data-name="NOVA Book Pro 14"
-        data-price="149990"
-        data-category="pro"
-    >
-        <div class="product-image">
-            <div class="laptop">
-                <div class="screen"></div>
-                <div class="base"></div>
-            </div>
-        </div>
-
-        <div class="product-info">
-            <div class="tag">PRO</div>
-
-            <h2>NOVA Book Pro 14</h2>
-
-            <p class="description">
-                Компактный профессиональный ноутбук
-                с высокой производительностью.
-            </p>
-
-            <div class="specs">
-                <div class="spec">
-                    <small>ДИСПЛЕЙ</small>
-                    <strong>14.2" OLED</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПРОЦЕССОР</small>
-                    <strong>NOVA X Pro</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПАМЯТЬ</small>
-                    <strong>24 GB RAM</strong>
-                </div>
-
-                <div class="spec">
-                    <small>SSD</small>
-                    <strong>1 TB</strong>
-                </div>
-            </div>
-
-            <div class="bottom">
-                <div class="price">149 990 ₽</div>
-
-                <button class="buy" data-id="nova-book-pro-14-custom">
-                    В корзину
-                </button>
-            </div>
-        </div>
-    </article>
-
-
-    <article
-        class="product"
-        data-id="nova-book-air-15-custom"
-        data-name="NOVA Book Air 15"
-        data-price="109990"
-        data-category="air"
-    >
-        <div class="product-image">
-            <div class="laptop">
-                <div class="screen"></div>
-                <div class="base"></div>
-            </div>
-        </div>
-
-        <div class="product-info">
-            <div class="tag">AIR</div>
-
-            <h2>NOVA Book Air 15</h2>
-
-            <p class="description">
-                Тонкий и лёгкий ноутбук
-                для работы и повседневных задач.
-            </p>
-
-            <div class="specs">
-                <div class="spec">
-                    <small>ДИСПЛЕЙ</small>
-                    <strong>15.3" Retina</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПРОЦЕССОР</small>
-                    <strong>NOVA X</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПАМЯТЬ</small>
-                    <strong>16 GB RAM</strong>
-                </div>
-
-                <div class="spec">
-                    <small>SSD</small>
-                    <strong>512 GB</strong>
-                </div>
-            </div>
-
-            <div class="bottom">
-                <div class="price">109 990 ₽</div>
-
-                <button class="buy" data-id="nova-book-air-15-custom">
-                    В корзину
-                </button>
-            </div>
-        </div>
-    </article>
-
-
-    <article
-        class="product"
-        data-id="nova-book-air-13-custom"
-        data-name="NOVA Book Air 13"
-        data-price="89990"
-        data-category="air"
-    >
-        <div class="product-image">
-            <div class="laptop">
-                <div class="screen"></div>
-                <div class="base"></div>
-            </div>
-        </div>
-
-        <div class="product-info">
-            <div class="tag">AIR</div>
-
-            <h2>NOVA Book Air 13</h2>
-
-            <p class="description">
-                Максимальная мобильность
-                в компактном корпусе.
-            </p>
-
-            <div class="specs">
-                <div class="spec">
-                    <small>ДИСПЛЕЙ</small>
-                    <strong>13.6" Retina</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПРОЦЕССОР</small>
-                    <strong>NOVA X</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПАМЯТЬ</small>
-                    <strong>16 GB RAM</strong>
-                </div>
-
-                <div class="spec">
-                    <small>SSD</small>
-                    <strong>512 GB</strong>
-                </div>
-            </div>
-
-            <div class="bottom">
-                <div class="price">89 990 ₽</div>
-
-                <button class="buy" data-id="nova-book-air-13-custom">
-                    В корзину
-                </button>
-            </div>
-        </div>
-    </article>
-
-
-    <article
-        class="product"
-        data-id="nova-gaming-x-custom"
-        data-name="NOVA Gaming X"
-        data-price="189990"
-        data-category="gaming"
-    >
-        <div class="product-image">
-            <div class="laptop">
-                <div class="screen"></div>
-                <div class="base"></div>
-            </div>
-        </div>
-
-        <div class="product-info">
-            <div class="tag">GAMING</div>
-
-            <h2>NOVA Gaming X</h2>
-
-            <p class="description">
-                Игровой ноутбук с мощной графикой
-                для современных игр.
-            </p>
-
-            <div class="specs">
-                <div class="spec">
-                    <small>ДИСПЛЕЙ</small>
-                    <strong>16" 240 Hz</strong>
-                </div>
-
-                <div class="spec">
-                    <small>GPU</small>
-                    <strong>NOVA RTX X</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПАМЯТЬ</small>
-                    <strong>32 GB RAM</strong>
-                </div>
-
-                <div class="spec">
-                    <small>SSD</small>
-                    <strong>2 TB</strong>
-                </div>
-            </div>
-
-            <div class="bottom">
-                <div class="price">189 990 ₽</div>
-
-                <button class="buy" data-id="nova-gaming-x-custom">
-                    В корзину
-                </button>
-            </div>
-        </div>
-    </article>
-
-
-    <article
-        class="product"
-        data-id="nova-business-14-custom"
-        data-name="NOVA Business 14"
-        data-price="99990"
-        data-category="business"
-    >
-        <div class="product-image">
-            <div class="laptop">
-                <div class="screen"></div>
-                <div class="base"></div>
-            </div>
-        </div>
-
-        <div class="product-info">
-            <div class="tag">BUSINESS</div>
-
-            <h2>NOVA Business 14</h2>
-
-            <p class="description">
-                Надёжный рабочий ноутбук
-                для бизнеса и офиса.
-            </p>
-
-            <div class="specs">
-                <div class="spec">
-                    <small>ДИСПЛЕЙ</small>
-                    <strong>14" IPS</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПРОЦЕССОР</small>
-                    <strong>NOVA Core 7</strong>
-                </div>
-
-                <div class="spec">
-                    <small>ПАМЯТЬ</small>
-                    <strong>16 GB RAM</strong>
-                </div>
-
-                <div class="spec">
-                    <small>SSD</small>
-                    <strong>512 GB</strong>
-                </div>
-            </div>
-
-            <div class="bottom">
-                <div class="price">99 990 ₽</div>
-
-                <button class="buy" data-id="nova-business-14-custom">
-                    В корзину
-                </button>
-            </div>
-        </div>
-    </article>
-
-
-    <div class="no-results" id="noResults">
-        <h2>Ничего не найдено</h2>
-        <p>Попробуй изменить запрос или категорию.</p>
-    </div>
-
-</section>
-
-
-<footer>
-
-    <div class="footer-grid">
-
-        <div>
-            <div class="footer-logo">NOVA</div>
+            <h1>Ноутбуки</h1>
 
             <p>
-                Технологии нового поколения.
-                Устройства, которые работают на вас.
+                Производительность, мобильность и минималистичный дизайн.
+                Выбери ноутбук NOVA под свои задачи.
             </p>
+
+        </section>
+
+
+        <!-- SEARCH / SORT -->
+
+        <div class="laptop-toolbar">
+
+            <div class="laptop-search">
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Поиск ноутбука..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <select id="sortSelect" class="laptop-sort">
+                <option value="default">Сначала рекомендуемые</option>
+                <option value="priceAsc">Цена: по возрастанию</option>
+                <option value="priceDesc">Цена: по убыванию</option>
+                <option value="nameAsc">Название: А–Я</option>
+            </select>
+
         </div>
 
-        <div>
-            <h3>Категории</h3>
 
-            <p>
-                <a href="smartphones.html">Смартфоны</a>
-            </p>
+        <!-- FILTERS -->
 
-            <p>
-                <a href="laptops.html">Ноутбуки</a>
-            </p>
+        <div class="laptop-filters">
 
-            <p>
-                <a href="tablets.html">Планшеты</a>
-            </p>
+            <button class="laptop-filter active" data-filter="all">
+                Все
+            </button>
 
-            <p>
-                <a href="audio.html">Аудио</a>
-            </p>
+            <button class="laptop-filter" data-filter="pro">
+                Pro
+            </button>
+
+            <button class="laptop-filter" data-filter="air">
+                Air
+            </button>
+
+            <button class="laptop-filter" data-filter="ultra">
+                Ultra
+            </button>
+
         </div>
 
-        <div>
-            <h3>NOVA</h3>
+
+        <!-- PRODUCTS -->
+
+        <section id="laptopsGrid" class="laptops-grid"></section>
+
+        <div id="emptyState" class="laptops-empty">
+
+            <h3>Ничего не найдено</h3>
 
             <p>
-                <a href="about.html">О компании</a>
+                Попробуй изменить запрос или выбрать другую категорию.
             </p>
 
-            <p>
-                <a href="delivery.html">Доставка</a>
-            </p>
-
-            <p>
-                <a href="contacts.html">Контакты</a>
-            </p>
         </div>
 
     </div>
 
-</footer>
+</main>
 
 
-<div class="toast" id="toast">
-    Товар добавлен в корзину ✓
-</div>
+<!-- TOAST -->
 
+<div id="toast" class="nova-toast"></div>
+
+
+<!-- =========================
+     PRODUCTS DATA
+========================= -->
+
+<script src="products.js"></script>
 
 <script>
-
-    const search = document.getElementById("search");
-    const sort = document.getElementById("sort");
-    const productsContainer = document.getElementById("products");
-    const noResults = document.getElementById("noResults");
-    const toast = document.getElementById("toast");
-    const cartCount = document.getElementById("cartCount");
-
-    let products = [...document.querySelectorAll(".product")];
-
-    let currentCategory = "all";
-
 
     /* =========================
        CART
     ========================= */
 
+    const CART_KEY = "novaCart";
+
     function readCart() {
 
         try {
 
-            const saved = JSON.parse(
-                localStorage.getItem("novaCart")
+            const data = JSON.parse(
+                localStorage.getItem(CART_KEY)
             );
 
-            if (!Array.isArray(saved)) {
+            if (!Array.isArray(data)) {
                 return [];
             }
 
-            return saved
-                .map(item => {
-
-                    if (typeof item === "string") {
-                        return {
-                            id: item,
-                            quantity: 1
-                        };
-                    }
-
-                    return {
-                        id: String(item.id || ""),
-                        quantity: Math.max(
-                            1,
-                            Number(item.quantity) || 1
-                        )
-                    };
-
-                })
+            return data
+                .map(item => ({
+                    id: String(item.id || ""),
+                    quantity: Math.max(
+                        1,
+                        Number(item.quantity) || 1
+                    )
+                }))
                 .filter(item => item.id);
 
         } catch (error) {
 
+            console.error("Ошибка чтения корзины:", error);
+
             return [];
-
         }
-
     }
 
 
     function saveCart(cart) {
 
         localStorage.setItem(
-            "novaCart",
+            CART_KEY,
             JSON.stringify(cart)
         );
 
+        updateCartCount();
     }
 
 
@@ -1045,24 +611,39 @@
         const cart = readCart();
 
         const count = cart.reduce(
-            (total, item) =>
-                total + item.quantity,
+            (total, item) => total + item.quantity,
             0
         );
 
-        cartCount.textContent = count;
+        const counter = document.getElementById("cartCount");
 
+        if (counter) {
+            counter.textContent = count;
+        }
     }
 
 
-    function addToCart(id) {
+    function addToCart(productId) {
+
+        const product = products[productId];
+
+        if (!product) {
+
+            console.error(
+                "Товар не найден:",
+                productId
+            );
+
+            showToast("Ошибка: товар не найден");
+
+            return;
+        }
 
         const cart = readCart();
 
         const existing = cart.find(
-            item => item.id === id
+            item => item.id === productId
         );
-
 
         if (existing) {
 
@@ -1071,16 +652,17 @@
         } else {
 
             cart.push({
-                id: id,
+                id: productId,
                 quantity: 1
             });
 
         }
 
-
         saveCart(cart);
 
-        updateCartCount();
+        showToast(
+            `${product.name} добавлен в корзину`
+        );
 
     }
 
@@ -1091,214 +673,401 @@
 
     let toastTimer;
 
+    function showToast(message) {
 
-    function showToast() {
+        const toast = document.getElementById("toast");
 
-        clearTimeout(toastTimer);
+        toast.textContent = message;
 
         toast.classList.add("show");
+
+        clearTimeout(toastTimer);
 
         toastTimer = setTimeout(() => {
 
             toast.classList.remove("show");
 
         }, 1800);
+    }
+
+
+    /* =========================
+       LAPTOP DATA
+    ========================= */
+
+    const laptopIds = [
+        "nova-book-pro-16",
+        "nova-book-air",
+        "nova-book-ultra"
+    ];
+
+
+    let currentFilter = "all";
+    let currentSearch = "";
+
+
+    /* =========================
+       LAPTOP CARD
+    ========================= */
+
+    function createLaptopCard(id) {
+
+        const product = products[id];
+
+        if (!product) {
+            return "";
+        }
+
+        let filterClass = "";
+
+        if (id === "nova-book-pro-16") {
+            filterClass = "pro";
+        }
+
+        if (id === "nova-book-air") {
+            filterClass = "air";
+        }
+
+        if (id === "nova-book-ultra") {
+            filterClass = "ultra";
+        }
+
+        const specs = Object.values(product.specs)
+            .slice(0, 3)
+            .map(spec => `
+                <span class="laptop-spec">
+                    ${spec}
+                </span>
+            `)
+            .join("");
+
+
+        return `
+            <article
+                class="laptop-card"
+                data-id="${id}"
+                data-filter="${filterClass}"
+            >
+
+                <div class="laptop-card-image">
+
+                    <div class="css-laptop">
+
+                        <div class="css-laptop-screen">
+
+                            <div class="css-laptop-camera"></div>
+
+                        </div>
+
+                        <div class="css-laptop-base"></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="laptop-card-content">
+
+                    <div class="laptop-badge">
+                        ${product.badge}
+                    </div>
+
+                    <h2>
+                        ${product.name}
+                    </h2>
+
+                    <p class="laptop-description">
+                        ${product.description}
+                    </p>
+
+                    <div class="laptop-specs">
+                        ${specs}
+                    </div>
+
+                    <div class="laptop-bottom">
+
+                        <div class="laptop-price">
+                            $${product.price.toLocaleString("en-US")}
+                        </div>
+
+                        <div class="laptop-actions">
+
+                            <button
+                                class="laptop-btn laptop-btn-details"
+                                data-action="details"
+                                data-id="${id}"
+                            >
+                                Подробнее
+                            </button>
+
+                            <button
+                                class="laptop-btn laptop-btn-cart"
+                                data-action="cart"
+                                data-id="${id}"
+                            >
+                                В корзину
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+        `;
+    }
+
+
+    /* =========================
+       RENDER
+    ========================= */
+
+    function renderLaptops() {
+
+        const grid =
+            document.getElementById("laptopsGrid");
+
+        const empty =
+            document.getElementById("emptyState");
+
+
+        let list = laptopIds
+            .map(id => ({
+                id,
+                product: products[id]
+            }))
+            .filter(item => item.product);
+
+
+        /* FILTER */
+
+        if (currentFilter !== "all") {
+
+            list = list.filter(item => {
+
+                if (currentFilter === "pro") {
+                    return item.id === "nova-book-pro-16";
+                }
+
+                if (currentFilter === "air") {
+                    return item.id === "nova-book-air";
+                }
+
+                if (currentFilter === "ultra") {
+                    return item.id === "nova-book-ultra";
+                }
+
+                return true;
+            });
+
+        }
+
+
+        /* SEARCH */
+
+        if (currentSearch) {
+
+            const search =
+                currentSearch.toLowerCase();
+
+            list = list.filter(item => {
+
+                const product = item.product;
+
+                return (
+                    product.name
+                        .toLowerCase()
+                        .includes(search)
+                    ||
+                    product.description
+                        .toLowerCase()
+                        .includes(search)
+                    ||
+                    product.badge
+                        .toLowerCase()
+                        .includes(search)
+                );
+
+            });
+
+        }
+
+
+        /* SORT */
+
+        const sort =
+            document.getElementById("sortSelect").value;
+
+
+        if (sort === "priceAsc") {
+
+            list.sort(
+                (a, b) =>
+                    a.product.price -
+                    b.product.price
+            );
+
+        }
+
+
+        if (sort === "priceDesc") {
+
+            list.sort(
+                (a, b) =>
+                    b.product.price -
+                    a.product.price
+            );
+
+        }
+
+
+        if (sort === "nameAsc") {
+
+            list.sort(
+                (a, b) =>
+                    a.product.name.localeCompare(
+                        b.product.name,
+                        "ru"
+                    )
+            );
+
+        }
+
+
+        /* OUTPUT */
+
+        grid.innerHTML = list
+            .map(item => createLaptopCard(item.id))
+            .join("");
+
+
+        if (list.length === 0) {
+
+            empty.style.display = "block";
+
+        } else {
+
+            empty.style.display = "none";
+
+        }
 
     }
 
 
     /* =========================
-       SEARCH / SORT / FILTER
+       EVENTS
     ========================= */
 
-    function updateProducts() {
+    document
+        .getElementById("searchInput")
+        .addEventListener("input", event => {
 
-        const query =
-            search.value
-                .toLowerCase()
-                .trim();
+            currentSearch =
+                event.target.value.trim();
 
-
-        let visible = products.filter(product => {
-
-            const name =
-                product.dataset.name
-                    .toLowerCase();
-
-            const category =
-                product.dataset.category;
-
-
-            const matchesSearch =
-                name.includes(query);
-
-
-            const matchesCategory =
-                currentCategory === "all" ||
-                category === currentCategory;
-
-
-            return (
-                matchesSearch &&
-                matchesCategory
-            );
+            renderLaptops();
 
         });
-
-
-        if (sort.value === "cheap") {
-
-            visible.sort(
-                (a, b) =>
-                    Number(a.dataset.price) -
-                    Number(b.dataset.price)
-            );
-
-        }
-
-
-        if (sort.value === "expensive") {
-
-            visible.sort(
-                (a, b) =>
-                    Number(b.dataset.price) -
-                    Number(a.dataset.price)
-            );
-
-        }
-
-
-        products.forEach(product => {
-
-            product.style.display = "none";
-
-        });
-
-
-        visible.forEach(product => {
-
-            product.style.display = "block";
-
-            productsContainer.appendChild(
-                product
-            );
-
-        });
-
-
-        noResults.style.display =
-            visible.length === 0
-                ? "block"
-                : "none";
-
-    }
-
-
-    search.addEventListener(
-        "input",
-        updateProducts
-    );
-
-
-    sort.addEventListener(
-        "change",
-        updateProducts
-    );
 
 
     document
-        .querySelectorAll(".category")
+        .getElementById("sortSelect")
+        .addEventListener("change", () => {
+
+            renderLaptops();
+
+        });
+
+
+    document
+        .querySelectorAll(".laptop-filter")
         .forEach(button => {
 
-            button.addEventListener(
-                "click",
-                () => {
+            button.addEventListener("click", () => {
 
-                    document
-                        .querySelectorAll(".category")
-                        .forEach(btn =>
-                            btn.classList
-                                .remove("active")
-                        );
-
-
-                    button.classList.add(
-                        "active"
+                document
+                    .querySelectorAll(".laptop-filter")
+                    .forEach(item =>
+                        item.classList.remove("active")
                     );
 
+                button.classList.add("active");
 
-                    currentCategory =
-                        button.dataset.category;
+                currentFilter =
+                    button.dataset.filter;
 
+                renderLaptops();
 
-                    updateProducts();
-
-                }
-            );
+            });
 
         });
 
 
-    /* =========================
-       ADD BUTTONS
-    ========================= */
+    /* CARD BUTTONS */
 
     document
-        .querySelectorAll(".buy")
-        .forEach(button => {
+        .getElementById("laptopsGrid")
+        .addEventListener("click", event => {
 
-            button.addEventListener(
-                "click",
-                () => {
+            const button =
+                event.target.closest("button");
 
-                    const id =
-                        button.dataset.id;
+            if (!button) {
+                return;
+            }
+
+            const id =
+                button.dataset.id;
+
+            const action =
+                button.dataset.action;
 
 
-                    if (!id) {
-                        return;
-                    }
+            if (!id || !products[id]) {
+                return;
+            }
 
 
-                    addToCart(id);
+            if (action === "details") {
 
+                window.location.href =
+                    `product.html?id=${encodeURIComponent(id)}`;
+
+                return;
+            }
+
+
+            if (action === "cart") {
+
+                addToCart(id);
+
+                button.classList.add("added");
+
+                button.textContent =
+                    "Добавлено ✓";
+
+                setTimeout(() => {
+
+                    button.classList.remove("added");
 
                     button.textContent =
-                        "Добавлено ✓";
+                        "В корзину";
 
+                }, 1200);
 
-                    button.classList.add(
-                        "added"
-                    );
-
-
-                    showToast();
-
-
-                    setTimeout(() => {
-
-                        button.textContent =
-                            "В корзину";
-
-                        button.classList.remove(
-                            "added"
-                        );
-
-                    }, 1200);
-
-                }
-            );
+            }
 
         });
 
 
     /* =========================
-       INITIAL
+       INIT
     ========================= */
 
     updateCartCount();
 
-    updateProducts();
+    renderLaptops();
 
 </script>
 
