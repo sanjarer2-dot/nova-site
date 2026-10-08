@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Каталог — NOVA</title>
-    <meta name="description" content="Каталог NOVA — смартфоны, ноутбуки, планшеты, аудио, часы и аксессуары.">
 
     <link rel="stylesheet" href="style.css">
 
@@ -40,38 +39,42 @@
             cursor: pointer;
         }
 
-        /* HEADER */
+        /* ================= HEADER ================= */
 
         .catalog-header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            height: 72px;
+
+            height: 68px;
+            padding: 0 5%;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 5%;
-            background: rgba(5, 5, 5, 0.82);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+            background: rgba(5, 5, 5, .86);
+            border-bottom: 1px solid rgba(255,255,255,.07);
+
             backdrop-filter: blur(18px);
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: 4px;
         }
 
         .header-nav {
             display: flex;
-            gap: 28px;
             align-items: center;
+            gap: 28px;
         }
 
         .header-nav a {
-            color: #aaa;
-            font-size: 14px;
-            transition: 0.2s;
+            color: #888;
+            font-size: 13px;
+            transition: .2s;
         }
 
         .header-nav a:hover,
@@ -81,117 +84,145 @@
 
         .header-actions {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 9px;
         }
 
         .header-action {
             position: relative;
-            width: 42px;
-            height: 42px;
-            border: 1px solid rgba(255,255,255,.1);
-            border-radius: 13px;
-            background: rgba(255,255,255,.04);
-            color: #fff;
+
+            width: 40px;
+            height: 40px;
+
+            padding: 0;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 12px;
+
+            background: rgba(255,255,255,.035);
+            color: #fff;
+
             transition: .2s;
         }
 
         .header-action:hover {
-            background: rgba(255,255,255,.1);
-            transform: translateY(-1px);
+            background: rgba(255,255,255,.09);
+        }
+
+        .header-icon {
+            font-size: 15px;
+            line-height: 1;
         }
 
         .counter {
             position: absolute;
+
             top: -5px;
             right: -5px;
-            min-width: 18px;
-            height: 18px;
-            padding: 0 5px;
-            border-radius: 20px;
-            background: #fff;
-            color: #000;
-            font-size: 10px;
-            font-weight: 800;
+
+            min-width: 17px;
+            height: 17px;
+
+            padding: 0 4px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            border-radius: 50%;
+
+            background: #fff;
+            color: #000;
+
+            font-size: 9px;
+            font-weight: 800;
+            line-height: 1;
         }
 
-        /* HERO */
+        /* ================= HERO ================= */
 
         .catalog-hero {
             position: relative;
             overflow: hidden;
-            padding: 110px 5% 75px;
-            text-align: center;
-            background:
-                radial-gradient(circle at 50% 0%, rgba(255,255,255,.09), transparent 35%),
-                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-            background-size: auto, 40px 40px, 40px 40px;
-        }
 
-        .catalog-hero::after {
-            content: "";
-            position: absolute;
-            width: 450px;
-            height: 450px;
-            border-radius: 50%;
-            background: rgba(255,255,255,.04);
-            filter: blur(80px);
-            left: 50%;
-            top: -250px;
-            transform: translateX(-50%);
-            pointer-events: none;
+            padding: 95px 5% 70px;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(255,255,255,.08),
+                    transparent 38%
+                ),
+                linear-gradient(
+                    rgba(255,255,255,.018) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.018) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                auto,
+                40px 40px,
+                40px 40px;
         }
 
         .hero-label {
-            position: relative;
-            z-index: 1;
             display: inline-block;
-            margin-bottom: 18px;
-            padding: 7px 13px;
-            border: 1px solid rgba(255,255,255,.12);
+
+            margin-bottom: 16px;
+            padding: 6px 12px;
+
+            border: 1px solid rgba(255,255,255,.1);
             border-radius: 30px;
-            color: #aaa;
-            font-size: 11px;
+
+            color: #777;
+
+            font-size: 9px;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .catalog-hero h1 {
-            position: relative;
-            z-index: 1;
             margin: 0;
-            font-size: clamp(42px, 7vw, 82px);
+
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1;
             letter-spacing: -4px;
         }
 
         .catalog-hero p {
-            position: relative;
-            z-index: 1;
-            max-width: 600px;
-            margin: 20px auto 0;
-            color: #8c8c8c;
+            max-width: 550px;
+
+            margin: 18px auto 0;
+
+            color: #777;
+
+            font-size: 13px;
             line-height: 1.7;
-            font-size: 15px;
         }
 
-        /* CATEGORY */
+        /* ================= CATEGORIES ================= */
 
         .category-section {
-            padding: 0 5% 45px;
+            padding: 0 5% 38px;
         }
 
         .category-list {
             display: flex;
-            gap: 10px;
+            gap: 9px;
+
             overflow-x: auto;
-            padding: 5px 0 10px;
+
+            padding: 3px 0 8px;
+
             scrollbar-width: none;
         }
 
@@ -201,11 +232,18 @@
 
         .category-btn {
             flex: 0 0 auto;
-            padding: 12px 18px;
-            border: 1px solid rgba(255,255,255,.09);
+
+            padding: 10px 16px;
+
+            border: 1px solid rgba(255,255,255,.08);
             border-radius: 30px;
-            background: rgba(255,255,255,.035);
-            color: #999;
+
+            background: rgba(255,255,255,.03);
+
+            color: #777;
+
+            font-size: 12px;
+
             transition: .2s;
         }
 
@@ -215,62 +253,77 @@
         }
 
         .category-btn.active {
-            color: #000;
             background: #fff;
+            color: #000;
             border-color: #fff;
         }
 
-        /* CONTROLS */
+        /* ================= LAYOUT ================= */
 
         .catalog-layout {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 35px;
-            padding: 0 5% 100px;
-            max-width: 1600px;
+            max-width: 1500px;
+
             margin: auto;
+            padding: 0 5% 90px;
+
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 30px;
         }
+
+        /* ================= FILTERS ================= */
 
         .filters {
             position: sticky;
-            top: 95px;
+            top: 90px;
             align-self: start;
-            padding: 22px;
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 22px;
+
+            padding: 20px;
+
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 20px;
+
             background: rgba(255,255,255,.025);
         }
 
         .filters h3 {
-            margin: 0 0 25px;
-            font-size: 15px;
+            margin: 0 0 20px;
+
+            font-size: 14px;
         }
 
         .filter-group {
-            padding: 20px 0;
-            border-top: 1px solid rgba(255,255,255,.07);
+            padding: 17px 0;
+
+            border-top: 1px solid rgba(255,255,255,.06);
         }
 
         .filter-group:first-of-type {
-            border-top: 0;
             padding-top: 0;
+            border-top: 0;
         }
 
         .filter-title {
-            margin-bottom: 13px;
-            color: #aaa;
-            font-size: 12px;
+            margin-bottom: 11px;
+
+            color: #777;
+
+            font-size: 9px;
+            letter-spacing: 1.4px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .filter-option {
             display: flex;
             align-items: center;
-            gap: 9px;
-            margin: 11px 0;
-            color: #999;
-            font-size: 13px;
+            gap: 8px;
+
+            margin: 9px 0;
+
+            color: #888;
+
+            font-size: 12px;
+
             cursor: pointer;
         }
 
@@ -279,121 +332,175 @@
         }
 
         .filter-option input {
+            width: 13px;
+            height: 13px;
+
             accent-color: #fff;
         }
 
-        .catalog-main {
-            min-width: 0;
-        }
+        /* ================= TOOLBAR ================= */
 
         .catalog-toolbar {
             display: flex;
-            gap: 12px;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
+            gap: 10px;
+
+            margin-bottom: 17px;
         }
 
         .search-box {
-            position: relative;
             flex: 1;
         }
 
         .search-box input {
             width: 100%;
-            height: 48px;
-            padding: 0 18px;
-            border: 1px solid rgba(255,255,255,.1);
-            border-radius: 14px;
-            outline: none;
-            background: rgba(255,255,255,.04);
-            color: #fff;
-        }
+            height: 44px;
 
-        .search-box input::placeholder {
-            color: #666;
-        }
-
-        .search-box input:focus {
-            border-color: rgba(255,255,255,.3);
-        }
-
-        .sort-select {
-            height: 48px;
-            min-width: 190px;
             padding: 0 15px;
-            border: 1px solid rgba(255,255,255,.1);
-            border-radius: 14px;
-            outline: none;
-            background: #101010;
-            color: #fff;
-        }
 
-        .result-count {
-            margin-bottom: 18px;
-            color: #666;
+            outline: none;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 12px;
+
+            background: rgba(255,255,255,.035);
+            color: #fff;
+
             font-size: 12px;
         }
 
-        /* PRODUCTS */
+        .search-box input::placeholder {
+            color: #555;
+        }
+
+        .search-box input:focus {
+            border-color: rgba(255,255,255,.2);
+        }
+
+        .sort-select {
+            min-width: 175px;
+            height: 44px;
+
+            padding: 0 12px;
+
+            outline: none;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 12px;
+
+            background: #101010;
+            color: #fff;
+
+            font-size: 11px;
+        }
+
+        .result-count {
+            margin-bottom: 15px;
+
+            color: #555;
+
+            font-size: 10px;
+        }
+
+        /* ================= PRODUCTS ================= */
 
         .products-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 18px;
+
+            gap: 16px;
         }
 
         .product-card {
-            position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 24px;
-            background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
-            transition: .3s ease;
+
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.045),
+                    rgba(255,255,255,.012)
+                );
+
+            transition: .28s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255,255,255,.18);
-            box-shadow: 0 20px 60px rgba(0,0,0,.35);
+            transform: translateY(-4px);
+
+            border-color: rgba(255,255,255,.16);
+
+            box-shadow:
+                0 20px 55px rgba(0,0,0,.3);
         }
 
         .product-image {
             position: relative;
-            height: 285px;
-            overflow: hidden;
+
+            height: 245px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            overflow: hidden;
+
             background:
-                radial-gradient(circle at center, rgba(255,255,255,.07), transparent 55%);
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,.065),
+                    transparent 60%
+                );
         }
 
         .product-badge {
             position: absolute;
-            top: 14px;
-            left: 14px;
+            top: 12px;
+            left: 12px;
             z-index: 5;
-            padding: 6px 9px;
-            border-radius: 8px;
-            background: rgba(255,255,255,.09);
-            color: #ccc;
-            font-size: 9px;
+
+            padding: 5px 8px;
+
+            border-radius: 7px;
+
+            background: rgba(255,255,255,.07);
+
+            color: #888;
+
+            font-size: 8px;
             font-weight: 700;
             letter-spacing: 1px;
         }
+
+        /* ================= FAVORITE ================= */
 
         .favorite-btn {
             position: absolute;
             top: 12px;
             right: 12px;
-            z-index: 10;
-            width: 38px;
-            height: 38px;
-            border: 1px solid rgba(255,255,255,.1);
+            z-index: 20;
+
+            width: 32px;
+            height: 32px;
+
+            padding: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255,255,255,.09);
             border-radius: 50%;
-            background: rgba(0,0,0,.3);
+
+            background: rgba(0,0,0,.35);
+
             color: #777;
+
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            line-height: 1;
+
             transition: .2s;
         }
 
@@ -404,112 +511,160 @@
 
         .favorite-btn.active {
             color: #fff;
-            border-color: rgba(255,255,255,.3);
+            border-color: rgba(255,255,255,.22);
         }
 
-        .product-visual-link {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* PHONE */
+        /* ================= PHONE ================= */
 
         .device {
             position: relative;
-            width: 105px;
-            height: 210px;
+
+            width: 94px;
+            height: 188px;
+
             border: 4px solid #252525;
-            border-radius: 22px;
-            background: linear-gradient(145deg, #1e1e1e, #090909);
-            box-shadow: 0 25px 50px rgba(0,0,0,.6);
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #080808
+                );
+
+            box-shadow:
+                0 25px 45px rgba(0,0,0,.6);
+
             transform: rotate(-3deg);
+
             transition: .3s;
+        }
+
+        .device::before {
+            content: "";
+
+            position: absolute;
+
+            top: 7px;
+            left: 50%;
+
+            width: 38px;
+            height: 9px;
+
+            border-radius: 10px;
+
+            background: #000;
+
+            transform: translateX(-50%);
+        }
+
+        .device::after {
+            content: "NOVA";
+
+            position: absolute;
+
+            bottom: 15px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            color: #555;
+
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
         .product-card:hover .device {
             transform: rotate(0) scale(1.04);
         }
 
-        .device::before {
-            content: "";
-            position: absolute;
-            top: 7px;
-            left: 50%;
-            width: 42px;
-            height: 10px;
-            border-radius: 10px;
-            background: #000;
-            transform: translateX(-50%);
-        }
-
-        .device::after {
-            content: "NOVA";
-            position: absolute;
-            bottom: 17px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 8px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #666;
-        }
-
-        /* LAPTOP */
+        /* ================= LAPTOP ================= */
 
         .laptop {
             position: relative;
-            width: 205px;
-            height: 125px;
+
+            width: 190px;
+            height: 116px;
+
             border: 5px solid #252525;
-            border-bottom-width: 9px;
-            border-radius: 12px 12px 5px 5px;
-            background: linear-gradient(145deg, #222, #090909);
-            transform: perspective(500px) rotateX(4deg);
-            box-shadow: 0 30px 45px rgba(0,0,0,.6);
+            border-bottom-width: 8px;
+            border-radius: 11px 11px 4px 4px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #222,
+                    #080808
+                );
+
+            box-shadow:
+                0 25px 45px rgba(0,0,0,.6);
+
             transition: .3s;
         }
 
         .laptop::after {
             content: "";
+
             position: absolute;
-            left: -20px;
-            bottom: -17px;
-            width: 235px;
-            height: 9px;
-            border-radius: 0 0 15px 15px;
+
+            left: -19px;
+            bottom: -16px;
+
+            width: 218px;
+            height: 8px;
+
+            border-radius: 0 0 13px 13px;
+
             background: #292929;
         }
 
         .product-card:hover .laptop {
-            transform: perspective(500px) rotateX(0) scale(1.04);
+            transform: scale(1.04);
         }
 
-        /* TABLET */
+        /* ================= TABLET ================= */
 
         .tablet {
             position: relative;
-            width: 155px;
-            height: 205px;
+
+            width: 142px;
+            height: 188px;
+
             border: 5px solid #252525;
-            border-radius: 19px;
-            background: linear-gradient(145deg, #1d1d1d, #080808);
-            box-shadow: 0 25px 50px rgba(0,0,0,.6);
-            transform: rotate(-3deg);
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #080808
+                );
+
+            box-shadow:
+                0 25px 45px rgba(0,0,0,.6);
+
+            transform: rotate(-2deg);
+
             transition: .3s;
         }
 
         .tablet::before {
             content: "";
+
             position: absolute;
-            top: 8px;
+
+            top: 7px;
             left: 50%;
+
             width: 5px;
             height: 5px;
+
             border-radius: 50%;
+
             background: #444;
+
             transform: translateX(-50%);
         }
 
@@ -517,71 +672,100 @@
             transform: rotate(0) scale(1.04);
         }
 
-        /* BUDS */
+        /* ================= AUDIO ================= */
 
         .buds {
             position: relative;
-            width: 145px;
-            height: 100px;
+
+            width: 130px;
+            height: 90px;
+
             transition: .3s;
         }
 
         .buds::before,
         .buds::after {
             content: "";
+
             position: absolute;
-            top: 12px;
-            width: 53px;
-            height: 68px;
-            border-radius: 30px 30px 24px 24px;
-            background: linear-gradient(145deg, #292929, #090909);
-            box-shadow: 0 20px 40px rgba(0,0,0,.6);
+
+            top: 10px;
+
+            width: 49px;
+            height: 65px;
+
+            border-radius: 27px 27px 22px 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #292929,
+                    #080808
+                );
+
+            box-shadow:
+                0 20px 35px rgba(0,0,0,.6);
         }
 
         .buds::before {
-            left: 13px;
-            transform: rotate(-12deg);
+            left: 10px;
+            transform: rotate(-11deg);
         }
 
         .buds::after {
-            right: 13px;
-            transform: rotate(12deg);
+            right: 10px;
+            transform: rotate(11deg);
         }
 
         .product-card:hover .buds {
             transform: scale(1.05);
         }
 
-        /* WATCH */
+        /* ================= WATCH ================= */
 
         .watch {
             position: relative;
-            width: 115px;
-            height: 145px;
+
+            width: 105px;
+            height: 135px;
+
             transition: .3s;
         }
 
         .watch::before {
             content: "";
+
             position: absolute;
-            left: 29px;
+
+            left: 27px;
             top: 0;
-            width: 57px;
-            height: 145px;
-            border-radius: 28px;
+
+            width: 51px;
+            height: 135px;
+
+            border-radius: 26px;
+
             background: #171717;
-            box-shadow: 0 25px 45px rgba(0,0,0,.6);
+
+            box-shadow:
+                0 25px 45px rgba(0,0,0,.6);
         }
 
         .watch::after {
             content: "";
+
             position: absolute;
-            left: 35px;
-            top: 32px;
-            width: 45px;
-            height: 62px;
-            border-radius: 14px;
+
+            left: 32px;
+            top: 30px;
+
+            width: 41px;
+            height: 57px;
+
+            border-radius: 12px;
+
             background: #050505;
+
             border: 3px solid #2b2b2b;
         }
 
@@ -589,26 +773,42 @@
             transform: scale(1.05);
         }
 
-        /* ACCESSORY */
+        /* ================= ACCESSORY ================= */
 
         .accessory {
             position: relative;
-            width: 145px;
-            height: 90px;
-            border-radius: 25px;
-            background: linear-gradient(145deg, #252525, #090909);
-            box-shadow: 0 25px 45px rgba(0,0,0,.6);
+
+            width: 135px;
+            height: 82px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #252525,
+                    #080808
+                );
+
+            box-shadow:
+                0 25px 45px rgba(0,0,0,.6);
+
             transition: .3s;
         }
 
         .accessory::after {
             content: "NOVA";
+
             position: absolute;
+
             left: 50%;
             top: 50%;
+
             transform: translate(-50%, -50%);
+
             color: #555;
-            font-size: 11px;
+
+            font-size: 9px;
             font-weight: 700;
             letter-spacing: 2px;
         }
@@ -617,32 +817,39 @@
             transform: scale(1.05);
         }
 
-        /* PRODUCT INFO */
+        /* ================= PRODUCT INFO ================= */
 
         .product-info {
-            padding: 20px;
+            padding: 17px;
         }
 
         .product-brand {
-            margin-bottom: 5px;
-            color: #666;
-            font-size: 10px;
+            margin-bottom: 4px;
+
+            color: #555;
+
+            font-size: 8px;
+            letter-spacing: 1.3px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
         }
 
         .product-name {
-            min-height: 42px;
+            min-height: 38px;
+
             margin: 0;
-            font-size: 17px;
+
+            font-size: 15px;
             line-height: 1.3;
         }
 
         .product-description {
-            min-height: 38px;
-            margin: 8px 0 17px;
-            color: #777;
-            font-size: 12px;
+            min-height: 34px;
+
+            margin: 7px 0 14px;
+
+            color: #666;
+
+            font-size: 10px;
             line-height: 1.5;
         }
 
@@ -650,36 +857,45 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+
+            gap: 8px;
         }
 
         .product-price {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             white-space: nowrap;
         }
 
         .add-cart {
-            padding: 11px 14px;
+            padding: 9px 12px;
+
             border: 0;
-            border-radius: 11px;
+            border-radius: 9px;
+
             background: #fff;
             color: #000;
-            font-size: 12px;
+
+            font-size: 10px;
             font-weight: 700;
+
             transition: .2s;
         }
 
         .add-cart:hover {
-            transform: translateY(-1px);
             background: #ddd;
+            transform: translateY(-1px);
         }
 
         .details-link {
             display: inline-block;
-            margin-top: 12px;
-            color: #777;
-            font-size: 11px;
+
+            margin-top: 9px;
+
+            color: #555;
+
+            font-size: 9px;
+
             transition: .2s;
         }
 
@@ -687,30 +903,46 @@
             color: #fff;
         }
 
-        /* EMPTY */
+        /* ================= EMPTY ================= */
 
         .empty-products {
             display: none;
-            padding: 80px 20px;
+
+            padding: 70px 20px;
+
             text-align: center;
+
             border: 1px solid rgba(255,255,255,.07);
-            border-radius: 22px;
-            color: #666;
+            border-radius: 20px;
+
+            color: #555;
         }
 
         .empty-products h3 {
-            margin: 0 0 8px;
+            margin: 0 0 7px;
+
             color: #fff;
+
+            font-size: 17px;
         }
 
-        /* CART PANEL */
+        .empty-products p {
+            margin: 0;
+
+            font-size: 11px;
+        }
+
+        /* ================= CART ================= */
 
         .cart-overlay {
             position: fixed;
             inset: 0;
             z-index: 2000;
+
             display: none;
+
             background: rgba(0,0,0,.55);
+
             backdrop-filter: blur(5px);
         }
 
@@ -720,17 +952,26 @@
 
         .cart-panel {
             position: fixed;
+
             top: 0;
             right: 0;
+
             z-index: 2001;
-            width: min(420px, 100%);
+
+            width: min(400px, 100%);
             height: 100vh;
-            padding: 25px;
+
+            padding: 24px;
+
             display: flex;
             flex-direction: column;
-            background: #0c0c0c;
+
+            background: #0b0b0b;
+
             border-left: 1px solid rgba(255,255,255,.08);
+
             transform: translateX(100%);
+
             transition: .3s ease;
         }
 
@@ -742,34 +983,47 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 25px;
+
+            margin-bottom: 20px;
         }
 
         .cart-head h2 {
             margin: 0;
-            font-size: 22px;
+
+            font-size: 20px;
         }
 
         .close-cart {
-            width: 38px;
-            height: 38px;
+            width: 35px;
+            height: 35px;
+
+            padding: 0;
+
             border: 1px solid rgba(255,255,255,.1);
             border-radius: 50%;
+
             background: rgba(255,255,255,.04);
+
             color: #fff;
+
+            font-size: 18px;
+            line-height: 1;
         }
 
         .cart-items {
             flex: 1;
+
             overflow-y: auto;
         }
 
         .cart-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,.07);
+            gap: 10px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,.06);
         }
 
         .cart-item-info {
@@ -778,42 +1032,65 @@
         }
 
         .cart-item-name {
-            margin-bottom: 5px;
-            font-size: 13px;
+            margin-bottom: 4px;
+
+            font-size: 12px;
             font-weight: 600;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .cart-item-price {
-            color: #777;
-            font-size: 11px;
+            color: #666;
+
+            font-size: 10px;
         }
 
         .cart-quantity {
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 6px;
         }
 
         .cart-quantity button {
-            width: 27px;
-            height: 27px;
+            width: 25px;
+            height: 25px;
+
+            padding: 0;
+
             border: 1px solid rgba(255,255,255,.1);
-            border-radius: 8px;
+            border-radius: 7px;
+
             background: rgba(255,255,255,.04);
             color: #fff;
+
+            line-height: 1;
         }
 
         .cart-quantity span {
-            min-width: 15px;
+            min-width: 14px;
+
             text-align: center;
-            font-size: 12px;
+
+            font-size: 11px;
         }
 
         .remove-item {
+            width: 24px;
+            height: 24px;
+
+            padding: 0;
+
             border: 0;
+
             background: none;
+
             color: #555;
-            font-size: 18px;
+
+            font-size: 16px;
+            line-height: 1;
         }
 
         .remove-item:hover {
@@ -822,51 +1099,75 @@
 
         .empty-cart {
             padding: 50px 0;
+
             text-align: center;
-            color: #666;
-            font-size: 13px;
+
+            color: #555;
+
+            font-size: 12px;
         }
 
         .cart-footer {
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,.08);
+            padding-top: 17px;
+
+            border-top: 1px solid rgba(255,255,255,.07);
         }
 
         .cart-total {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 18px;
-            font-size: 18px;
+
+            margin-bottom: 15px;
+
+            font-size: 16px;
             font-weight: 700;
         }
 
         .open-cart-btn {
             width: 100%;
-            padding: 15px;
+
+            padding: 13px;
+
             border: 0;
-            border-radius: 13px;
+            border-radius: 11px;
+
             background: #fff;
             color: #000;
+
+            font-size: 11px;
             font-weight: 700;
         }
 
-        /* TOAST */
+        /* ================= TOAST ================= */
 
         .toast {
             position: fixed;
+
             left: 50%;
-            bottom: 25px;
+            bottom: 22px;
+
             z-index: 3000;
-            padding: 13px 18px;
+
+            max-width: calc(100% - 30px);
+
+            padding: 11px 15px;
+
             border: 1px solid rgba(255,255,255,.1);
-            border-radius: 13px;
+            border-radius: 11px;
+
             background: #151515;
+
             color: #fff;
-            font-size: 13px;
+
+            font-size: 11px;
+
             box-shadow: 0 15px 40px rgba(0,0,0,.4);
-            transform: translate(-50%, 100px);
+
+            transform: translate(-50%, 80px);
             opacity: 0;
+
             pointer-events: none;
+
             transition: .3s;
         }
 
@@ -875,25 +1176,25 @@
             opacity: 1;
         }
 
-        /* FOOTER */
+        /* ================= FOOTER ================= */
 
         footer {
-            padding: 60px 5%;
-            border-top: 1px solid rgba(255,255,255,.07);
-            color: #666;
+            padding: 55px 5%;
+
+            border-top: 1px solid rgba(255,255,255,.06);
+
+            color: #555;
+
             text-align: center;
-            font-size: 12px;
+
+            font-size: 10px;
         }
 
-        /* RESPONSIVE */
+        /* ================= RESPONSIVE ================= */
 
         @media (max-width: 1100px) {
             .products-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .catalog-layout {
-                grid-template-columns: 210px 1fr;
             }
         }
 
@@ -909,10 +1210,6 @@
             .filters {
                 position: static;
             }
-
-            .products-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
         }
 
         @media (max-width: 560px) {
@@ -921,7 +1218,7 @@
             }
 
             .catalog-hero {
-                padding: 80px 20px 55px;
+                padding: 75px 20px 55px;
             }
 
             .catalog-hero h1 {
@@ -936,7 +1233,6 @@
 
             .catalog-toolbar {
                 flex-direction: column;
-                align-items: stretch;
             }
 
             .sort-select {
@@ -948,7 +1244,7 @@
             }
 
             .product-image {
-                height: 300px;
+                height: 270px;
             }
         }
     </style>
@@ -957,7 +1253,10 @@
 <body>
 
 <header class="catalog-header">
-    <a href="index.html" class="logo">NOVA</a>
+
+    <a href="index.html" class="logo">
+        NOVA
+    </a>
 
     <nav class="header-nav">
         <a href="index.html">Главная</a>
@@ -967,31 +1266,52 @@
     </nav>
 
     <div class="header-actions">
-        <button class="header-action" id="favoritesButton" aria-label="Избранное">
-            ♡
+
+        <button
+            class="header-action"
+            id="favoritesButton"
+            aria-label="Избранное"
+        >
+            <span class="header-icon">♡</span>
             <span class="counter" id="favoritesCount">0</span>
         </button>
 
-        <button class="header-action" id="cartButton" aria-label="Корзина">
-            🛒
+        <button
+            class="header-action"
+            id="cartButton"
+            aria-label="Корзина"
+        >
+            <span class="header-icon">🛒</span>
             <span class="counter" id="cartCount">0</span>
         </button>
+
     </div>
+
 </header>
 
-<section class="catalog-hero">
-    <div class="hero-label">NOVA Store</div>
 
-    <h1>Каталог</h1>
+<section class="catalog-hero">
+
+    <div class="hero-label">
+        NOVA Store
+    </div>
+
+    <h1>
+        Каталог
+    </h1>
 
     <p>
-        Техника нового поколения. Выбирай устройство,
-        которое подходит именно тебе.
+        Техника нового поколения.
+        Выбирай устройство, которое подходит именно тебе.
     </p>
+
 </section>
 
+
 <section class="category-section">
+
     <div class="category-list">
+
         <button class="category-btn active" data-category="all">
             Все товары
         </button>
@@ -1019,18 +1339,25 @@
         <button class="category-btn" data-category="accessory">
             Аксессуары
         </button>
+
     </div>
+
 </section>
+
 
 <main class="catalog-layout">
 
     <aside class="filters">
 
-        <h3>Фильтры</h3>
+        <h3>
+            Фильтры
+        </h3>
 
         <div class="filter-group">
 
-            <div class="filter-title">Цена</div>
+            <div class="filter-title">
+                Цена
+            </div>
 
             <label class="filter-option">
                 <input
@@ -1066,7 +1393,9 @@
 
         <div class="filter-group">
 
-            <div class="filter-title">Особое</div>
+            <div class="filter-title">
+                Особое
+            </div>
 
             <label class="filter-option">
                 <input type="checkbox" id="newFilter">
@@ -1083,7 +1412,11 @@
         <div class="filter-group">
 
             <label class="filter-option">
-                <input type="checkbox" id="stockFilter" checked>
+                <input
+                    type="checkbox"
+                    id="stockFilter"
+                    checked
+                >
                 В наличии
             </label>
 
@@ -1091,148 +1424,257 @@
 
     </aside>
 
+
     <section class="catalog-main">
 
         <div class="catalog-toolbar">
 
             <div class="search-box">
+
                 <input
                     type="search"
                     id="searchInput"
                     placeholder="Поиск по каталогу..."
                     autocomplete="off"
                 >
+
             </div>
 
-            <select id="sortSelect" class="sort-select">
-                <option value="default">По умолчанию</option>
-                <option value="price-asc">Цена: по возрастанию</option>
-                <option value="price-desc">Цена: по убыванию</option>
-                <option value="name-asc">Название: А–Я</option>
-                <option value="name-desc">Название: Я–А</option>
+            <select
+                id="sortSelect"
+                class="sort-select"
+            >
+
+                <option value="default">
+                    По умолчанию
+                </option>
+
+                <option value="price-asc">
+                    Цена: по возрастанию
+                </option>
+
+                <option value="price-desc">
+                    Цена: по убыванию
+                </option>
+
+                <option value="name-asc">
+                    Название: А–Я
+                </option>
+
+                <option value="name-desc">
+                    Название: Я–А
+                </option>
+
             </select>
 
         </div>
 
-        <div class="result-count" id="resultCount">
+
+        <div
+            class="result-count"
+            id="resultCount"
+        >
             Товаров: 0
         </div>
 
-        <div class="products-grid" id="productsGrid"></div>
 
-        <div class="empty-products" id="emptyProducts">
-            <h3>Ничего не найдено</h3>
-            <p>Попробуй изменить запрос или фильтры.</p>
+        <div
+            class="products-grid"
+            id="productsGrid"
+        ></div>
+
+
+        <div
+            class="empty-products"
+            id="emptyProducts"
+        >
+
+            <h3>
+                Ничего не найдено
+            </h3>
+
+            <p>
+                Попробуй изменить запрос или фильтры.
+            </p>
+
         </div>
 
     </section>
 
 </main>
 
-<!-- CART -->
 
-<div class="cart-overlay" id="cartOverlay"></div>
+<!-- ================= CART ================= -->
 
-<aside class="cart-panel" id="cartPanel">
+<div
+    class="cart-overlay"
+    id="cartOverlay"
+></div>
+
+
+<aside
+    class="cart-panel"
+    id="cartPanel"
+>
 
     <div class="cart-head">
-        <h2>Корзина</h2>
 
-        <button class="close-cart" id="closeCart">
+        <h2>
+            Корзина
+        </h2>
+
+        <button
+            class="close-cart"
+            id="closeCart"
+            aria-label="Закрыть"
+        >
             ×
         </button>
+
     </div>
 
-    <div class="cart-items" id="cartItems"></div>
+
+    <div
+        class="cart-items"
+        id="cartItems"
+    ></div>
+
 
     <div class="cart-footer">
 
         <div class="cart-total">
-            <span>Итого</span>
-            <span id="cartTotal">0 ₽</span>
+
+            <span>
+                Итого
+            </span>
+
+            <span id="cartTotal">
+                0 ₽
+            </span>
+
         </div>
 
+
         <a href="cart.html">
+
             <button class="open-cart-btn">
                 Перейти в корзину
             </button>
+
         </a>
 
     </div>
 
 </aside>
 
-<div class="toast" id="toast"></div>
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
 
 <footer>
     © 2026 NOVA. Техника. Без компромиссов.
 </footer>
 
-<!-- ВАЖНО: сначала products.js, потом код каталога -->
+
+<!-- СНАЧАЛА БАЗА ТОВАРОВ -->
 <script src="products.js"></script>
 
+
 <script>
-    /* =========================================================
-       NOVA CATALOG
-       ========================================================= */
 
-    const productsGrid = document.getElementById("productsGrid");
-    const emptyProducts = document.getElementById("emptyProducts");
-    const resultCount = document.getElementById("resultCount");
+    /* ================= ELEMENTS ================= */
 
-    const searchInput = document.getElementById("searchInput");
-    const sortSelect = document.getElementById("sortSelect");
+    const productsGrid =
+        document.getElementById("productsGrid");
 
-    const newFilter = document.getElementById("newFilter");
-    const bestFilter = document.getElementById("bestFilter");
-    const stockFilter = document.getElementById("stockFilter");
+    const emptyProducts =
+        document.getElementById("emptyProducts");
 
-    const cartButton = document.getElementById("cartButton");
-    const cartPanel = document.getElementById("cartPanel");
-    const cartOverlay = document.getElementById("cartOverlay");
-    const closeCart = document.getElementById("closeCart");
+    const resultCount =
+        document.getElementById("resultCount");
 
-    const cartItems = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const cartCount = document.getElementById("cartCount");
+    const searchInput =
+        document.getElementById("searchInput");
 
-    const favoritesButton = document.getElementById("favoritesButton");
-    const favoritesCount = document.getElementById("favoritesCount");
+    const sortSelect =
+        document.getElementById("sortSelect");
 
-    const toast = document.getElementById("toast");
+    const newFilter =
+        document.getElementById("newFilter");
+
+    const bestFilter =
+        document.getElementById("bestFilter");
+
+    const stockFilter =
+        document.getElementById("stockFilter");
+
+    const cartButton =
+        document.getElementById("cartButton");
+
+    const cartPanel =
+        document.getElementById("cartPanel");
+
+    const cartOverlay =
+        document.getElementById("cartOverlay");
+
+    const closeCart =
+        document.getElementById("closeCart");
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const cartTotal =
+        document.getElementById("cartTotal");
+
+    const cartCount =
+        document.getElementById("cartCount");
+
+    const favoritesButton =
+        document.getElementById("favoritesButton");
+
+    const favoritesCount =
+        document.getElementById("favoritesCount");
+
+    const toast =
+        document.getElementById("toast");
 
 
-    /* =========================================================
-       DATA
-       ========================================================= */
+    /* ================= PRODUCTS ================= */
 
-    const productArray = Object.entries(products).map(([id, product]) => ({
-        id,
-        ...product
-    }));
+    const productArray =
+        Object.entries(products).map(
+            ([id, product]) => ({
+                id,
+                ...product
+            })
+        );
 
 
-    /* =========================================================
-       STATE
-       ========================================================= */
+    /* ================= STATE ================= */
 
     let selectedCategory = "all";
+
     let searchQuery = "";
 
     let cart = readCart();
+
     let favorites = readFavorites();
 
 
-    /* =========================================================
-       HELPERS
-       ========================================================= */
+    /* ================= HELPERS ================= */
 
     function formatPrice(price) {
-        return new Intl.NumberFormat("ru-RU").format(Number(price) || 0) + " ₽";
+
+        return new Intl.NumberFormat("ru-RU")
+            .format(Number(price) || 0) + " ₽";
     }
 
 
     function escapeHtml(value) {
+
         return String(value ?? "")
             .replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
@@ -1243,8 +1685,13 @@
 
 
     function readCart() {
+
         try {
-            const saved = JSON.parse(localStorage.getItem("novaCart"));
+
+            const saved =
+                JSON.parse(
+                    localStorage.getItem("novaCart")
+                );
 
             if (!Array.isArray(saved)) {
                 return [];
@@ -1253,17 +1700,22 @@
             return saved
                 .map(item => ({
                     id: String(item.id || ""),
-                    quantity: Math.max(1, Number(item.quantity) || 1)
+                    quantity: Math.max(
+                        1,
+                        Number(item.quantity) || 1
+                    )
                 }))
                 .filter(item => item.id);
 
-        } catch (error) {
+        } catch {
+
             return [];
         }
     }
 
 
     function saveCart() {
+
         localStorage.setItem(
             "novaCart",
             JSON.stringify(cart)
@@ -1272,22 +1724,27 @@
 
 
     function readFavorites() {
+
         try {
-            const saved = JSON.parse(
-                localStorage.getItem("novaFavorites")
-            );
+
+            const saved =
+                JSON.parse(
+                    localStorage.getItem("novaFavorites")
+                );
 
             return Array.isArray(saved)
                 ? saved.map(String)
                 : [];
 
-        } catch (error) {
+        } catch {
+
             return [];
         }
     }
 
 
     function saveFavorites() {
+
         localStorage.setItem(
             "novaFavorites",
             JSON.stringify(favorites)
@@ -1296,86 +1753,105 @@
 
 
     function getProduct(id) {
+
         return products[id] || null;
     }
 
 
     function getCartQuantity() {
+
         return cart.reduce(
-            (total, item) => total + item.quantity,
+            (sum, item) =>
+                sum + item.quantity,
             0
         );
     }
 
 
     function getCartTotal() {
-        return cart.reduce((total, item) => {
 
-            const product = getProduct(item.id);
+        return cart.reduce(
+            (sum, item) => {
 
-            if (!product) {
-                return total;
-            }
+                const product =
+                    getProduct(item.id);
 
-            return total +
-                (Number(product.price) || 0) *
-                item.quantity;
+                if (!product) {
+                    return sum;
+                }
 
-        }, 0);
+                return sum +
+                    Number(product.price || 0) *
+                    item.quantity;
+
+            },
+            0
+        );
     }
 
 
     function showToast(message) {
+
         toast.textContent = message;
+
         toast.classList.add("show");
 
         clearTimeout(showToast.timer);
 
-        showToast.timer = setTimeout(() => {
-            toast.classList.remove("show");
-        }, 1800);
+        showToast.timer =
+            setTimeout(() => {
+
+                toast.classList.remove("show");
+
+            }, 1800);
     }
 
 
-    /* =========================================================
-       VISUAL
-       ========================================================= */
+    /* ================= VISUAL ================= */
 
     function getVisualClass(category) {
 
-        const classes = {
+        const visualClasses = {
+
             smartphone: "device",
+
             laptop: "laptop",
+
             tablet: "tablet",
+
             audio: "buds",
+
             watch: "watch",
+
             accessory: "accessory"
         };
 
-        return classes[category] || "accessory";
+        return visualClasses[category] ||
+            "accessory";
     }
 
 
-    /* =========================================================
-       PRODUCT CARD
-       ========================================================= */
+    /* ================= CARD ================= */
 
     function createProductCard(product) {
 
-        const favoriteActive =
-            favorites.includes(String(product.id));
+        const isFavorite =
+            favorites.includes(
+                String(product.id)
+            );
 
         const badge =
             product.badge
-                ? `<div class="product-badge">${escapeHtml(product.badge)}</div>`
+                ? `
+                    <div class="product-badge">
+                        ${escapeHtml(product.badge)}
+                    </div>
+                `
                 : "";
-
-        const description =
-            product.description ||
-            "Премиальное устройство NOVA.";
 
 
         return `
+
             <article class="product-card">
 
                 <div class="product-image">
@@ -1383,54 +1859,109 @@
                     ${badge}
 
                     <button
-                        class="favorite-btn ${favoriteActive ? "active" : ""}"
-                        data-favorite="${escapeHtml(product.id)}"
-                        aria-label="Добавить в избранное"
+                        class="favorite-btn ${
+                            isFavorite
+                                ? "active"
+                                : ""
+                        }"
+                        data-favorite="${
+                            escapeHtml(product.id)
+                        }"
+                        aria-label="Избранное"
                     >
-                        ${favoriteActive ? "♥" : "♡"}
+                        ${
+                            isFavorite
+                                ? "♥"
+                                : "♡"
+                        }
                     </button>
+
 
                     <a
                         class="product-visual-link"
-                        href="product.html?id=${encodeURIComponent(product.id)}"
+                        href="product.html?id=${
+                            encodeURIComponent(
+                                product.id
+                            )
+                        }"
                     >
-                        <div class="${getVisualClass(product.category)}"></div>
+
+                        <div
+                            class="${
+                                getVisualClass(
+                                    product.category
+                                )
+                            }"
+                        ></div>
+
                     </a>
 
                 </div>
 
+
                 <div class="product-info">
 
                     <div class="product-brand">
-                        ${escapeHtml(product.brand || "NOVA")}
+                        ${
+                            escapeHtml(
+                                product.brand ||
+                                "NOVA"
+                            )
+                        }
                     </div>
 
+
                     <h2 class="product-name">
-                        ${escapeHtml(product.name)}
+                        ${
+                            escapeHtml(
+                                product.name
+                            )
+                        }
                     </h2>
 
+
                     <p class="product-description">
-                        ${escapeHtml(description)}
+                        ${
+                            escapeHtml(
+                                product.description ||
+                                "Премиальное устройство NOVA."
+                            )
+                        }
                     </p>
+
 
                     <div class="product-bottom">
 
                         <div class="product-price">
-                            ${formatPrice(product.price)}
+                            ${
+                                formatPrice(
+                                    product.price
+                                )
+                            }
                         </div>
+
 
                         <button
                             class="add-cart"
-                            data-add-cart="${escapeHtml(product.id)}"
+                            data-add-cart="${
+                                escapeHtml(
+                                    product.id
+                                )
+                            }"
                         >
                             В корзину
                         </button>
 
                     </div>
 
+
                     <a
                         class="details-link"
-                        href="product.html?id=${encodeURIComponent(product.id)}"
+                        href="product.html?id=${
+                            encodeURIComponent(
+                                product.id
+                            )
+                        }"
                     >
                         Подробнее →
                     </a>
@@ -1442,32 +1973,44 @@
     }
 
 
-    /* =========================================================
-       FILTERS
-       ========================================================= */
+    /* ================= FILTERS ================= */
 
     function matchesPrice(product) {
 
-        const filters = [
-            ...document.querySelectorAll(".price-filter:checked")
-        ];
+        const checked =
+            [
+                ...document.querySelectorAll(
+                    ".price-filter:checked"
+                )
+            ];
 
-        if (filters.length === 0) {
+        if (checked.length === 0) {
             return true;
         }
 
-        const price = Number(product.price) || 0;
+        const price =
+            Number(product.price) || 0;
 
-        return filters.some(filter => {
 
-            const min = Number(filter.dataset.min);
+        return checked.some(filter => {
+
+            const min =
+                Number(
+                    filter.dataset.min
+                );
 
             const max =
-                filter.dataset.max === "Infinity"
+                filter.dataset.max ===
+                "Infinity"
                     ? Infinity
-                    : Number(filter.dataset.max);
+                    : Number(
+                        filter.dataset.max
+                    );
 
-            return price >= min && price <= max;
+            return (
+                price >= min &&
+                price <= max
+            );
         });
     }
 
@@ -1475,7 +2018,9 @@
     function matchesSpecialFilters(product) {
 
         const badge =
-            String(product.badge || "").toUpperCase();
+            String(
+                product.badge || ""
+            ).toUpperCase();
 
 
         if (
@@ -1493,8 +2038,7 @@
             bestFilter.checked &&
             !(
                 badge.includes("BEST") ||
-                badge.includes("ХИТ") ||
-                badge.includes("Bestseller".toUpperCase())
+                badge.includes("ХИТ")
             )
         ) {
             return false;
@@ -1515,92 +2059,123 @@
 
     function getFilteredProducts() {
 
-        let result = [...productArray];
+        let result =
+            [...productArray];
 
 
-        /* CATEGORY */
+        if (
+            selectedCategory !==
+            "all"
+        ) {
 
-        if (selectedCategory !== "all") {
-
-            result = result.filter(product =>
-                product.category === selectedCategory
-            );
+            result =
+                result.filter(
+                    product =>
+                        product.category ===
+                        selectedCategory
+                );
         }
 
 
-        /* SEARCH */
-
-        if (searchQuery.trim()) {
+        if (
+            searchQuery.trim()
+        ) {
 
             const query =
                 searchQuery
                     .trim()
                     .toLowerCase();
 
-            result = result.filter(product => {
 
-                const searchable = [
-                    product.name,
-                    product.brand,
-                    product.description,
-                    product.category,
-                    product.badge
-                ]
-                    .filter(Boolean)
-                    .join(" ")
-                    .toLowerCase();
+            result =
+                result.filter(product => {
 
-                return searchable.includes(query);
-            });
+                    const text = [
+
+                        product.name,
+
+                        product.brand,
+
+                        product.description,
+
+                        product.category,
+
+                        product.badge
+
+                    ]
+                        .filter(Boolean)
+                        .join(" ")
+                        .toLowerCase();
+
+
+                    return text.includes(query);
+                });
         }
 
 
-        /* PRICE */
-
-        result = result.filter(matchesPrice);
-
-
-        /* SPECIAL */
-
-        result = result.filter(matchesSpecialFilters);
+        result =
+            result.filter(
+                matchesPrice
+            );
 
 
-        /* SORT */
+        result =
+            result.filter(
+                matchesSpecialFilters
+            );
 
-        switch (sortSelect.value) {
+
+        switch (
+            sortSelect.value
+        ) {
 
             case "price-asc":
+
                 result.sort(
                     (a, b) =>
-                        Number(a.price) - Number(b.price)
+                        Number(a.price) -
+                        Number(b.price)
                 );
+
                 break;
+
 
             case "price-desc":
+
                 result.sort(
                     (a, b) =>
-                        Number(b.price) - Number(a.price)
+                        Number(b.price) -
+                        Number(a.price)
                 );
+
                 break;
+
 
             case "name-asc":
+
                 result.sort(
                     (a, b) =>
-                        String(a.name).localeCompare(
-                            String(b.name),
-                            "ru"
-                        )
+                        String(a.name)
+                            .localeCompare(
+                                String(b.name),
+                                "ru"
+                            )
                 );
+
                 break;
 
+
             case "name-desc":
+
                 result.sort(
                     (a, b) =>
-                        String(b.name).localeCompare(
-                            String(a.name),
-                            "ru"
-                        )
+                        String(b.name)
+                            .localeCompare(
+                                String(a.name),
+                                "ru"
+                            )
                 );
+
                 break;
         }
 
@@ -1609,9 +2184,7 @@
     }
 
 
-    /* =========================================================
-       RENDER PRODUCTS
-       ========================================================= */
+    /* ================= RENDER ================= */
 
     function renderProducts() {
 
@@ -1627,13 +2200,15 @@
 
             productsGrid.innerHTML = "";
 
-            emptyProducts.style.display = "block";
+            emptyProducts.style.display =
+                "block";
 
             return;
         }
 
 
-        emptyProducts.style.display = "none";
+        emptyProducts.style.display =
+            "none";
 
 
         productsGrid.innerHTML =
@@ -1643,22 +2218,31 @@
     }
 
 
-    /* =========================================================
-       CART
-       ========================================================= */
+    /* ================= CART ================= */
 
     function addToCart(id) {
 
-        const product = getProduct(id);
+        id = String(id);
+
+        const product =
+            getProduct(id);
+
 
         if (!product) {
-            showToast("Товар не найден");
+
+            showToast(
+                "Ошибка: товар не найден"
+            );
+
             return;
         }
 
 
         const existing =
-            cart.find(item => item.id === String(id));
+            cart.find(
+                item =>
+                    item.id === id
+            );
 
 
         if (existing) {
@@ -1668,7 +2252,7 @@
         } else {
 
             cart.push({
-                id: String(id),
+                id: id,
                 quantity: 1
             });
         }
@@ -1678,16 +2262,26 @@
 
         updateCartUI();
 
+
         showToast(
-            `${product.name} добавлен в корзину ✓`
+            "Товар добавлен в корзину ✓"
         );
     }
 
 
-    function changeCartQuantity(id, change) {
+    function changeCartQuantity(
+        id,
+        change
+    ) {
+
+        id = String(id);
+
 
         const item =
-            cart.find(item => item.id === String(id));
+            cart.find(
+                cartItem =>
+                    cartItem.id === id
+            );
 
 
         if (!item) {
@@ -1698,12 +2292,14 @@
         item.quantity += change;
 
 
-        if (item.quantity <= 0) {
+        if (
+            item.quantity <= 0
+        ) {
 
             cart =
                 cart.filter(
                     cartItem =>
-                        cartItem.id !== String(id)
+                        cartItem.id !== id
                 );
         }
 
@@ -1716,10 +2312,13 @@
 
     function removeFromCart(id) {
 
+        id = String(id);
+
+
         cart =
             cart.filter(
                 item =>
-                    item.id !== String(id)
+                    item.id !== id
             );
 
 
@@ -1727,7 +2326,9 @@
 
         updateCartUI();
 
-        showToast("Товар удалён");
+        showToast(
+            "Товар удалён"
+        );
     }
 
 
@@ -1741,7 +2342,8 @@
                 </div>
             `;
 
-            cartTotal.textContent = "0 ₽";
+            cartTotal.textContent =
+                "0 ₽";
 
             return;
         }
@@ -1760,24 +2362,38 @@
 
 
                 return `
+
                     <div class="cart-item">
 
                         <div class="cart-item-info">
 
                             <div class="cart-item-name">
-                                ${escapeHtml(product.name)}
+                                ${
+                                    escapeHtml(
+                                        product.name
+                                    )
+                                }
                             </div>
 
                             <div class="cart-item-price">
-                                ${formatPrice(product.price)}
+                                ${
+                                    formatPrice(
+                                        product.price
+                                    )
+                                }
                             </div>
 
                         </div>
 
+
                         <div class="cart-quantity">
 
                             <button
-                                data-cart-minus="${escapeHtml(product.id)}"
+                                data-cart-minus="${
+                                    escapeHtml(
+                                        product.id
+                                    )
+                                }"
                             >
                                 −
                             </button>
@@ -1787,16 +2403,25 @@
                             </span>
 
                             <button
-                                data-cart-plus="${escapeHtml(product.id)}"
+                                data-cart-plus="${
+                                    escapeHtml(
+                                        product.id
+                                    )
+                                }"
                             >
                                 +
                             </button>
 
                         </div>
 
+
                         <button
                             class="remove-item"
-                            data-cart-remove="${escapeHtml(product.id)}"
+                            data-cart-remove="${
+                                escapeHtml(
+                                    product.id
+                                )
+                            }"
                             aria-label="Удалить"
                         >
                             ×
@@ -1809,7 +2434,9 @@
 
 
         cartTotal.textContent =
-            formatPrice(getCartTotal());
+            formatPrice(
+                getCartTotal()
+            );
     }
 
 
@@ -1822,16 +2449,16 @@
     }
 
 
-    /* =========================================================
-       FAVORITES
-       ========================================================= */
+    /* ================= FAVORITES ================= */
 
     function toggleFavorite(id) {
 
         id = String(id);
 
 
-        if (favorites.includes(id)) {
+        if (
+            favorites.includes(id)
+        ) {
 
             favorites =
                 favorites.filter(
@@ -1839,13 +2466,17 @@
                         favoriteId !== id
                 );
 
-            showToast("Удалено из избранного");
+            showToast(
+                "Удалено из избранного"
+            );
 
         } else {
 
             favorites.push(id);
 
-            showToast("Добавлено в избранное ✓");
+            showToast(
+                "Добавлено в избранное ✓"
+            );
         }
 
 
@@ -1864,25 +2495,35 @@
     }
 
 
-    /* =========================================================
-       CART OPEN / CLOSE
-       ========================================================= */
+    /* ================= CART PANEL ================= */
 
     function openCart() {
 
-        cartPanel.classList.add("open");
-        cartOverlay.classList.add("open");
+        cartPanel.classList.add(
+            "open"
+        );
 
-        document.body.style.overflow = "hidden";
+        cartOverlay.classList.add(
+            "open"
+        );
+
+        document.body.style.overflow =
+            "hidden";
     }
 
 
     function closeCartPanel() {
 
-        cartPanel.classList.remove("open");
-        cartOverlay.classList.remove("open");
+        cartPanel.classList.remove(
+            "open"
+        );
 
-        document.body.style.overflow = "";
+        cartOverlay.classList.remove(
+            "open"
+        );
+
+        document.body.style.overflow =
+            "";
     }
 
 
@@ -1904,16 +2545,16 @@
     );
 
 
-    /* =========================================================
-       PRODUCT EVENTS
-       ========================================================= */
+    /* ================= PRODUCT EVENTS ================= */
 
     productsGrid.addEventListener(
         "click",
-        function(event) {
+        event => {
 
             const addButton =
-                event.target.closest("[data-add-cart]");
+                event.target.closest(
+                    "[data-add-cart]"
+                );
 
 
             if (addButton) {
@@ -1929,12 +2570,15 @@
 
 
             const favoriteButton =
-                event.target.closest("[data-favorite]");
+                event.target.closest(
+                    "[data-favorite]"
+                );
 
 
             if (favoriteButton) {
 
                 event.preventDefault();
+
                 event.stopPropagation();
 
                 toggleFavorite(
@@ -1946,22 +2590,28 @@
     );
 
 
-    /* =========================================================
-       CART EVENTS
-       ========================================================= */
+    /* ================= CART EVENTS ================= */
 
     cartItems.addEventListener(
         "click",
-        function(event) {
+        event => {
 
             const plus =
-                event.target.closest("[data-cart-plus]");
+                event.target.closest(
+                    "[data-cart-plus]"
+                );
+
 
             const minus =
-                event.target.closest("[data-cart-minus]");
+                event.target.closest(
+                    "[data-cart-minus]"
+                );
+
 
             const remove =
-                event.target.closest("[data-cart-remove]");
+                event.target.closest(
+                    "[data-cart-remove]"
+                );
 
 
             if (plus) {
@@ -1997,30 +2647,36 @@
     );
 
 
-    /* =========================================================
-       CATEGORIES
-       ========================================================= */
+    /* ================= CATEGORIES ================= */
 
     document
-        .querySelectorAll(".category-btn")
+        .querySelectorAll(
+            ".category-btn"
+        )
         .forEach(button => {
 
             button.addEventListener(
                 "click",
-                function() {
+                () => {
 
                     document
-                        .querySelectorAll(".category-btn")
+                        .querySelectorAll(
+                            ".category-btn"
+                        )
                         .forEach(btn =>
-                            btn.classList.remove("active")
+                            btn.classList.remove(
+                                "active"
+                            )
                         );
 
 
-                    this.classList.add("active");
+                    button.classList.add(
+                        "active"
+                    );
 
 
                     selectedCategory =
-                        this.dataset.category;
+                        button.dataset.category;
 
 
                     renderProducts();
@@ -2030,25 +2686,21 @@
         });
 
 
-    /* =========================================================
-       SEARCH
-       ========================================================= */
+    /* ================= SEARCH ================= */
 
     searchInput.addEventListener(
         "input",
-        function() {
+        () => {
 
             searchQuery =
-                this.value;
+                searchInput.value;
 
             renderProducts();
         }
     );
 
 
-    /* =========================================================
-       SORT
-       ========================================================= */
+    /* ================= SORT ================= */
 
     sortSelect.addEventListener(
         "change",
@@ -2056,12 +2708,12 @@
     );
 
 
-    /* =========================================================
-       FILTERS
-       ========================================================= */
+    /* ================= FILTERS ================= */
 
     document
-        .querySelectorAll(".price-filter")
+        .querySelectorAll(
+            ".price-filter"
+        )
         .forEach(filter => {
 
             filter.addEventListener(
@@ -2090,17 +2742,19 @@
     );
 
 
-    /* =========================================================
-       FAVORITES BUTTON
-       ========================================================= */
+    /* ================= FAVORITES BUTTON ================= */
 
     favoritesButton.addEventListener(
         "click",
-        function() {
+        () => {
 
-            if (favorites.length === 0) {
+            if (
+                favorites.length === 0
+            ) {
 
-                showToast("Избранное пока пустое");
+                showToast(
+                    "Избранное пока пустое"
+                );
 
                 return;
             }
@@ -2113,12 +2767,12 @@
     );
 
 
-    /* =========================================================
-       INITIALIZE
-       ========================================================= */
+    /* ================= START ================= */
 
     updateCartUI();
+
     updateFavoritesUI();
+
     renderProducts();
 
 </script>
