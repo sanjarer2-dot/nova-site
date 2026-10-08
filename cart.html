@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина — NOVA</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 50% -10%, rgba(255,255,255,.08), transparent 35%),
+                #07080a;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            background: rgba(7,8,10,.78);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            color: #a8a8ad;
+            font-size: 14px;
+        }
+
+        nav a {
+            transition: .25s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #fff;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-btn {
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.04);
+            transition: .25s;
+        }
+
+        .header-btn:hover {
+            background: rgba(255,255,255,.1);
+            transform: translateY(-2px);
+        }
+
+        /* MAIN */
+
+        main {
+            width: min(1200px, 90%);
+            margin: auto;
+            padding: 70px 0 100px;
+        }
+
+        .page-title {
+            margin-bottom: 45px;
+        }
+
+        .page-title span {
+            color: #777;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .page-title h1 {
+            margin-top: 10px;
+            font-size: clamp(42px, 7vw, 72px);
+            letter-spacing: -3px;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* PRODUCTS */
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 22px;
+            align-items: center;
+            padding: 18px;
+            border-radius: 24px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,.07),
+                rgba(255,255,255,.025)
+            );
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .product-image {
+            width: 120px;
+            height: 140px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at 50% 30%, rgba(255,255,255,.14), transparent 45%),
+                #111318;
+            overflow: hidden;
+        }
+
+        .mini-phone {
+            width: 54px;
+            height: 105px;
+            border-radius: 13px;
+            background: linear-gradient(145deg,#555b67,#15171c);
+            border: 3px solid #30343d;
+            box-shadow: 0 15px 30px rgba(0,0,0,.5);
+            position: relative;
+        }
+
+        .mini-phone::before {
+            content: "";
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 5px;
+            border-radius: 10px;
+            background: #08090b;
+        }
+
+        .mini-phone::after {
+            content: "";
+            position: absolute;
+            inset: 12px 7px;
+            border-radius: 9px;
+            background:
+                radial-gradient(circle at 50% 30%, rgba(255,255,255,.2), transparent 35%),
+                linear-gradient(160deg,#202833,#090b0e);
+        }
+
+        .product-info h2 {
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .product-info p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .item-right {
+            min-width: 145px;
+            text-align: right;
+        }
+
+        .quantity {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 13px;
+        }
+
+        .quantity button {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background: rgba(255,255,255,.05);
+            color: #fff;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .quantity button:hover {
+            background: rgba(255,255,255,.12);
+        }
+
+        .quantity span {
+            width: 35px;
+            text-align: center;
+        }
+
+        .remove {
+            display: block;
+            margin-left: auto;
+            border: none;
+            background: none;
+            color: #777;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .remove:hover {
+            color: #ff5c5c;
+        }
+
+        /* SUMMARY */
+
+        .summary {
+            position: sticky;
+            top: 95px;
+            padding: 28px;
+            border-radius: 25px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,.08),
+                rgba(255,255,255,.03)
+            );
+            border: 1px solid rgba(255,255,255,.1);
+        }
+
+        .summary h2 {
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            color: #999;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            color: #fff;
+            font-size: 21px;
+            font-weight: 700;
+            padding-top: 18px;
+            margin-top: 10px;
+            border-top: 1px solid rgba(255,255,255,.1);
+        }
+
+        .checkout {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            margin-top: 22px;
+            background: #fff;
+            color: #050505;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255,255,255,.12);
+        }
+
+        .continue {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .continue:hover {
+            color: #fff;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            display: none;
+            text-align: center;
+            padding: 100px 20px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 30px;
+            background: rgba(255,255,255,.025);
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: .7;
+        }
+
+        .empty h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .catalog-btn {
+            display: inline-block;
+            padding: 14px 25px;
+            border-radius: 13px;
+            background: #fff;
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,.07);
+            padding: 35px 6%;
+            color: #666;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            main {
+                width: 92%;
+                padding-top: 45px;
+            }
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary {
+                position: static;
+            }
+
+            .cart-item {
+                grid-template-columns: 85px 1fr;
+                gap: 15px;
+            }
+
+            .product-image {
+                width: 85px;
+                height: 110px;
+            }
+
+            .item-right {
+                grid-column: 2;
+                text-align: left;
+            }
+
+            .remove {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <a href="index.html" class="logo">NOVA</a>
+
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="smartphones.html">Смартфоны</a>
+        <a href="laptops.html">Ноутбуки</a>
+        <a href="audio.html">Аудио</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="favorites.html" class="header-btn">♡</a>
+        <a href="cart.html" class="header-btn">🛒</a>
+    </div>
+
+</header>
+
+
+<main>
+
+    <div class="page-title">
+        <span>NOVA Store</span>
+        <h1>Корзина</h1>
+    </div>
+
+
+    <div id="cartContent">
+
+        <div class="cart-layout">
+
+            <div class="cart-items" id="cartItems"></div>
+
+
+            <aside class="summary">
+
+                <h2>Ваш заказ</h2>
+
+                <div class="summary-row">
+                    <span>Товары</span>
+                    <span id="subtotal">0 ₽</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Доставка</span>
+                    <span>Бесплатно</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Итого</span>
+                    <span id="total">0 ₽</span>
+                </div>
+
+                <button class="checkout" onclick="checkout()">
+                    Оформить заказ
+                </button>
+
+                <a href="catalog.html" class="continue">
+                    ← Продолжить покупки
+                </a>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+
+    <div class="empty" id="emptyCart">
+
+        <div class="empty-icon">🛒</div>
+
+        <h2>Корзина пуста</h2>
+
+        <p>
+            Добавьте товары из каталога,
+            чтобы они появились здесь.
+        </p>
+
+        <a href="catalog.html" class="catalog-btn">
+            Перейти в каталог
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer>
+    © 2026 NOVA. Premium technology store.
+</footer>
+
+
+<script>
+
+    /*
+       Данные товаров.
+       Позже сюда подключим все категории.
+    */
+
+    const products = {
+
+        "iphone-15-pro-max": {
+            name: "iPhone 15 Pro Max",
+            price: 1479
+        },
+
+        "iphone-16-pro-max": {
+            name: "iPhone 16 Pro Max",
+            price: 899
+        },
+
+        "iphone-17-pro-max": {
+            name: "iPhone 17 Pro Max",
+            price: 1285
+        },
+
+        "iphone-18-pro": {
+            name: "iPhone 18 Pro",
+            price: 1449
+        },
+
+        "iphone-18-pro-max": {
+            name: "iPhone 18 Pro Max",
+            price: 1599
+        }
+    };
+
+
+    /*
+       Получаем корзину из localStorage.
+    */
+
+    let cart = JSON.parse(
+        localStorage.getItem("novaCart") || "[]"
+    );
+
+
+    /*
+       Приводим старый формат корзины
+       к нормальному виду.
+    */
+
+    cart = cart.map(item => {
+
+        if (typeof item === "string") {
+
+            return {
+                id: item,
+                quantity: 1
+            };
+
+        }
+
+        return {
+            id: item.id,
+            quantity: item.quantity || 1
+        };
+
+    });
+
+
+    function saveCart() {
+
+        localStorage.setItem(
+            "novaCart",
+            JSON.stringify(cart)
+        );
+
+    }
+
+
+    function renderCart() {
+
+        const container =
+            document.getElementById("cartItems");
+
+        const content =
+            document.getElementById("cartContent");
+
+        const empty =
+            document.getElementById("emptyCart");
+
+
+        if (cart.length === 0) {
+
+            content.style.display = "none";
+            empty.style.display = "block";
+
+            return;
+
+        }
+
+
+        content.style.display = "block";
+        empty.style.display = "none";
+
+
+        container.innerHTML = "";
+
+
+        let total = 0;
+
+
+        cart.forEach((item, index) => {
+
+            const product = products[item.id];
+
+
+            if (!product) return;
+
+
+            const itemTotal =
+                product.price * item.quantity;
+
+
+            total += itemTotal;
+
+
+            const element =
+                document.createElement("div");
+
+
+            element.className = "cart-item";
+
+
+            element.innerHTML = `
+
+                <div class="product-image">
+
+                    <div class="mini-phone"></div>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h2>${product.name}</h2>
+
+                    <p>Официальный продукт NOVA</p>
+
+                    <div class="product-price">
+                        ${product.price.toLocaleString("ru-RU")} ₽
+                    </div>
+
+                </div>
+
+
+                <div class="item-right">
+
+                    <div class="quantity">
+
+                        <button onclick="changeQuantity(${index}, -1)">
+                            −
+                        </button>
+
+                        <span>${item.quantity}</span>
+
+                        <button onclick="changeQuantity(${index}, 1)">
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="remove"
+                        onclick="removeItem(${index})">
+
+                        Удалить
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(element);
+
+        });
+
+
+        document.getElementById("subtotal")
+            .textContent =
+            total.toLocaleString("ru-RU") + " ₽";
+
+
+        document.getElementById("total")
+            .textContent =
+            total.toLocaleString("ru-RU") + " ₽";
+
+    }
+
+
+    function changeQuantity(index, change) {
+
+        cart[index].quantity += change;
+
+
+        if (cart[index].quantity <= 0) {
+
+            cart.splice(index, 1);
+
+        }
+
+
+        saveCart();
+
+        renderCart();
+
+    }
+
+
+    function removeItem(index) {
+
+        cart.splice(index, 1);
+
+        saveCart();
+
+        renderCart();
+
+    }
+
+
+    function checkout() {
+
+        if (cart.length === 0) return;
+
+
+        alert(
+            "Оформление заказа будет доступно на следующем этапе NOVA."
+        );
+
+    }
+
+
+    renderCart();
+
+</script>
+
+</body>
+</html>
