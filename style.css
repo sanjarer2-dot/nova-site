@@ -726,3 +726,14 @@ footer {
     }
 
 }
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 35px;
+    transition: transform .5s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.06);
+}
