@@ -19,16 +19,9 @@ html{
 }
 
 body{
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
     background:#050608;
     color:#fff;
-
     overflow-x:hidden;
 }
 
@@ -45,91 +38,62 @@ button{
 /* ================= HEADER ================= */
 
 .header{
-
     position:fixed;
-
     top:0;
     left:0;
     right:0;
-
     height:74px;
-
     padding:0 6%;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     z-index:1000;
-
     background:rgba(5,6,8,.55);
-
     backdrop-filter:blur(20px);
-
     border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .logo{
-
     font-size:25px;
-
     font-weight:850;
-
     letter-spacing:4px;
 }
 
 .nav{
-
     display:flex;
-
     gap:30px;
 }
 
 .nav a{
-
     color:#9298a4;
-
     font-size:14px;
-
     transition:.25s;
 }
 
 .nav a:hover{
-
     color:#fff;
 }
 
 .actions{
-
     display:flex;
-
     gap:9px;
 }
 
 .action{
-
     width:42px;
     height:42px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-radius:12px;
-
     border:1px solid #272b34;
-
     background:rgba(15,17,21,.7);
-
     transition:.25s;
 }
 
 .action:hover{
-
     background:#fff;
-
     color:#000;
-
     transform:translateY(-2px);
 }
 
@@ -137,41 +101,27 @@ button{
 /* ================= HERO ================= */
 
 .hero{
-
     min-height:100vh;
-
     position:relative;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     overflow:hidden;
-
     padding:120px 6% 70px;
 }
 
 .hero-bg{
-
     position:absolute;
-
     width:900px;
     height:900px;
-
     border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(110,120,255,.16),
-            rgba(0,0,0,0) 65%
-        );
-
+    background:radial-gradient(
+        circle,
+        rgba(110,120,255,.16),
+        rgba(0,0,0,0) 65%
+    );
     filter:blur(20px);
-
-    animation:
-        breathe 6s ease-in-out infinite;
-
+    animation:breathe 6s ease-in-out infinite;
     pointer-events:none;
 }
 
@@ -188,13 +138,9 @@ button{
     }
 }
 
-
 .grid-bg{
-
     position:absolute;
-
     inset:0;
-
     background-image:
         linear-gradient(
             rgba(255,255,255,.025) 1px,
@@ -205,180 +151,112 @@ button{
             rgba(255,255,255,.025) 1px,
             transparent 1px
         );
-
     background-size:70px 70px;
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-            black,
-            transparent 85%
-        );
-
+    mask-image:linear-gradient(
+        to bottom,
+        black,
+        transparent 85%
+    );
     pointer-events:none;
 }
 
-
 .hero-content{
-
     width:100%;
     max-width:1250px;
-
     position:relative;
-
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     align-items:center;
-
     gap:50px;
-
     z-index:2;
 }
 
 .hero-text{
-
-    animation:
-        heroIn 1s ease forwards;
-
+    animation:heroIn 1s ease forwards;
     opacity:0;
-
     transform:translateY(30px);
 }
 
 @keyframes heroIn{
 
     to{
-
         opacity:1;
-
         transform:translateY(0);
-
     }
 }
 
 .eyebrow{
-
     display:inline-flex;
-
     align-items:center;
-
     gap:8px;
-
     padding:8px 13px;
-
     border:1px solid #292d36;
-
     border-radius:30px;
-
     color:#aeb4c0;
-
     background:#0d0f13;
-
     font-size:12px;
-
     margin-bottom:25px;
 }
 
 .dot{
-
     width:6px;
     height:6px;
-
     border-radius:50%;
-
     background:#fff;
-
-    box-shadow:
-        0 0 12px #fff;
+    box-shadow:0 0 12px #fff;
 }
 
 .hero h1{
-
-    font-size:
-        clamp(55px,7vw,100px);
-
+    font-size:clamp(55px,7vw,100px);
     line-height:.91;
-
     letter-spacing:-6px;
-
     max-width:700px;
-
     margin-bottom:30px;
 }
 
 .hero h1 span{
-
     color:#7d8490;
-
 }
 
 .hero-description{
-
     max-width:580px;
-
     color:#858c99;
-
     font-size:18px;
-
     line-height:1.7;
-
     margin-bottom:35px;
 }
 
 .hero-buttons{
-
     display:flex;
-
     gap:12px;
-
     flex-wrap:wrap;
 }
 
 .primary{
-
     padding:15px 24px;
-
     border-radius:13px;
-
     background:#fff;
-
     color:#000;
-
     font-weight:700;
-
     transition:.25s;
 }
 
 .primary:hover{
-
     transform:translateY(-3px);
-
-    box-shadow:
-        0 15px 35px rgba(255,255,255,.12);
+    box-shadow:0 15px 35px rgba(255,255,255,.12);
 }
 
 .secondary{
-
     padding:15px 24px;
-
     border-radius:13px;
-
     border:1px solid #30343d;
-
     background:#101217;
-
     color:#fff;
-
     transition:.25s;
 }
 
 .secondary:hover{
-
     background:#191c22;
-
     transform:translateY(-3px);
 }
 
@@ -386,93 +264,62 @@ button{
 /* ================= HERO PHONE ================= */
 
 .hero-device{
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     min-height:570px;
-
     position:relative;
-
-    animation:
-        deviceIn 1.3s .2s ease forwards;
-
+    animation:deviceIn 1.3s .2s ease forwards;
     opacity:0;
-
-    transform:
-        translateY(40px)
-        rotateY(-12deg);
+    transform:translateY(40px) rotateY(-12deg);
 }
 
 @keyframes deviceIn{
 
     to{
-
         opacity:1;
-
-        transform:
-            translateY(0)
-            rotateY(-12deg);
-
+        transform:translateY(0) rotateY(-12deg);
     }
 }
 
 .phone{
-
     width:265px;
     height:525px;
-
     border-radius:48px;
-
     padding:7px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #656b77,
-            #171a20 35%,
-            #08090c
-        );
+    background:linear-gradient(
+        135deg,
+        #656b77,
+        #171a20 35%,
+        #08090c
+    );
 
     box-shadow:
-
         0 60px 120px rgba(0,0,0,.8),
-
         0 0 100px rgba(120,130,255,.12);
 
     position:relative;
 
-    transform:
-        rotate(-7deg);
+    transform:rotate(-7deg);
 
-    animation:
-        floatPhone 5s ease-in-out infinite;
+    animation:floatPhone 5s ease-in-out infinite;
 }
 
 @keyframes floatPhone{
 
     0%,100%{
-        transform:
-            rotate(-7deg)
-            translateY(0);
+        transform:rotate(-7deg) translateY(0);
     }
 
     50%{
-        transform:
-            rotate(-4deg)
-            translateY(-18px);
+        transform:rotate(-4deg) translateY(-18px);
     }
 }
 
 .phone-screen{
-
     width:100%;
     height:100%;
-
     border-radius:42px;
-
     overflow:hidden;
 
     background:
@@ -486,30 +333,65 @@ button{
     position:relative;
 }
 
+
+/* DYNAMIC ISLAND */
+
 .phone-screen::before{
 
     content:"";
 
     position:absolute;
 
-    width:130px;
-    height:30px;
+    width:112px;
+    height:29px;
 
     background:#000;
 
-    border-radius:0 0 20px 20px;
+    border-radius:20px;
 
-    top:0;
+    top:11px;
     left:50%;
 
     transform:translateX(-50%);
+
+    z-index:10;
+
+    box-shadow:
+        0 0 1px rgba(255,255,255,.15);
+}
+
+
+/* маленький объектив фронтальной камеры */
+
+.phone-screen::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#10141b;
+
+    top:22px;
+    left:50%;
+
+    transform:translateX(25px);
+
+    z-index:11;
+
+    box-shadow:
+        inset 0 0 3px rgba(255,255,255,.2);
 }
 
 .phone-time{
 
     position:absolute;
 
-    top:60px;
+    top:68px;
 
     left:0;
     right:0;
@@ -527,7 +409,7 @@ button{
 
     position:absolute;
 
-    top:130px;
+    top:140px;
 
     left:0;
     right:0;
@@ -560,8 +442,7 @@ button{
 
     filter:blur(20px);
 
-    animation:
-        phoneGlow 4s ease-in-out infinite;
+    animation:phoneGlow 4s ease-in-out infinite;
 }
 
 @keyframes phoneGlow{
@@ -577,67 +458,10 @@ button{
     }
 }
 
-.camera{
 
-    position:absolute;
-
-    left:25px;
-    top:25px;
-
-    width:92px;
-    height:105px;
-
-    border-radius:25px;
-
-    background:#111318;
-
-    border:1px solid #363b46;
-
-    z-index:5;
-}
-
-.lens{
-
-    position:absolute;
-
-    width:30px;
-    height:30px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #3e4655,
-            #08090c 65%
-        );
-
-    border:3px solid #464c57;
-}
-
-.lens:nth-child(1){
-
-    left:12px;
-    top:12px;
-}
-
-.lens:nth-child(2){
-
-    right:12px;
-    top:12px;
-}
-
-.lens:nth-child(3){
-
-    left:30px;
-    bottom:12px;
-}
-
-
-/* floating labels */
+/* ================= FLOATING LABELS ================= */
 
 .float-card{
-
     position:absolute;
 
     padding:13px 17px;
@@ -646,44 +470,36 @@ button{
 
     border-radius:14px;
 
-    background:
-        rgba(12,14,18,.78);
+    background:rgba(12,14,18,.78);
 
     backdrop-filter:blur(15px);
 
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.4);
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
 
     font-size:12px;
 
     color:#c5cad4;
 
-    animation:
-        labelFloat 4s ease-in-out infinite;
+    animation:labelFloat 4s ease-in-out infinite;
+
+    z-index:20;
 }
 
 .float-card strong{
-
     display:block;
-
     color:#fff;
-
     font-size:14px;
-
     margin-bottom:3px;
 }
 
 .float-1{
-
     top:130px;
     right:15px;
 }
 
 .float-2{
-
     bottom:140px;
     left:0;
-
     animation-delay:1s;
 }
 
@@ -702,46 +518,30 @@ button{
 /* ================= TRUST ================= */
 
 .trust{
-
     border-top:1px solid #181b21;
-
     border-bottom:1px solid #181b21;
-
     padding:22px 6%;
-
     background:#08090c;
 }
 
 .trust-inner{
-
     max-width:1250px;
-
     margin:auto;
-
     display:flex;
-
     justify-content:space-between;
-
     gap:30px;
-
     flex-wrap:wrap;
-
     color:#686f7b;
-
     font-size:13px;
 }
 
 .trust-item{
-
     display:flex;
-
     align-items:center;
-
     gap:9px;
 }
 
 .trust-item span{
-
     color:#fff;
 }
 
@@ -749,44 +549,29 @@ button{
 /* ================= SECTION ================= */
 
 .section{
-
     width:88%;
-
     max-width:1250px;
-
     margin:auto;
-
     padding:120px 0;
 }
 
 .section-head{
-
     display:flex;
-
     align-items:end;
-
     justify-content:space-between;
-
     gap:30px;
-
     margin-bottom:45px;
 }
 
 .section-title{
-
     font-size:45px;
-
     letter-spacing:-2px;
 }
 
 .section-subtitle{
-
     color:#777e8b;
-
     max-width:420px;
-
     line-height:1.6;
-
     font-size:14px;
 }
 
@@ -794,104 +579,70 @@ button{
 /* ================= CATEGORIES ================= */
 
 .categories{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:16px;
 }
 
 .category{
-
     min-height:260px;
-
     border:1px solid #232730;
-
     border-radius:24px;
-
     background:#0c0e12;
-
     padding:28px;
-
     position:relative;
-
     overflow:hidden;
-
     transition:.35s;
 }
 
 .category:hover{
-
     transform:translateY(-7px);
-
     border-color:#444a56;
 }
 
 .category::after{
-
     content:"";
-
     position:absolute;
-
     width:180px;
     height:180px;
-
     border-radius:50%;
-
     background:
         radial-gradient(
             circle,
             rgba(255,255,255,.08),
             transparent 70%
         );
-
     right:-50px;
     bottom:-70px;
 }
 
 .category-icon{
-
     font-size:42px;
-
     margin-bottom:35px;
 }
 
 .category h3{
-
     font-size:22px;
-
     margin-bottom:8px;
 }
 
 .category p{
-
     color:#777e8b;
-
     font-size:13px;
-
     line-height:1.5;
 }
 
 .category-arrow{
-
     position:absolute;
-
     right:25px;
     top:25px;
-
     font-size:20px;
-
     color:#666d78;
-
     transition:.25s;
 }
 
 .category:hover .category-arrow{
-
     color:#fff;
-
     transform:translate(4px,-4px);
 }
 
@@ -899,31 +650,19 @@ button{
 /* ================= FEATURE PRODUCT ================= */
 
 .feature{
-
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     min-height:570px;
-
     border:1px solid #252932;
-
     border-radius:30px;
-
     overflow:hidden;
-
     background:#0b0d11;
 }
 
 .feature-visual{
-
     position:relative;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     background:
@@ -935,10 +674,8 @@ button{
 }
 
 .feature-phone{
-
     width:205px;
     height:400px;
-
     border-radius:37px;
 
     background:
@@ -957,57 +694,37 @@ button{
 }
 
 .feature-info{
-
     padding:70px;
-
     display:flex;
-
     flex-direction:column;
-
     justify-content:center;
 }
 
 .feature-label{
-
     color:#777f8c;
-
     text-transform:uppercase;
-
     letter-spacing:2px;
-
     font-size:11px;
-
     margin-bottom:20px;
 }
 
 .feature-info h2{
-
     font-size:48px;
-
     line-height:1;
-
     letter-spacing:-2px;
-
     margin-bottom:20px;
 }
 
 .feature-info p{
-
     color:#858c99;
-
     line-height:1.7;
-
     max-width:480px;
-
     margin-bottom:30px;
 }
 
 .feature-price{
-
     font-size:30px;
-
     font-weight:750;
-
     margin-bottom:30px;
 }
 
@@ -1015,44 +732,30 @@ button{
 /* ================= NUMBERS ================= */
 
 .numbers{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     border-top:1px solid #22252c;
-
     border-bottom:1px solid #22252c;
 }
 
 .number{
-
     padding:45px 25px;
-
     text-align:center;
-
     border-right:1px solid #22252c;
 }
 
 .number:last-child{
-
     border-right:0;
 }
 
 .number strong{
-
     display:block;
-
     font-size:38px;
-
     margin-bottom:7px;
 }
 
 .number span{
-
     color:#717885;
-
     font-size:12px;
 }
 
@@ -1060,23 +763,15 @@ button{
 /* ================= CTA ================= */
 
 .cta{
-
     margin-top:30px;
-
     min-height:380px;
-
     border:1px solid #252932;
-
     border-radius:30px;
-
     position:relative;
-
     overflow:hidden;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     text-align:center;
@@ -1090,44 +785,29 @@ button{
 }
 
 .cta::before{
-
     content:"NOVA";
-
     position:absolute;
-
     font-size:220px;
-
     font-weight:900;
-
     letter-spacing:-15px;
-
     color:rgba(255,255,255,.025);
-
     white-space:nowrap;
 }
 
 .cta-content{
-
     position:relative;
-
     z-index:2;
-
     padding:30px;
 }
 
 .cta h2{
-
     font-size:48px;
-
     letter-spacing:-2px;
-
     margin-bottom:15px;
 }
 
 .cta p{
-
     color:#777e8b;
-
     margin-bottom:28px;
 }
 
@@ -1135,24 +815,18 @@ button{
 /* ================= FOOTER ================= */
 
 .footer{
-
     border-top:1px solid #20232a;
-
     padding:55px 6% 30px;
-
     color:#686f7b;
 }
 
 .footer-grid{
-
     max-width:1250px;
-
     margin:auto;
 
     display:grid;
 
-    grid-template-columns:
-        2fr 1fr 1fr 1fr;
+    grid-template-columns:2fr 1fr 1fr 1fr;
 
     gap:40px;
 
@@ -1160,64 +834,42 @@ button{
 }
 
 .footer-logo{
-
     color:#fff;
-
     font-size:24px;
-
     font-weight:800;
-
     letter-spacing:3px;
-
     margin-bottom:15px;
 }
 
 .footer p{
-
     max-width:300px;
-
     font-size:13px;
-
     line-height:1.7;
 }
 
 .footer h4{
-
     color:#fff;
-
     margin-bottom:15px;
-
     font-size:13px;
 }
 
 .footer a{
-
     display:block;
-
     color:#737a87;
-
     font-size:13px;
-
     margin-bottom:10px;
-
     transition:.2s;
 }
 
 .footer a:hover{
-
     color:#fff;
 }
 
 .copyright{
-
     max-width:1250px;
-
     margin:auto;
-
     padding-top:25px;
-
     border-top:1px solid #20232a;
-
     font-size:12px;
 }
 
@@ -1231,25 +883,20 @@ button{
     }
 
     .hero-content{
-
         grid-template-columns:1fr;
-
         text-align:center;
     }
 
     .hero-description{
-
         margin-left:auto;
         margin-right:auto;
     }
 
     .hero-buttons{
-
         justify-content:center;
     }
 
     .hero-device{
-
         min-height:500px;
     }
 
@@ -1262,46 +909,35 @@ button{
     }
 
     .categories{
-
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
     .feature{
-
         grid-template-columns:1fr;
     }
 
     .feature-visual{
-
         min-height:450px;
     }
 
     .feature-info{
-
         padding:45px;
     }
 
     .numbers{
-
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
     .number:nth-child(2){
-
         border-right:0;
     }
 
     .number:nth-child(-n+2){
-
         border-bottom:1px solid #22252c;
     }
 
     .footer-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
 }
@@ -1309,81 +945,63 @@ button{
 @media(max-width:600px){
 
     .header{
-
         padding:0 5%;
     }
 
     .hero{
-
         padding-left:5%;
         padding-right:5%;
     }
 
     .hero h1{
-
         font-size:55px;
-
         letter-spacing:-4px;
     }
 
     .hero-device{
-
         transform:scale(.85);
     }
 
     .section{
-
         width:90%;
-
         padding:80px 0;
     }
 
     .section-head{
-
         display:block;
     }
 
     .section-title{
-
         font-size:36px;
-
         margin-bottom:15px;
     }
 
     .categories{
-
         grid-template-columns:1fr;
     }
 
     .feature-info h2{
-
         font-size:38px;
     }
 
     .numbers{
-
         grid-template-columns:1fr;
     }
 
     .number{
-
         border-right:0;
-
         border-bottom:1px solid #22252c;
     }
 
     .number:last-child{
-
         border-bottom:0;
     }
 
     .footer-grid{
-
         grid-template-columns:1fr;
     }
 
     .cta h2{
-
         font-size:35px;
     }
 
@@ -1403,7 +1021,6 @@ button{
     <a href="index.html" class="logo">
         NOVA
     </a>
-
 
     <nav class="nav">
 
@@ -1429,7 +1046,6 @@ button{
 
     </nav>
 
-
     <div class="actions">
 
         <a
@@ -1451,7 +1067,6 @@ button{
     </div>
 
 </header>
-
 
 
 <!-- ================= HERO ================= -->
@@ -1518,7 +1133,6 @@ button{
         </div>
 
 
-
         <!-- DEVICE -->
 
         <div class="hero-device">
@@ -1550,15 +1164,6 @@ button{
 
                 <div class="phone-screen">
 
-                    <div class="camera">
-
-                        <div class="lens"></div>
-                        <div class="lens"></div>
-                        <div class="lens"></div>
-
-                    </div>
-
-
                     <div class="phone-time">
                         09:41
                     </div>
@@ -1578,7 +1183,6 @@ button{
     </div>
 
 </section>
-
 
 
 <!-- ================= TRUST ================= -->
@@ -1606,7 +1210,6 @@ button{
     </div>
 
 </section>
-
 
 
 <!-- ================= CATEGORIES ================= -->
@@ -1664,7 +1267,6 @@ button{
         </a>
 
 
-
         <a
             href="laptops.html"
             class="category"
@@ -1688,7 +1290,6 @@ button{
             </p>
 
         </a>
-
 
 
         <a
@@ -1716,7 +1317,6 @@ button{
         </a>
 
 
-
         <a
             href="audio.html"
             class="category"
@@ -1742,7 +1342,6 @@ button{
         </a>
 
 
-
         <a
             href="watches.html"
             class="category"
@@ -1766,7 +1365,6 @@ button{
             </p>
 
         </a>
-
 
 
         <a
@@ -1798,11 +1396,9 @@ button{
 </section>
 
 
-
 <!-- ================= FEATURE ================= -->
 
 <section class="section">
-
 
     <div class="section-head">
 
@@ -1811,12 +1407,13 @@ button{
         </h2>
 
         <p class="section-subtitle">
+
             Устройство, с которого стоит начать
             знакомство с нашей коллекцией.
+
         </p>
 
     </div>
-
 
 
     <div class="feature">
@@ -1827,7 +1424,6 @@ button{
             <div class="feature-phone"></div>
 
         </div>
-
 
 
         <div class="feature-info">
@@ -1871,14 +1467,11 @@ button{
 </section>
 
 
-
 <!-- ================= NUMBERS ================= -->
 
 <section class="section">
 
-
     <div class="numbers">
-
 
         <div class="number">
 
@@ -1936,11 +1529,9 @@ button{
 </section>
 
 
-
 <!-- ================= CTA ================= -->
 
 <section class="section">
-
 
     <div class="cta">
 
@@ -1968,11 +1559,9 @@ button{
 </section>
 
 
-
 <!-- ================= FOOTER ================= -->
 
 <footer class="footer">
-
 
     <div class="footer-grid">
 
