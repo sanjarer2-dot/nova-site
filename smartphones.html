@@ -3,1312 +3,1029 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="theme-color" content="#08090c">
 <title>NOVA — Смартфоны</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-    background:#08090c;
-    color:#fff;
+:root {
+    color-scheme: dark;
+    --bg: #08090c;
+    --panel: #0e1015;
+    --panel-light: #14171d;
+    --border: #252933;
+    --text: #ffffff;
+    --muted: #858c99;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
 }
 
-.header{
-    height:72px;
-    padding:0 6%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    position:sticky;
-    top:0;
-    z-index:100;
-
-    background:rgba(8,9,12,.92);
-    backdrop-filter:blur(18px);
-
-    border-bottom:1px solid #20232a;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.logo{
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:3px;
+button,
+input,
+select {
+    font: inherit;
 }
 
-.nav{
-    display:flex;
-    gap:28px;
+button {
+    cursor: pointer;
 }
 
-.nav a{
-    color:#9ca3af;
-    font-size:14px;
-    transition:.2s;
+.header {
+    min-height: 72px;
+    padding: 12px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8, 9, 12, .94);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid #20232a;
 }
 
-.nav a:hover{
-    color:#fff;
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    flex-shrink: 0;
 }
 
-.actions{
-    display:flex;
-    gap:10px;
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
 }
 
-.action{
-    width:42px;
-    height:42px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border:1px solid #2a2e37;
-    border-radius:12px;
-
-    transition:.2s;
+.nav a {
+    color: #9ca3af;
+    font-size: 14px;
+    transition: color .2s;
 }
 
-.action:hover{
-    background:#171a20;
+.nav a:hover,
+.nav a.active {
+    color: #fff;
 }
 
-.container{
-    width:88%;
-    max-width:1250px;
-    margin:auto;
+.actions {
+    display: flex;
+    gap: 10px;
 }
 
-.hero{
-    padding:80px 0 55px;
+.action {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #2a2e37;
+    border-radius: 12px;
+    transition: background .2s;
+    font-size: 20px;
 }
 
-.hero h1{
-    font-size:60px;
-    letter-spacing:-3px;
-    margin-bottom:15px;
+.action:hover {
+    background: #20232a;
 }
 
-.hero p{
-    max-width:650px;
-    color:#858c99;
-    font-size:18px;
-    line-height:1.7;
+.container {
+    width: 88%;
+    max-width: 1250px;
+    margin: 0 auto;
 }
 
-.tools{
-    display:flex;
-    gap:12px;
-    margin-bottom:30px;
+.hero {
+    padding: 76px 0 42px;
 }
 
-.search{
-    flex:1;
-
-    height:50px;
-
-    background:#101217;
-    border:1px solid #292d35;
-    border-radius:13px;
-
-    color:white;
-
-    padding:0 18px;
-    font-size:15px;
-
-    outline:none;
+.eyebrow {
+    color: #a4aab6;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 11px;
+    margin-bottom: 16px;
 }
 
-.search:focus{
-    border-color:#666d78;
+.hero h1 {
+    font-size: clamp(42px, 6vw, 64px);
+    letter-spacing: -3px;
+    line-height: 1.08;
+    margin-bottom: 18px;
 }
 
-.sort{
-    width:180px;
-
-    background:#101217;
-    border:1px solid #292d35;
-    border-radius:13px;
-
-    color:white;
-
-    padding:0 15px;
+.hero p {
+    max-width: 650px;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
 }
 
-.categories{
-    display:flex;
-    gap:10px;
-
-    overflow-x:auto;
-
-    margin-bottom:35px;
+.tools {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
 }
 
-.category{
-    padding:11px 18px;
+.search {
+    flex: 1;
+    min-width: 0;
+    height: 50px;
+    background: #101217;
+    border: 1px solid #292d35;
+    border-radius: 13px;
+    color: white;
+    padding: 0 18px;
+    outline: none;
+}
 
-    border:1px solid #2b3039;
-    border-radius:30px;
+.search:focus,
+.sort:focus {
+    border-color: #777f8d;
+}
 
-    background:#101217;
+.sort {
+    width: 205px;
+    min-width: 170px;
+    height: 50px;
+    background: #101217;
+    border: 1px solid #292d35;
+    border-radius: 13px;
+    color: white;
+    padding: 0 14px;
+    outline: none;
+}
 
-    color:#9ca3af;
+.categories {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 2px 0 12px;
+    margin-bottom: 20px;
+    scrollbar-width: thin;
+}
 
-    cursor:pointer;
-    white-space:nowrap;
-
-    transition:.2s;
+.category {
+    padding: 11px 18px;
+    border: 1px solid #2b3039;
+    border-radius: 30px;
+    background: #101217;
+    color: #9ca3af;
+    white-space: nowrap;
+    transition: .2s;
 }
 
 .category:hover,
-.category.active{
-    background:#fff;
-    color:#000;
-    border-color:#fff;
+.category.active {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
 }
 
-.grid{
-    display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-    gap:20px;
-
-    padding-bottom:90px;
+.result-count {
+    color: #777f8d;
+    font-size: 13px;
+    margin-bottom: 18px;
 }
 
-.card{
-    background:#0e1015;
-
-    border:1px solid #242832;
-    border-radius:22px;
-
-    overflow:hidden;
-
-    transition:.3s;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    padding-bottom: 90px;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-    border-color:#3b404a;
+.card {
+    min-width: 0;
+    background: var(--panel);
+    border: 1px solid #242832;
+    border-radius: 22px;
+    overflow: hidden;
+    transition: transform .25s, border-color .25s;
 }
 
-.visual{
-    height:350px;
+.card:hover {
+    transform: translateY(-4px);
+    border-color: #424854;
+}
 
+.visual {
+    height: 320px;
     background:
-    radial-gradient(
-        circle at 50% 40%,
-        #242933,
-        #0b0d11 65%
-    );
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    position:relative;
+        radial-gradient(circle at 50% 42%, #242933, #0b0d11 68%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.phone{
-    width:155px;
-    height:285px;
+.visual::after {
+    content: "";
+    position: absolute;
+    bottom: 20px;
+    width: 130px;
+    height: 16px;
+    background: #000;
+    filter: blur(18px);
+    opacity: .8;
+}
 
-    border-radius:30px;
+.phone {
+    position: relative;
+    z-index: 1;
+    width: 150px;
+    height: 275px;
+    border-radius: 29px;
+    background: linear-gradient(145deg, #343944, #0c0e12);
+    border: 4px solid #454b57;
+    box-shadow: 0 25px 60px rgba(0,0,0,.65);
+    transition: transform .3s;
+}
 
+.card:hover .phone {
+    transform: translateY(-4px) rotate(-2deg);
+}
+
+.screen {
+    position: absolute;
+    inset: 5px;
+    border-radius: 22px;
     background:
-    linear-gradient(
-        145deg,
-        #343944,
-        #0c0e12
-    );
-
-    border:4px solid #3e434e;
-
-    box-shadow:
-    0 25px 60px rgba(0,0,0,.7);
-
-    position:relative;
+        radial-gradient(ellipse at 35% 25%, #4d647d 0%, transparent 34%),
+        radial-gradient(ellipse at 70% 65%, #4a315e 0%, transparent 42%),
+        linear-gradient(145deg, #11151c, #1c222d 55%, #08090c);
 }
 
-.camera{
-    position:absolute;
-
-    left:12px;
-    top:12px;
-
-    width:62px;
-    height:72px;
-
-    border-radius:18px;
-
-    background:#17191e;
-
-    border:1px solid #444953;
+.screen::before {
+    content: "";
+    position: absolute;
+    width: 52px;
+    height: 15px;
+    background: #030406;
+    border-radius: 12px;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.lens{
-    width:20px;
-    height:20px;
-
-    border-radius:50%;
-
-    background:#050609;
-
-    border:2px solid #4d535e;
-
-    position:absolute;
+.camera {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 64px;
+    height: 74px;
+    border-radius: 17px;
+    background: linear-gradient(145deg, #242832, #111319);
+    border: 1px solid #4b515c;
+    z-index: 2;
 }
 
-.lens:nth-child(1){
-    left:8px;
-    top:8px;
+.lens {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #60748d, #080a10 48%);
+    border: 3px solid #505763;
+    position: absolute;
 }
 
-.lens:nth-child(2){
-    right:8px;
-    top:8px;
+.lens:nth-child(1) {
+    left: 6px;
+    top: 6px;
 }
 
-.lens:nth-child(3){
-    left:20px;
-    bottom:8px;
+.lens:nth-child(2) {
+    right: 6px;
+    top: 6px;
 }
 
-.screen{
-    position:absolute;
+.lens:nth-child(3) {
+    left: 20px;
+    bottom: 6px;
+}
 
-    inset:5px;
+.visual.variant-two .phone {
+    background: linear-gradient(145deg, #c0b8a9, #56534e);
+    border-color: #9b9589;
+}
 
-    border-radius:25px;
-
+.visual.variant-two .screen {
     background:
-    linear-gradient(
-        145deg,
-        #11151c,
-        #1c222d
-    );
+        radial-gradient(ellipse at 65% 30%, #b4a6a0 0%, transparent 38%),
+        linear-gradient(145deg, #343943, #08090c);
 }
 
-.info{
-    padding:23px;
+.visual.variant-three .phone {
+    background: linear-gradient(145deg, #bc754b, #29201f);
+    border-color: #a96b4d;
 }
 
-.badge{
-    display:inline-block;
-
-    padding:6px 10px;
-
-    border-radius:20px;
-
-    background:#191c22;
-
-    color:#9da4b0;
-
-    font-size:11px;
-
-    margin-bottom:12px;
+.visual.variant-three .screen {
+    background:
+        radial-gradient(ellipse at 50% 25%, #b46e43 0%, transparent 35%),
+        linear-gradient(145deg, #17151b, #08090c);
 }
 
-.name{
-    font-size:22px;
-    font-weight:700;
-
-    margin-bottom:9px;
+.info {
+    padding: 22px;
 }
 
-.description{
-    color:#777f8d;
-
-    font-size:13px;
-
-    line-height:1.6;
-
-    min-height:42px;
-
-    margin-bottom:18px;
+.badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #191c22;
+    color: #b1b7c2;
+    font-size: 10px;
+    letter-spacing: .8px;
+    margin-bottom: 12px;
 }
 
-.specs{
-    display:flex;
-    flex-wrap:wrap;
-
-    gap:7px;
-
-    margin-bottom:20px;
+.name {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 9px;
 }
 
-.spec{
-    padding:7px 9px;
-
-    background:#15181e;
-
-    border-radius:8px;
-
-    color:#9aa1ad;
-
-    font-size:11px;
+.description {
+    color: #858c99;
+    font-size: 13px;
+    line-height: 1.65;
+    min-height: 43px;
+    margin-bottom: 17px;
 }
 
-.bottom{
-    display:flex;
-
-    justify-content:space-between;
-    align-items:center;
-
-    gap:10px;
+.specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 21px;
 }
 
-.price{
-    font-size:20px;
-    font-weight:750;
+.spec {
+    padding: 7px 9px;
+    background: #15181e;
+    border-radius: 8px;
+    color: #a3aab6;
+    font-size: 11px;
 }
 
-.buttons{
-    display:flex;
-    gap:8px;
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
 }
 
-.details{
-    padding:11px 15px;
-
-    background:#fff;
-    color:#000;
-
-    border-radius:10px;
-
-    font-size:13px;
-    font-weight:650;
-
-    transition:.2s;
+.price {
+    font-size: 20px;
+    font-weight: 750;
+    white-space: nowrap;
 }
 
-.details:hover{
-    background:#ddd;
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.cart{
-    width:42px;
-    height:42px;
-
-    border:1px solid #30343d;
-
-    background:#14171c;
-
-    color:#fff;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-size:17px;
+.details {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 13px;
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background .2s;
 }
 
-.cart:hover{
-    background:#22262e;
+.details:hover {
+    background: #dcdcdc;
 }
 
-.empty{
-    display:none;
-
-    text-align:center;
-
-    padding:80px 20px;
-
-    color:#777e8c;
-
-    grid-column:1/-1;
+.cart {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #30343d;
+    background: #14171c;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 17px;
+    transition: background .2s, border-color .2s;
 }
 
-.footer{
-    border-top:1px solid #20232a;
-
-    padding:35px 6%;
-
-    color:#666d7a;
-
-    text-align:center;
-
-    font-size:13px;
+.cart:hover {
+    background: #282d36;
+    border-color: #596170;
 }
 
-.toast{
-    position:fixed;
-
-    right:25px;
-    bottom:25px;
-
-    padding:16px 22px;
-
-    background:#fff;
-    color:#000;
-
-    border-radius:13px;
-
-    font-weight:600;
-
-    transform:translateY(100px);
-
-    opacity:0;
-
-    transition:.3s;
-
-    z-index:999;
+.cart:disabled {
+    opacity: .55;
+    cursor: not-allowed;
 }
 
-.toast.show{
-    transform:translateY(0);
-    opacity:1;
+.empty {
+    display: none;
+    text-align: center;
+    padding: 80px 20px;
+    color: #858c99;
+    grid-column: 1 / -1;
 }
 
-@media(max-width:950px){
+.empty h2 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 
-    .grid{
-        grid-template-columns:repeat(2,1fr);
+.empty p {
+    font-size: 14px;
+}
+
+.footer {
+    border-top: 1px solid #20232a;
+    padding: 35px 6%;
+    color: #737b89;
+    text-align: center;
+    font-size: 13px;
+}
+
+.toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    max-width: calc(100vw - 32px);
+    padding: 15px 20px;
+    background: #fff;
+    color: #090a0d;
+    border-radius: 13px;
+    font-weight: 650;
+    font-size: 14px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    transform: translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: .25s;
+    z-index: 999;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 1100px) {
+    .nav {
+        gap: 14px;
     }
 
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bottom {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .buttons {
+        width: 100%;
+    }
+
+    .details {
+        flex: 1;
+    }
 }
 
-@media(max-width:700px){
-
-    .nav{
-        display:none;
+@media (max-width: 760px) {
+    .header {
+        gap: 12px;
+        padding: 12px 5%;
     }
 
-    .hero h1{
-        font-size:44px;
+    .nav {
+        display: none;
     }
 
-    .tools{
-        flex-direction:column;
+    .container {
+        width: 90%;
     }
 
-    .sort{
-        width:100%;
-        height:50px;
+    .hero {
+        padding-top: 54px;
     }
 
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .tools {
+        flex-direction: column;
+    }
+
+    .search,
+    .sort {
+        width: 100%;
+        height: 48px;
+    }
+
+    .visual {
+        height: 290px;
+    }
+
+    .info {
+        padding: 18px;
+    }
+
+    .name {
+        font-size: 19px;
+    }
 }
 
-@media(max-width:600px){
-
-    .grid{
-        grid-template-columns:1fr;
+@media (max-width: 520px) {
+    .grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
     }
 
-    .hero{
-        padding-top:55px;
+    .visual {
+        height: 310px;
     }
 
-    .hero h1{
-        font-size:40px;
+    .bottom {
+        flex-direction: row;
+        align-items: center;
     }
 
+    .buttons {
+        width: auto;
+    }
+
+    .details {
+        flex: initial;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .action {
+        width: 39px;
+        height: 39px;
+    }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
 </style>
 </head>
 
-
 <body>
 
-
 <header class="header">
+    <a href="index.html" class="logo">NOVA</a>
 
-    <a href="index.html" class="logo">
-        NOVA
-    </a>
-
-    <nav class="nav">
-
-        <a href="index.html">
-            Главная
-        </a>
-
-        <a href="catalog.html">
-            Каталог
-        </a>
-
-        <a href="about.html">
-            О компании
-        </a>
-
-        <a href="contacts.html">
-            Контакты
-        </a>
-
-        <a href="delivery.html">
-            Доставка
-        </a>
-
+    <nav class="nav" aria-label="Главная навигация">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="smartphones.html" class="active">Смартфоны</a>
+        <a href="laptops.html">Ноутбуки</a>
     </nav>
 
-
     <div class="actions">
-
-        <a href="favorites.html" class="action">
-            ♡
-        </a>
-
-        <a href="cart.html" class="action">
-            🛒
-        </a>
-
+        <a href="favorites.html" class="action" aria-label="Избранное">♡</a>
+        <a href="cart.html" class="action" aria-label="Корзина">🛒</a>
     </div>
-
 </header>
 
-
-
 <main class="container">
+    <section class="hero">
+        <div class="eyebrow">NOVA COLLECTION</div>
+        <h1>Смартфоны</h1>
+        <p>
+            Флагманские устройства, профессиональные камеры
+            и технологии нового поколения. Выбери смартфон,
+            который подходит именно тебе.
+        </p>
+    </section>
 
+    <div class="tools">
+        <input
+            id="search"
+            class="search"
+            type="search"
+            placeholder="Поиск смартфона..."
+            aria-label="Поиск смартфона"
+            autocomplete="off"
+        >
 
-<section class="hero">
-
-    <h1>
-        Смартфоны
-    </h1>
-
-    <p>
-        Флагманские устройства, мощные процессоры,
-        профессиональные камеры и технологии нового поколения.
-    </p>
-
-</section>
-
-
-
-<div class="tools">
-
-    <input
-        id="search"
-        class="search"
-        type="text"
-        placeholder="Поиск смартфона..."
-    >
-
-    <select id="sort" class="sort">
-
-        <option value="default">
-            Сначала популярные
-        </option>
-
-        <option value="cheap">
-            Сначала дешевле
-        </option>
-
-        <option value="expensive">
-            Сначала дороже
-        </option>
-
-    </select>
-
-</div>
-
-
-
-<div class="categories">
-
-    <button class="category active" data-filter="all">
-        Все
-    </button>
-
-    <button class="category" data-filter="apple">
-        Apple
-    </button>
-
-    <button class="category" data-filter="flagship">
-        Флагманы
-    </button>
-
-    <button class="category" data-filter="new">
-        Новинки
-    </button>
-
-</div>
-
-
-
-<section class="grid" id="products">
-
-
-
-<!-- IPHONE 15 PRO MAX -->
-
-<article
-    class="card"
-    data-category="apple"
-    data-price="1479"
-    data-name="iPhone 15 Pro Max"
->
-
-    <div class="visual">
-
-        <div class="phone">
-
-            <div class="screen"></div>
-
-            <div class="camera">
-
-                <div class="lens"></div>
-                <div class="lens"></div>
-                <div class="lens"></div>
-
-            </div>
-
-        </div>
-
+        <select id="sort" class="sort" aria-label="Сортировка товаров">
+            <option value="default">Сначала популярные</option>
+            <option value="cheap">Сначала дешевле</option>
+            <option value="expensive">Сначала дороже</option>
+        </select>
     </div>
 
-
-    <div class="info">
-
-        <div class="badge">
-            APPLE
-        </div>
-
-        <div class="name">
-            iPhone 15 Pro Max
-        </div>
-
-        <div class="description">
-            Титановый корпус, профессиональная камера
-            и мощный чип.
-        </div>
-
-        <div class="specs">
-
-            <span class="spec">
-                6.7" OLED
-            </span>
-
-            <span class="spec">
-                256 ГБ
-            </span>
-
-            <span class="spec">
-                5G
-            </span>
-
-        </div>
-
-
-        <div class="bottom">
-
-            <div class="price">
-                1 479 €
-            </div>
-
-            <div class="buttons">
-
-                <a
-                    href="product.html?id=iphone-15-pro-max"
-                    class="details"
-                >
-                    Подробнее
-                </a>
-
-                <button
-                    class="cart"
-                    onclick="addCart('iPhone 15 Pro Max')"
-                >
-                    🛒
-                </button>
-
-            </div>
-
-        </div>
-
+    <div class="categories" aria-label="Фильтр смартфонов">
+        <button class="category active" type="button" data-filter="all">
+            Все
+        </button>
+        <button class="category" type="button" data-filter="apple">
+            Apple
+        </button>
+        <button class="category" type="button" data-filter="flagship">
+            Флагманы
+        </button>
+        <button class="category" type="button" data-filter="new">
+            Новинки
+        </button>
     </div>
 
-</article>
+    <p class="result-count" id="resultCount">Найдено: 5 товаров</p>
 
+    <section class="grid" id="products" aria-label="Каталог смартфонов">
 
+        <article class="card"
+            data-id="iphone-15-pro-max"
+            data-category="apple"
+            data-price="1479"
+            data-name="iPhone 15 Pro Max"
+            data-order="0">
 
-<!-- IPHONE 16 PRO MAX -->
-
-<article
-    class="card"
-    data-category="apple flagship"
-    data-price="899"
-    data-name="iPhone 16 Pro Max"
->
-
-    <div class="visual">
-
-        <div class="phone">
-
-            <div class="screen"></div>
-
-            <div class="camera">
-
-                <div class="lens"></div>
-                <div class="lens"></div>
-                <div class="lens"></div>
-
+            <div class="visual">
+                <div class="phone">
+                    <div class="screen"></div>
+                    <div class="camera">
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                    </div>
+                </div>
             </div>
 
-        </div>
+            <div class="info">
+                <span class="badge">APPLE</span>
+                <h2 class="name">iPhone 15 Pro Max</h2>
+                <p class="description">
+                    Титановый корпус, профессиональная камера
+                    и мощный чип.
+                </p>
+                <div class="specs">
+                    <span class="spec">6.7″ OLED</span>
+                    <span class="spec">256 ГБ</span>
+                    <span class="spec">5G</span>
+                </div>
+                <div class="bottom">
+                    <span class="price">1 479 €</span>
+                    <div class="buttons">
+                        <a href="product.html?id=iphone-15-pro-max"
+                            class="details">Подробнее</a>
+                        <button class="cart" type="button"
+                            data-add="iphone-15-pro-max"
+                            aria-label="Добавить iPhone 15 Pro Max в корзину">🛒</button>
+                    </div>
+                </div>
+            </div>
+        </article>
 
-    </div>
+        <article class="card"
+            data-id="iphone-16-pro-max"
+            data-category="apple flagship"
+            data-price="899"
+            data-name="iPhone 16 Pro Max"
+            data-order="1">
 
-
-    <div class="info">
-
-        <div class="badge">
-            APPLE
-        </div>
-
-        <div class="name">
-            iPhone 16 Pro Max
-        </div>
-
-        <div class="description">
-            Большой дисплей, мощный процессор
-            и профессиональная камера.
-        </div>
-
-        <div class="specs">
-
-            <span class="spec">
-                6.9" OLED
-            </span>
-
-            <span class="spec">
-                256 ГБ
-            </span>
-
-            <span class="spec">
-                5G
-            </span>
-
-        </div>
-
-
-        <div class="bottom">
-
-            <div class="price">
-                899 €
+            <div class="visual variant-two">
+                <div class="phone">
+                    <div class="screen"></div>
+                    <div class="camera">
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="buttons">
+            <div class="info">
+                <span class="badge">APPLE</span>
+                <h2 class="name">iPhone 16 Pro Max</h2>
+                <p class="description">
+                    Большой дисплей, мощный процессор
+                    и профессиональная камера.
+                </p>
+                <div class="specs">
+                    <span class="spec">6.9″ OLED</span>
+                    <span class="spec">256 ГБ</span>
+                    <span class="spec">5G</span>
+                </div>
+                <div class="bottom">
+                    <span class="price">899 €</span>
+                    <div class="buttons">
+                        <a href="product.html?id=iphone-16-pro-max"
+                            class="details">Подробнее</a>
+                        <button class="cart" type="button"
+                            data-add="iphone-16-pro-max"
+                            aria-label="Добавить iPhone 16 Pro Max в корзину">🛒</button>
+                    </div>
+                </div>
+            </div>
+        </article>
 
-                <a
-                    href="product.html?id=iphone-16-pro-max"
-                    class="details"
-                >
-                    Подробнее
-                </a>
+        <article class="card"
+            data-id="iphone-17-pro-max"
+            data-category="apple flagship new"
+            data-price="1285"
+            data-name="iPhone 17 Pro Max"
+            data-order="2">
 
-                <button
-                    class="cart"
-                    onclick="addCart('iPhone 16 Pro Max')"
-                >
-                    🛒
-                </button>
-
+            <div class="visual variant-three">
+                <div class="phone">
+                    <div class="screen"></div>
+                    <div class="camera">
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                    </div>
+                </div>
             </div>
 
-        </div>
+            <div class="info">
+                <span class="badge">НОВИНКА</span>
+                <h2 class="name">iPhone 17 Pro Max</h2>
+                <p class="description">
+                    Флагман нового поколения с улучшенной
+                    камерой и производительностью.
+                </p>
+                <div class="specs">
+                    <span class="spec">OLED</span>
+                    <span class="spec">256 ГБ</span>
+                    <span class="spec">5G</span>
+                </div>
+                <div class="bottom">
+                    <span class="price">1 285 €</span>
+                    <div class="buttons">
+                        <a href="product.html?id=iphone-17-pro-max"
+                            class="details">Подробнее</a>
+                        <button class="cart" type="button"
+                            data-add="iphone-17-pro-max"
+                            aria-label="Добавить iPhone 17 Pro Max в корзину">🛒</button>
+                    </div>
+                </div>
+            </div>
+        </article>
 
-    </div>
+        <article class="card"
+            data-id="iphone-18-pro"
+            data-category="apple flagship new"
+            data-price="1449"
+            data-name="iPhone 18 Pro"
+            data-order="3">
 
-</article>
-
-
-
-<!-- IPHONE 17 PRO MAX -->
-
-<article
-    class="card"
-    data-category="apple flagship new"
-    data-price="1285"
-    data-name="iPhone 17 Pro Max"
->
-
-    <div class="visual">
-
-        <div class="phone">
-
-            <div class="screen"></div>
-
-            <div class="camera">
-
-                <div class="lens"></div>
-                <div class="lens"></div>
-                <div class="lens"></div>
-
+            <div class="visual variant-two">
+                <div class="phone">
+                    <div class="screen"></div>
+                    <div class="camera">
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                    </div>
+                </div>
             </div>
 
-        </div>
+            <div class="info">
+                <span class="badge">НОВИНКА</span>
+                <h2 class="name">iPhone 18 Pro</h2>
+                <p class="description">
+                    Премиальный смартфон нового поколения
+                    с передовыми технологиями.
+                </p>
+                <div class="specs">
+                    <span class="spec">OLED</span>
+                    <span class="spec">256 ГБ</span>
+                    <span class="spec">5G</span>
+                </div>
+                <div class="bottom">
+                    <span class="price">1 449 €</span>
+                    <div class="buttons">
+                        <a href="product.html?id=iphone-18-pro"
+                            class="details">Подробнее</a>
+                        <button class="cart" type="button"
+                            data-add="iphone-18-pro"
+                            aria-label="Добавить iPhone 18 Pro в корзину">🛒</button>
+                    </div>
+                </div>
+            </div>
+        </article>
 
-    </div>
+        <article class="card"
+            data-id="iphone-18-pro-max"
+            data-category="apple flagship new"
+            data-price="1599"
+            data-name="iPhone 18 Pro Max"
+            data-order="4">
 
-
-    <div class="info">
-
-        <div class="badge">
-            НОВИНКА
-        </div>
-
-        <div class="name">
-            iPhone 17 Pro Max
-        </div>
-
-        <div class="description">
-            Флагман нового поколения с улучшенной
-            камерой и производительностью.
-        </div>
-
-        <div class="specs">
-
-            <span class="spec">
-                OLED
-            </span>
-
-            <span class="spec">
-                256 ГБ
-            </span>
-
-            <span class="spec">
-                5G
-            </span>
-
-        </div>
-
-
-        <div class="bottom">
-
-            <div class="price">
-                1 285 €
+            <div class="visual">
+                <div class="phone">
+                    <div class="screen"></div>
+                    <div class="camera">
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                        <div class="lens"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="buttons">
-
-                <a
-                    href="product.html?id=iphone-17-pro-max"
-                    class="details"
-                >
-                    Подробнее
-                </a>
-
-                <button
-                    class="cart"
-                    onclick="addCart('iPhone 17 Pro Max')"
-                >
-                    🛒
-                </button>
-
+            <div class="info">
+                <span class="badge">НОВИНКА</span>
+                <h2 class="name">iPhone 18 Pro Max</h2>
+                <p class="description">
+                    Максимальная производительность,
+                    большой дисплей и профессиональная камера.
+                </p>
+                <div class="specs">
+                    <span class="spec">OLED</span>
+                    <span class="spec">512 ГБ</span>
+                    <span class="spec">5G</span>
+                </div>
+                <div class="bottom">
+                    <span class="price">1 599 €</span>
+                    <div class="buttons">
+                        <a href="product.html?id=iphone-18-pro-max"
+                            class="details">Подробнее</a>
+                        <button class="cart" type="button"
+                            data-add="iphone-18-pro-max"
+                            aria-label="Добавить iPhone 18 Pro Max в корзину">🛒</button>
+                    </div>
+                </div>
             </div>
+        </article>
 
+        <div class="empty" id="empty">
+            <h2>Ничего не найдено</h2>
+            <p>Попробуй изменить запрос или выбрать другую категорию.</p>
         </div>
 
-    </div>
-
-</article>
-
-
-
-<!-- IPHONE 18 PRO -->
-
-<article
-    class="card"
-    data-category="apple flagship new"
-    data-price="1449"
-    data-name="iPhone 18 Pro"
->
-
-    <div class="visual">
-
-        <div class="phone">
-
-            <div class="screen"></div>
-
-            <div class="camera">
-
-                <div class="lens"></div>
-                <div class="lens"></div>
-                <div class="lens"></div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="info">
-
-        <div class="badge">
-            НОВИНКА
-        </div>
-
-        <div class="name">
-            iPhone 18 Pro
-        </div>
-
-        <div class="description">
-            Премиальный смартфон нового поколения
-            с передовыми технологиями.
-        </div>
-
-        <div class="specs">
-
-            <span class="spec">
-                OLED
-            </span>
-
-            <span class="spec">
-                256 ГБ
-            </span>
-
-            <span class="spec">
-                5G
-            </span>
-
-        </div>
-
-
-        <div class="bottom">
-
-            <div class="price">
-                1 449 €
-            </div>
-
-            <div class="buttons">
-
-                <a
-                    href="product.html?id=iphone-18-pro"
-                    class="details"
-                >
-                    Подробнее
-                </a>
-
-                <button
-                    class="cart"
-                    onclick="addCart('iPhone 18 Pro')"
-                >
-                    🛒
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</article>
-
-
-
-<!-- IPHONE 18 PRO MAX -->
-
-<article
-    class="card"
-    data-category="apple flagship new"
-    data-price="1599"
-    data-name="iPhone 18 Pro Max"
->
-
-    <div class="visual">
-
-        <div class="phone">
-
-            <div class="screen"></div>
-
-            <div class="camera">
-
-                <div class="lens"></div>
-                <div class="lens"></div>
-                <div class="lens"></div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="info">
-
-        <div class="badge">
-            НОВИНКА
-        </div>
-
-        <div class="name">
-            iPhone 18 Pro Max
-        </div>
-
-        <div class="description">
-            Максимальная производительность,
-            большой дисплей и профессиональная камера.
-        </div>
-
-        <div class="specs">
-
-            <span class="spec">
-                OLED
-            </span>
-
-            <span class="spec">
-                512 ГБ
-            </span>
-
-            <span class="spec">
-                5G
-            </span>
-
-        </div>
-
-
-        <div class="bottom">
-
-            <div class="price">
-                1 599 €
-            </div>
-
-            <div class="buttons">
-
-                <a
-                    href="product.html?id=iphone-18-pro-max"
-                    class="details"
-                >
-                    Подробнее
-                </a>
-
-                <button
-                    class="cart"
-                    onclick="addCart('iPhone 18 Pro Max')"
-                >
-                    🛒
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</article>
-
-
-
-<div class="empty" id="empty">
-    Ничего не найдено.
-</div>
-
-
-</section>
-
+    </section>
 </main>
 
-
-
 <footer class="footer">
-
     © 2026 NOVA. Все права защищены.
-
 </footer>
 
-
-
-<div class="toast" id="toast">
+<div class="toast" id="toast" role="status" aria-live="polite">
     Товар добавлен в корзину ✓
 </div>
 
-
+<!-- Общие данные товаров. Не дублируем объект products здесь. -->
+<script src="products.js"></script>
 
 <script>
+(function () {
+    "use strict";
 
-
-/* SEARCH */
-
-const search = document.getElementById("search");
-
-const cards = [
-    ...document.querySelectorAll(".card")
-];
-
-const empty = document.getElementById("empty");
-
-
-search.addEventListener("input", filterProducts);
-
-
-function filterProducts(){
-
-    const query =
-        search.value
-        .toLowerCase()
-        .trim();
-
-    let visible = 0;
-
-    cards.forEach(card => {
-
-        const name =
-            card.dataset.name.toLowerCase();
-
-        if(name.includes(query)){
-
-            card.style.display = "";
-
-            visible++;
-
-        }else{
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-    empty.style.display =
-        visible === 0 ? "block" : "none";
-
-}
-
-
-
-/* CATEGORIES */
-
-document.querySelectorAll(".category")
-.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        document
-            .querySelectorAll(".category")
-            .forEach(x =>
-                x.classList.remove("active")
-            );
-
-        button.classList.add("active");
-
-        const filter =
-            button.dataset.filter;
-
-        let visible = 0;
-
-        cards.forEach(card => {
-
-            const categories =
-                card.dataset.category;
-
-            const name =
-                card.dataset.name
-                .toLowerCase();
-
-            const query =
-                search.value
-                .toLowerCase()
-                .trim();
-
-            const categoryMatch =
-                filter === "all" ||
-                categories.includes(filter);
-
-            const searchMatch =
-                name.includes(query);
-
-            if(categoryMatch && searchMatch){
-
-                card.style.display = "";
-
-                visible++;
-
-            }else{
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-        empty.style.display =
-            visible === 0 ? "block" : "none";
-
-    });
-
-});
-
-
-
-/* SORT */
-
-document.getElementById("sort")
-.addEventListener("change", function(){
-
-    const grid =
-        document.getElementById("products");
-
-    const products =
-        [...document.querySelectorAll(".card")];
-
-    if(this.value === "cheap"){
-
-        products.sort(
-            (a,b) =>
-            Number(a.dataset.price) -
-            Number(b.dataset.price)
-        );
-
-    }
-
-    if(this.value === "expensive"){
-
-        products.sort(
-            (a,b) =>
-            Number(b.dataset.price) -
-            Number(a.dataset.price)
-        );
-
-    }
-
-    products.forEach(product =>
-        grid.appendChild(product)
+    const grid = document.getElementById("products");
+    const searchInput = document.getElementById("search");
+    const sortSelect = document.getElementById("sort");
+    const emptyMessage = document.getElementById("empty");
+    const resultCount = document.getElementById("resultCount");
+    const toast = document.getElementById("toast");
+    const filterButtons = Array.from(
+        document.querySelectorAll(".category")
     );
 
-});
+    const productCards = Array.from(
+        grid.querySelectorAll(".card")
+    );
 
+    let activeFilter = "all";
+    let toastTimer = null;
 
+    function getCart() {
+        try {
+            const saved = JSON.parse(
+                localStorage.getItem("novaCart") || "[]"
+            );
 
-/* CART DEMO */
+            if (!Array.isArray(saved)) {
+                return [];
+            }
 
-function addCart(name){
+            return saved.map(function (item) {
+                if (typeof item === "string") {
+                    return {
+                        id: item,
+                        quantity: 1
+                    };
+                }
 
-    const toast =
-        document.getElementById("toast");
+                if (!item || typeof item !== "object") {
+                    return null;
+                }
 
-    toast.textContent =
-        name + " добавлен в корзину ✓";
+                return {
+                    id: String(item.id || ""),
+                    quantity: Math.max(
+                        1,
+                        Math.floor(Number(item.quantity) || 1)
+                    )
+                };
+            }).filter(function (item) {
+                return item && item.id;
+            });
+        } catch (error) {
+            console.error("Не удалось прочитать корзину:", error);
+            return [];
+        }
+    }
 
-    toast.classList.add("show");
+    function saveCart(cart) {
+        try {
+            localStorage.setItem(
+                "novaCart",
+                JSON.stringify(cart)
+            );
+            return true;
+        } catch (error) {
+            console.error("Не удалось сохранить корзину:", error);
+            showToast("Не удалось сохранить корзину. Проверь память браузера.");
+            return false;
+        }
+    }
 
-    setTimeout(() => {
+    function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
 
-        toast.classList.remove("show");
+        if (toastTimer) {
+            clearTimeout(toastTimer);
+        }
 
-    },2000);
+        toastTimer = setTimeout(function () {
+            toast.classList.remove("show");
+        }, 2400);
+    }
 
-}
+    function addCart(id) {
+        /*
+         * Проверяем существование товара в общем products.js.
+         * Числовые цены и карточки не меняем.
+         */
+        if (
+            typeof products === "undefined" ||
+            !Object.prototype.hasOwnProperty.call(products, id)
+        ) {
+            showToast("Товар не найден в общем каталоге.");
+            return;
+        }
 
+        const cart = getCart();
+        const existing = cart.find(function (item) {
+            return item.id === id;
+        });
 
-</script>
-
-</body>
-</html>
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({
+                id: id,
+                quantity: 1
