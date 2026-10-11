@@ -1,0 +1,88 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050505">
+    <title>Контакты — NOVA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: #050505;
+            color: #fff;
+            font-family: Inter, Arial, sans-serif;
+        }
+        a { color: inherit; text-decoration: none; }
+        header {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 16px max(24px, calc((100% - 1100px) / 2));
+            border-bottom: 1px solid #222;
+            background: #080808;
+        }
+        .logo { font-size: 22px; font-weight: 900; letter-spacing: 4px; }
+        nav { display: flex; flex-wrap: wrap; gap: 20px; color: #aaa; font-size: 13px; }
+        nav a:hover { color: #fff; }
+        main { width: min(1000px, calc(100% - 40px)); margin: auto; }
+        .hero { padding: 100px 0 45px; }
+        .eyebrow { color: #888; font-size: 12px; letter-spacing: 4px; font-weight: 800; }
+        h1 { font-size: clamp(46px, 8vw, 78px); letter-spacing: -4px; margin: 20px 0; }
+        .lead { max-width: 600px; color: #999; line-height: 1.8; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 20px 0 90px; }
+        .card { padding: 28px; border: 1px solid #252525; border-radius: 18px; background: #0b0b0b; }
+        h2 { font-size: 20px; margin: 0 0 12px; }
+        .card p { color: #999; font-size: 14px; line-height: 1.7; }
+        .note { color: #777; font-size: 12px; line-height: 1.7; }
+        .button { display: inline-block; padding: 14px 20px; background: #fff; color: #000; border-radius: 11px; font-weight: 800; font-size: 13px; }
+        footer { border-top: 1px solid #222; padding: 28px 20px; text-align: center; color: #666; font-size: 12px; }
+        @media(max-width: 650px) {
+            header { padding: 18px; align-items: flex-start; flex-direction: column; }
+            .grid { grid-template-columns: 1fr; }
+            h1 { letter-spacing: -2px; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <a href="index.html" class="logo">NOVA</a>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="eyebrow">CONTACT NOVA</div>
+        <h1>Связаться<br>с NOVA.</h1>
+        <p class="lead">
+            Есть вопрос по каталогу или работе сайта?
+            Здесь будут размещены официальные контакты проекта.
+        </p>
+    </section>
+
+    <section class="grid">
+        <article class="card">
+            <h2>Поддержка</h2>
+            <p>Добавь сюда рабочий адрес электронной почты или официальный Telegram магазина.</p>
+            <p class="note">Контакт пока не опубликован.</p>
+        </article>
+        <article class="card">
+            <h2>Вопросы по заказу</h2>
+            <p>Перед публикацией укажи реальный способ связи и время ответа.</p>
+            <p class="note">Не указывай выдуманные контакты: покупатели должны иметь возможность связаться с магазином.</p>
+        </article>
+    </section>
+</main>
+
+<footer>© 2026 NOVA. Все права защищены.</footer>
+</body>
+</html>
+```
