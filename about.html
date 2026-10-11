@@ -1,0 +1,109 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050505">
+    <title>О нас — NOVA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: #050505;
+            color: #fff;
+            font-family: Inter, Arial, sans-serif;
+        }
+        a { color: inherit; text-decoration: none; }
+        .header {
+            height: 72px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 0 max(24px, calc((100% - 1100px) / 2));
+            background: rgba(5,5,5,.9);
+            border-bottom: 1px solid #222;
+            backdrop-filter: blur(16px);
+        }
+        .logo { font-size: 22px; font-weight: 900; letter-spacing: 4px; }
+        .nav { display: flex; flex-wrap: wrap; gap: 20px; color: #aaa; font-size: 13px; }
+        .nav a:hover { color: #fff; }
+        main { width: min(1000px, calc(100% - 40px)); margin: auto; }
+        .hero { padding: 110px 0 75px; border-bottom: 1px solid #222; }
+        .eyebrow { color: #888; font-size: 12px; letter-spacing: 4px; font-weight: 800; }
+        h1 { max-width: 800px; font-size: clamp(46px, 8vw, 88px); line-height: .98; letter-spacing: -4px; margin: 22px 0; }
+        h1 span { color: #777; }
+        .lead { max-width: 650px; color: #999; line-height: 1.8; font-size: 17px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 45px 0 80px; }
+        .card { padding: 25px; min-height: 190px; border: 1px solid #252525; border-radius: 20px; background: #0b0b0b; }
+        .number { color: #666; font-size: 12px; }
+        h2 { font-size: 23px; margin: 25px 0 12px; }
+        .card p, .bottom p { color: #888; line-height: 1.7; font-size: 14px; }
+        .bottom { padding: 45px 0 90px; border-top: 1px solid #222; }
+        .button { display: inline-block; margin-top: 12px; padding: 15px 22px; background: white; color: black; border-radius: 12px; font-weight: 800; font-size: 13px; }
+        footer { border-top: 1px solid #222; padding: 28px 20px; text-align: center; color: #666; font-size: 12px; }
+        @media (max-width: 700px) {
+            .header { padding: 0 18px; height: auto; min-height: 72px; flex-wrap: wrap; }
+            .nav { padding-bottom: 14px; gap: 14px; }
+            .grid { grid-template-columns: 1fr; }
+            h1 { letter-spacing: -2px; }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <a href="index.html" class="logo">NOVA</a>
+    <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="contacts.html">Контакты</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="eyebrow">ABOUT NOVA</div>
+        <h1>Технологии.<br><span>Новый взгляд.</span></h1>
+        <p class="lead">
+            NOVA — концепция магазина современной техники для тех,
+            кто ценит функциональность, продуманный дизайн и удобный выбор.
+            Мы стремимся сделать знакомство с устройствами простым и понятным.
+        </p>
+        <a href="catalog.html" class="button">Посмотреть каталог →</a>
+    </section>
+
+    <section class="grid">
+        <article class="card">
+            <div class="number">01 / ПОДХОД</div>
+            <h2>Продуманный выбор</h2>
+            <p>Удобная структура каталога помогает быстрее находить подходящие устройства.</p>
+        </article>
+        <article class="card">
+            <div class="number">02 / ДИЗАЙН</div>
+            <h2>Ничего лишнего</h2>
+            <p>Тёмный интерфейс, понятная навигация и внимание к деталям.</p>
+        </article>
+        <article class="card">
+            <div class="number">03 / РАЗВИТИЕ</div>
+            <h2>Движение вперёд</h2>
+            <p>Мы развиваем проект и постепенно добавляем новые возможности.</p>
+        </article>
+    </section>
+
+    <section class="bottom">
+        <div class="eyebrow">DISCOVER NOVA</div>
+        <h2>Найди технику под свои задачи.</h2>
+        <p>Изучай доступные категории и сравнивай устройства в каталоге.</p>
+        <a href="catalog.html" class="button">Открыть каталог →</a>
+    </section>
+</main>
+
+<footer>© 2026 NOVA. Все права защищены.</footer>
+</body>
+</html>
+```
